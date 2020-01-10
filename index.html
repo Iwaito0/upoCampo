@@ -23,29 +23,37 @@
 <body>
 
 <ul class="nav nav-pills bg-dark ">
-  <li class="nav-item" onclick="altaCliente();">
-    <a class="nav-link" href="#">Alta cliente</a>
-  </li>
-  <li class="nav-item" onclick="altaVehiculo();">
-    <a class="nav-link" href="#">Alta vehiculo</a>
-  </li>
-  <li class="nav-item" onclick="ComprarVehiculo();">
-    <a class="nav-link" href="#">Comprar vehiculo</a>
-  </li>
-  <li class="nav-item" onclick="VenderVehiculo();">
-    <a class="nav-link" href="#">Vender vehiculos</a>
-  </li>
-  
   <li class="nav-item dropdown">
-    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Listados</a>
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Altas</a>
     <ul class="dropdown-menu">
-    <li onclick="vehiculoVenta();">  <a class="dropdown-item" href="#">Vehiculo a la venta</a> </li>
-     <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Vehiculos vendidos e un periodo</a></li>
-     <li onclick="vehiculoCompradosPeriodo();">  <a class="dropdown-item" href="#">Vehiculos comprados en un periodo</a></li>
-     <li onclick="vehiculoVentaFiltros();">  <a class="dropdown-item" href="#">Listado de vehiculos con filtros</a></li>
-     <li onclick="listadoClientes();">  <a class="dropdown-item" href="#">Listado de clientes</a></li>
-    </ul >
+    <li onclick="vehiculoVenta();">  <a class="dropdown-item" href="#">Alta cliente</a> </li>
+     <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Alta proveedor</a></li>
+     <li onclick="vehiculoCompradosPeriodo();">  <a class="dropdown-item" href="#">Alta reserva</a></li>
+     <li onclick="vehiculoVentaFiltros();">  <a class="dropdown-item" href="#">Alta actividad</a></li>
+     <li onclick="listadoClientes();">  <a class="dropdown-item" href="#">Alta habitaciones</a></li>
+     <li onclick="listadoClientes();">  <a class="dropdown-item" href="#">Alta parking</a></li>
+     <li onclick="listadoClientes();">  <a class="dropdown-item" href="#">Alta regime alimenticio</a></li>
+	</ul >
   </li>
+   <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Bajas</a>
+    <ul class="dropdown-menu">
+    <li onclick="vehiculoVenta();">  <a class="dropdown-item" href="#">Borrar proveedores</a> </li>
+     <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Borrar actividades</a></li>
+     </ul >
+  </li>
+   <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Dropdown link
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <a class="dropdown-item" href="#">Action</a>
+          <a class="dropdown-item" href="#">Another action</a>
+          <a class="dropdown-item" href="#">Something else here</a>
+        </div>
+      </li>
+    </ul>
 </ul>
 
 <br>
