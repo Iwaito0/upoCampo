@@ -65,50 +65,37 @@
             Listado
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Listados</a>
+          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Listados general</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Actividades</a></li>
+              <li><a class="dropdown-item" href="#">Proveedores</a></li>
+              <li><a class="dropdown-item" href="#">Clientes</a></li>
+              <li><a class="dropdown-item" href="#">Reserva</a></li>
+              <li><a class="dropdown-item" href="#">Habitaciones</a></li>
+              <li><a class="dropdown-item" href="#">Parking</a></li>
+
             </ul>
            </li>
           <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Listado pr fechas</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Listado clientes por fecha</a></li>
+              <li><a class="dropdown-item" href="#">Listado reserva por fecha</a></li>
+              <li><a class="dropdown-item" href="#">Listado de habitaciones disponibles por fecha</a></li>
+              <li><a class="dropdown-item" href="#">Listado de parking disponibles por fecha</a></li>
             </ul>
            </li>
           <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Listado por reservas</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Listado reserva parking</a></li>
+              <li><a class="dropdown-item" href="#">Listado reserva regimen</a></li>
+              <li><a class="dropdown-item" href="#">Listado reserva actividades</a></li>
             </ul>
            </li>
         </ul>
       </li>
     </ul>
-        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             Listado general
-            </a>
-                <div class="dropdown-menu sub-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">Actividades</a>
-                    <a class="dropdown-item" href="#">Proveedores</a>
-                    <a class="dropdown-item" href="#">Clientes</a>
-                    <a class="dropdown-item" href="#">Reserva</a>
-                    <a class="dropdown-item" href="#">Habitaciones</a>
-                    <a class="dropdown-item" href="#">Parking</a>
-                </div>
-            <a class="nav-link dropdown-toggle" href="http://example.com" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             Listado por fechas
-            </a>
-                <div class="dropdown-menu sub-menu" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="dropdown-item" href="#">pruebas</a>
-                           
-                </div>
-            
-        </div>
-    </li>
-</ul>
+        
+
 
 <br>
 <br>
@@ -161,129 +148,6 @@
 
         </fieldset>
     </form>
-<!--AltaVehiculo-->
-	<form class="form-horizontal" name="frmAltaVehiculo" id="frmAltaVehiculo">
-        <fieldset>
-            <legend>Alta de vehiculo</legend>
-
-			<div class="form-group">
-                <label class="col-md-4 control-label" for="txtCategoria">Categoria: T=>Turismos, 4=>4x4</label>
-                <div class="col-md-4">
-                    <input id="txtCategoria" name="txtCategoria" type="text" placeholder="" class="form-control input-md" required="">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="txtMatricula">Matricula</label>
-                <div class="col-md-4">
-                    <input id="txtMatricula" name="txtMatricula" type="text" placeholder="" class="form-control input-md" required="">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="txtMarca">Marca</label>
-                <div class="col-md-4">
-                    <input id="txtMarca" name="txtMarca" type="text"  class="form-control input-md" required="">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="txtModelo">Modelo</label>
-                <div class="col-md-4">
-                    <input id="txtModelo" name="txtModelo" type="text" placeholder="" class="form-control input-md" required="">
-
-                </div>
-            </div>
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="txtCombustible">Combustible: G=>Gasolina/D=>Diesel/B=>Biocombustible</label>
-                <div class="col-md-4">
-                    <input id="txtCombustible" name="txtCombustible" type="text" placeholder="" class="form-control input-md" required="">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="btnAceptar"></label>
-                <div class="col-md-4">
-                    <input onclick="comprobarCategoria();" type="button" id="btnAceptar" name="btnAceptar" class="btn btn-primary" value="Comprobar" />
-                </div>
-            </div>
-
-        </fieldset>
-    </form>
-<!--AltaTurismo-->
-<form class="form-horizontal" name="frmAltaTurismo" id="frmAltaTurismo">
-        <fieldset>
-            <legend>Alta de turismo</legend>
-
-			<div class="form-group">
-                <label class="col-md-4 control-label" for="bABS">ABS</label>
-                <div class="col-md-4">
-                    <input id="bABS" name="bABS" type="checkbox" placeholder="" class="form-control input-md" required="">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="bDescapotable">Descapotable</label>
-                <div class="col-md-4">
-                    <input id="bDescapotable" name="bDescapotable" type="checkbox" placeholder="" class="form-control input-md" required="">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="txtNumPuertas">Numero de puertas</label>
-                <div class="col-md-4">
-                    <input id="txtNumPuertas" name="txtNumPuertas" type="text"  class="form-control input-md" required="">
-
-                </div>
-            </div>
-
-           
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="btnAceptar"></label>
-                <div class="col-md-4">
-                    <input onclick="aceptarAltaVehiculo();" type="button" id="btnAceptar" name="btnAceptar" class="btn btn-primary" value="Aceptar" />
-                </div>
-            </div>
-
-        </fieldset>
-    </form>
-<!--Alta4x4-->
-<form class="form-horizontal" name="frmAlta4x4" id="frmAlta4x4">
-        <fieldset>
-            <legend>Alta de 4x4</legend>
-
-			<div class="form-group">
-                <label class="col-md-4 control-label" for="txtPenMax">PendienteMax</label>
-                <div class="col-md-4">
-                    <input id="txtPenMax" name="txtPenMax" type="text" placeholder="" class="form-control input-md" required="">
-
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="btnAceptar"></label>
-                <div class="col-md-4">
-                    <input onclick="aceptarAltaVehiculo();" type="button" id="btnAceptar" name="btnAceptar" class="btn btn-primary" value="Aceptar" />
-                </div>
-            </div>
-
-        </fieldset>
-    </form>
-
-	 
-
-
-
-
-
-
 <!-- A partir de aqui no se puede contruir formularios-->
 <div id="listado">
 
@@ -310,6 +174,5 @@
       return false;
     });
 </script>
-
 </body>
 </html>
