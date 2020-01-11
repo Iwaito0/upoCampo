@@ -13,8 +13,8 @@
  color: gray;
  }
  form {
-       display: none;
-	  margin-left: 35%;
+      display: none;
+	    margin-left: 35%;
       }
 
 .dropdown-submenu {
@@ -108,7 +108,7 @@
             <legend>Alta de cliente</legend>
 
             <div class="form-group">
-                <label class="col-md-4 control-label" for="txtNif">NIF</label>
+                <label class="col-md-4 control-label" for="txtNif">DNI</label>
                 <div class="col-md-4">
                     <input id="txtNif" name="txtNif" type="text" placeholder="" class="form-control input-md" required="">
 
@@ -122,14 +122,6 @@
 
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="col-md-4 control-label" for="txtApellidos">Apellidos</label>
-                <div class="col-md-4">
-                    <input id="txtApellidos" name="txtApellidos" type="text" placeholder="" class="form-control input-md" required="">
-
-                </div>
-            </div>
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtTelefono">Telefono</label>
                 <div class="col-md-4">
@@ -137,14 +129,33 @@
 
                 </div>
             </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="txtDireccion">Direccion</label>
+              <div class="col-md-4">
+                  <input id="txtDireccion" name="txtDireccion" type="text" placeholder="" class="form-control input-md" required="">
+
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="txtEmail">Email</label>
+                <div class="col-md-4">
+                    <input id="txtEmail" name="txtEmail" type="text" placeholder="" class="form-control input-md" required="">
+  
+                </div>
+              </div>
+          <div class="form-group">
+            <label class="col-md-4 control-label" for="txtNTarjeta">Numero Tarjeta</label>
+            <div class="col-md-4">
+                <input id="txtNTarjeta" name="txtNTarjeta" type="text" placeholder="" class="form-control input-md" required="">
+
+            </div>
+           </div>
 
             <div class="form-group">
                 <label class="col-md-4 control-label" for="btnAceptar"></label>
                 <div class="col-md-4">
-                    <input onclick="aceptarAltaCliente();" type="button" id="btnAceptar" name="btnAceptar" class="btn btn-primary" value="Aceptar" />
+                    <input type="button" id="btnAceptar" name="btnAceptar" class="btn btn-primary" value="Aceptar" />
                 </div>
             </div>
-
         </fieldset>
     </form>
 <!-- A partir de aqui no se puede contruir formularios-->
