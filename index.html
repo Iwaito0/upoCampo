@@ -44,8 +44,8 @@
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Altas</a>
     <ul class="dropdown-menu">
-    <li onclick="altaCliente();">  <a class="dropdown-item" href="#">Alta cliente</a> </li>
-    <li onclick="vehiculoCompradosPeriodo();">  <a class="dropdown-item" href="#">Alta reserva</a></li>
+    <li id="altaCliente">  <a class="dropdown-item" href="#">Alta cliente</a> </li>
+    <li id="altaReserva">  <a class="dropdown-item" href="#">Alta reserva</a></li>
     <li onclick="vehiculoVentaFiltros();">  <a class="dropdown-item" href="#">Alta actividad</a></li>
      <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Alta proveedor</a></li>
 	</ul >
@@ -55,7 +55,7 @@
     <ul class="dropdown-menu">
     <li onclick="vehiculoVenta();">  <a class="dropdown-item" href="#">Borrar proveedores</a> </li>
      <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Borrar actividades</a></li>
-     <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Borrar cleintes</a></li>
+     <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Borrar clientes</a></li>
      <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Borrar reservas</a></li>
 
      </ul >
@@ -153,11 +153,62 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="btnAceptar"></label>
                 <div class="col-md-4">
-                    <input type="button" id="btnAceptar" name="btnAceptar" class="btn btn-primary" value="Aceptar" />
+                    <input type="button" id="btnAceptarAltaCliente" name="btnAceptarAltaCliente" class="btn btn-primary" value="Aceptar" />
                 </div>
             </div>
         </fieldset>
     </form>
+
+    <!-- FORMULARIO ALTA RESERVA -->
+
+    <form class="form-horizontal" name="frmAltaReserva" id="frmAltaReserva">
+        <fieldset>
+            <legend>Alta de reservas</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="txtId">ID</label>
+                <div class="col-md-4">
+                    <input id="txtId" name="txtId" type="text" placeholder="" class="form-control input-md" required="">
+
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="txtNum">Numero de personas</label>
+                <div class="col-md-4">
+                    <input id="txtNum" name="txtNum" type="number" min="0" max="4" class="form-control input-md" required="">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="txtEntrada">Dia de entrada</label>
+                <div class="col-md-4">
+                    <input id="txtEntrada" name="txtEntrada" type="date" placeholder="" class="form-control input-md" required="">
+
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="txtSalida">Dia de salida</label>
+              <div class="col-md-4">
+                  <input id="txtSalida" name="txtSalida" type="date" placeholder="" class="form-control input-md" required="">
+
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="txtPrecio">Precio</label>
+                <div class="col-md-4">
+                    <input id="txtPrecio" name="txtPrecio" type="text" placeholder="" class="form-control input-md" required="">
+  
+                </div>
+              </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnAceptar"></label>
+                <div class="col-md-4">
+                    <input type="button" id="btnAceptarAltaReserva" name="btnAceptarAltaReserva" class="btn btn-primary" value="Aceptar" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
 <!-- A partir de aqui no se puede contruir formularios-->
 <div id="listado">
 
