@@ -55,8 +55,8 @@
     <ul class="dropdown-menu">
     <li onclick="vehiculoVenta();">  <a class="dropdown-item" href="#">Borrar proveedores</a> </li>
      <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Borrar actividades</a></li>
-     <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Borrar clientes</a></li>
-     <li onclick="vehiculoVentaPeriodo();">  <a class="dropdown-item" href="#">Borrar reservas</a></li>
+     <li id="bajaCliente">  <a class="dropdown-item" href="#">Borrar clientes</a></li>
+     <li id="bajaReserva">  <a class="dropdown-item" href="#">Borrar reservas</a></li>
 
      </ul >
   </li>
@@ -110,7 +110,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtNif">DNI</label>
                 <div class="col-md-4">
-                    <input id="txtNif" name="txtNif" type="text" placeholder="" class="form-control input-md" required="">
+                    <input id="txtNifAlta" name="txtNif" type="text" placeholder="" class="form-control input-md" required="">
 
                 </div>
             </div>
@@ -168,7 +168,7 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtId">ID</label>
                 <div class="col-md-4">
-                    <input id="txtId" name="txtId" type="text" placeholder="" class="form-control input-md" required="">
+                    <input id="txtId" name="txtIdAlta" type="text" placeholder="" class="form-control input-md" required="">
 
                 </div>
             </div>
@@ -241,6 +241,50 @@
                 <label class="col-md-4 control-label" for="btnAceptar"></label>
                 <div class="col-md-4">
                     <input type="button" id="btnAceptarAltaProveedor" name="btnAceptarAltaProveedor" class="btn btn-primary" value="Aceptar" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+    <!-- FORMULARIO BAJA CLIENTE -->
+
+    <form class="form-horizontal" name="frmBajaCliente" id="frmBajaCliente">
+        <fieldset>
+            <legend>Baja de clientes</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="txtNif">DNI</label>
+                <div class="col-md-4">
+                    <input id="txtNifBaja" name="txtNif" type="text" placeholder="" class="form-control input-md" required="">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnAceptar"></label>
+                <div class="col-md-4">
+                    <input type="button" id="btnAceptarBajaCliente" name="btnAceptarBajaCliente" class="btn btn-primary" value="Aceptar" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+    <!-- FORMULARIO BAJA RESERVA -->
+
+    <form class="form-horizontal" name="frmBajaReserva" id="frmBajaReserva">
+        <fieldset>
+            <legend>Baja de reservas</legend>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="txtId">ID</label>
+                <div class="col-md-4">
+                    <input id="txtIdBaja" name="txtId" type="text" placeholder="" class="form-control input-md" required="">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnAceptar"></label>
+                <div class="col-md-4">
+                    <input type="button" id="btnAceptarBajaReserva" name="btnAceptarBajaReserva" class="btn btn-primary" value="Aceptar" />
                 </div>
             </div>
         </fieldset>
