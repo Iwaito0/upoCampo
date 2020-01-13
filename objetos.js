@@ -1,15 +1,19 @@
 "use strict";
+
 //Clase Cliente
-function Cliente(sNIF, sNombre, sApellido, iTelefono) {
+function Cliente(sNIF, sNombre, iTelefono, sDireccion, sEmail, iNumTarjeta) {
     this.nif = sNIF;
-    this.nombre= sNombre;
-    this.apellido = sApellido;
+    this.nombre = sNombre;
     this.telefono = iTelefono;
+    this.direccion = sDireccion;
+    this.email = sEmail;
+    this.numeroTarjeta = iNumTarjeta;
 }
 Cliente.prototype.toString = function() {
-    let sMensaje = "El cliente " +this.nombre+ " " +this.apellido+" con DNI " +this.nif+ " y telefono " +this.telefono;
+    let sMensaje = "El cliente " +this.nombre+" con DNI " +this.nif+ " y telefono " +this.telefono+" con la direccion "+this.direccion+" y email "+this.email+" y con un numero de tarjeta "+this.numeroTarjeta;
     return sMensaje;
 }
+
 //Clase Habitacion
 function Habitacion(iID, sTipo, fPrecio, iOcupacionMax) {
     this.id = iID;
@@ -21,6 +25,7 @@ Habitacion.prototype.toString = function() {
     let sMensaje = "La habitacion " +this.id+ " del tipo " +this.tipo+" con un precio de " +this.precio+ " y una ocupacion maxima de " +this.ocupacionMaxima;
     return sMensaje;
 }
+
 //Clase Parking
 function Parking(iID, fPrecio, bAnchoEspecial) {
     this.id = iID;
@@ -37,6 +42,7 @@ Parking.prototype.toString = function() {
     return sMensaje;
     }
 }
+
 //Clase Regimen Alimenticio
 function RegimenAlimenticio(iID, fPrecioPersona) {
     this.id = iID;
@@ -46,6 +52,7 @@ RegimenAlimenticio.prototype.toString = function() {
     let sMensaje = "El regimen con  " +this.id+ " tiene un precio de " +this.precioPersona;
     return sMensaje;
 }
+
 //Clase Actividades
 function Actividades(iID, sNombre, fPrecio) {
     this.id = iID;
@@ -56,6 +63,7 @@ Actividades.prototype.toString = function() {
     let sMensaje = "La actividad  " +this.nombre+ " con un ID" +this.id+" y con un precio de " +this.precio;
     return sMensaje;
 }
+
 //Clase Proveedores
 function Proveedores(sCIF, sNombre, itelefono) {
     this.cif = sCIF;
