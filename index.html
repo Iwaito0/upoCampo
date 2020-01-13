@@ -46,7 +46,7 @@
     <ul class="dropdown-menu">
     <li id="altaCliente">  <a class="dropdown-item" href="#">Alta cliente</a> </li>
     <li id="altaReserva">  <a class="dropdown-item" href="#">Alta reserva</a></li>
-    <li onclick="vehiculoVentaFiltros();">  <a class="dropdown-item" href="#">Alta actividad</a></li>
+    <li id="altaActividad">  <a class="dropdown-item" href="#">Alta actividad</a></li>
      <li id="altaProveedor">  <a class="dropdown-item" href="#">Alta proveedor</a></li>
 	</ul >
   </li>
@@ -250,6 +250,39 @@
                 <label class="col-md-4 control-label" for="btnAceptar"></label>
                 <div class="col-md-4">
                     <input type="button" id="btnAceptarAltaProveedor" name="btnAceptarAltaProveedor" class="btn btn-primary" value="Alta" />
+                </div>
+            </div>
+        </fieldset>
+    </form> 
+    <!--FORMULARIO ALTA ACTIVIDADES-->
+    <form class="form-horizontal" name="frmAltaActividades" id="frmAltaActividades">
+        <fieldset>
+            <legend>Alta de actividades</legend>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="txtID">ID</label>
+                <div class="col-md-4">
+                    <input id="txtID" name="txtNombre" type="txtID"  class="form-control input-md" required="">
+
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="txtNombre">Nombre</label>
+                <div class="col-md-4">
+                    <input id="txtNombreClienteAlta" name="txtNombre" type="text"  class="form-control input-md" required="">
+
+                </div>
+            </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="txtPrecio">Precio</label>
+                <div class="col-md-4">
+                    <input id="txtPrecioAltaActividades" name="txtPrecioAltaActividades" type="text" class="form-control input-md" required="">
+  
+                </div>
+              </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnAceptar"></label>
+                <div class="col-md-4">
+                    <input type="button" id="btnAceptarAltaActividades" name="btnAceptarAltaActividades" class="btn btn-primary" value="Alta" />
                 </div>
             </div>
         </fieldset>
