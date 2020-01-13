@@ -16,6 +16,9 @@ menuAltaReserva.addEventListener("click", altaReserva, false);
 var menuAltaProveedor = document.getElementById("altaProveedor");
 menuAltaProveedor.addEventListener("click", altaProveedor, false);
 
+var menuAltaActividad = document.getElementById("altaActividad");
+menuAltaActividad.addEventListener("click", altaActividad, false);
+
 
 /*---------------MENU BAJA-------------*/
 
@@ -49,6 +52,9 @@ botonAltaReserva.addEventListener("click", aceptarAltaReserva, false);
 
 var botonAltaProveedor = document.getElementById("btnAceptarAltaProveedor");
 botonAltaProveedor.addEventListener("click", aceptarAltaProveedor, false);
+
+var botonAltaActividad = document.getElementById("btnAceptarAltaActividades");
+botonAltaActividad.addEventListener("click", aceptarAltaActividade, false);
 
 
 /*---------------ACEPTAR BAJA--------------------*/
@@ -98,6 +104,9 @@ function aceptarModificarCliente(){
 function aceptarModificarReserva(){
 	alert("mmmmm");
 }
+function aceptarAltaActividade(){
+    alert("ñam ñam");
+}
 
 //Mostrar Formularios
 
@@ -110,6 +119,7 @@ function altaCliente() {
     frmBajaReserva.style.display = "none";
     frmModificarCliente.style.display = "none";
     frmModificarReserva.style.display = "none";
+    frmAltaActividades.style.display = "none";
 }
 
 function altaReserva() {
@@ -119,7 +129,9 @@ function altaReserva() {
 	frmBajaCliente.style.display = "none";
 	frmBajaReserva.style.display = "none";
 	frmModificarCliente.style.display = "none";
-	frmModificarReserva.style.display = "none";
+    frmModificarReserva.style.display = "none";
+    frmAltaActividades.style.display = "none";
+
 }
 
 function altaProveedor() {
@@ -129,7 +141,9 @@ function altaProveedor() {
 	frmBajaCliente.style.display = "none";
 	frmBajaReserva.style.display = "none";
 	frmModificarCliente.style.display = "none";
-	frmModificarReserva.style.display = "none";
+    frmModificarReserva.style.display = "none";
+    frmAltaActividades.style.display = "none";
+
 }
 
 function bajaCliente() {
@@ -140,6 +154,8 @@ function bajaCliente() {
     frmBajaReserva.style.display = "none";
     frmModificarCliente.style.display = "none";
     frmModificarReserva.style.display = "none";
+    frmAltaActividades.style.display = "none";
+
 }
 
 function bajaReserva() {
@@ -150,6 +166,8 @@ function bajaReserva() {
     frmAltaProveedor.style.display = "none";
     frmModificarCliente.style.display = "none";
     frmModificarReserva.style.display = "none";
+    frmAltaActividades.style.display = "none";
+
 }
 
 function modificarCliente() {
@@ -160,10 +178,24 @@ function modificarCliente() {
     frmAltaReserva.style.display = "none";
     frmAltaProveedor.style.display = "none";
     frmModificarReserva.style.display = "none";
+    frmAltaActividades.style.display = "none";
+
 }
 
 function modificarReserva() {
 	frmModificarReserva.style.display = "block";
+	frmModificarCliente.style.display = "none";
+	frmBajaReserva.style.display = "none";
+	frmBajaCliente.style.display = "none";
+    frmAltaCliente.style.display = "none";
+    frmAltaReserva.style.display = "none";
+    frmAltaProveedor.style.display = "none";
+    frmAltaActividades.style.display = "none";
+
+}
+function altaActividad(){
+    frmAltaActividades.style.display = "block";  
+    frmModificarReserva.style.display = "none";
 	frmModificarCliente.style.display = "none";
 	frmBajaReserva.style.display = "none";
 	frmBajaCliente.style.display = "none";
