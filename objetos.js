@@ -37,6 +37,35 @@ Parking.prototype.toString = function() {
     return sMensaje;
     }
 }
+//Clase Regimen Alimenticio
+function RegimenAlimenticio(iID, fPrecioPersona) {
+    this.id = iID;
+    this.precioPersona = fPrecioPersona;
+}
+RegimenAlimenticio.prototype.toString = function() {
+    let sMensaje = "El regimen con  " +this.id+ " tiene un precio de " +this.precioPersona;
+    return sMensaje;
+}
+//Clase Actividades
+function Actividades(iID, sNombre, fPrecio) {
+    this.id = iID;
+    this.nombre= sNombre;
+    this.precio = fPrecio;
+}
+Actividades.prototype.toString = function() {
+    let sMensaje = "La actividad  " +this.nombre+ " con un ID" +this.id+" y con un precio de " +this.precio;
+    return sMensaje;
+}
+//Clase Proveedores
+function Proveedores(iID, sNombre, fPrecio) {
+    this.id = iID;
+    this.nombre= sNombre;
+    this.precio = fPrecio;
+}
+Actividades.prototype.toString = function() {
+    let sMensaje = "La actividad  " +this.nombre+ " con un ID" +this.id+" y con un precio de " +this.precio;
+    return sMensaje;
+}
 //Clase principal
 class UpoCampo{
 
