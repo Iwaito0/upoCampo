@@ -57,13 +57,13 @@ Actividades.prototype.toString = function() {
     return sMensaje;
 }
 //Clase Proveedores
-function Proveedores(iID, sNombre, fPrecio) {
-    this.id = iID;
+function Proveedores(sCIF, sNombre, itelefono) {
+    this.cif = sCIF;
     this.nombre= sNombre;
-    this.precio = fPrecio;
+    this.telefono = itelefono;
 }
-Actividades.prototype.toString = function() {
-    let sMensaje = "La actividad  " +this.nombre+ " con un ID" +this.id+" y con un precio de " +this.precio;
+Proveedores.prototype.toString = function() {
+    let sMensaje = "El proveedor  " +this.nombre+ " con un CIF" +this.cif+" y su numero es " +this.telefono;
     return sMensaje;
 }
 //Clase principal
