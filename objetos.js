@@ -74,6 +74,19 @@ Proveedores.prototype.toString = function() {
     let sMensaje = "El proveedor  " +this.nombre+ " con un CIF" +this.cif+" y su numero es " +this.telefono;
     return sMensaje;
 }
+
+//Clase Reservas
+function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio) {
+    this.id = iID;
+    this.numPersonas= iNumPersonas;
+    this.checkin = dCheckIn;
+    this.checkout = dCheckOut;
+    this.precio = fPrecio;
+}
+Reservas.prototype.toString = function() {
+    let sMensaje = "ID: "+this.id+" Numero personas: "+this.numPersonas+" CheckIn: "+this.checkin+" CheckOut: "+this.checkout+" Precio: "+this.precio;
+    return sMensaje;
+}
 //Clase principal
 class UpoCampo{
 
