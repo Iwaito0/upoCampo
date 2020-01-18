@@ -92,9 +92,58 @@ class UpoCampo{
 
 constructor() 
     {
-        
+        this.clientes = [];
+        this.reservas = [];
+        this.habitaciones = [];
+        this.parking = [];
+        this.actividades = [];
+        this.proveedores = [];
+        this.regimenAlimentario = [];
     }
 
-  
+  altaCliente(oCliente) {
+        let sMensaje = "";
+
+        if (this.clientes.filter(cliente => cliente.nif == oCliente.nif).length == 0) {
+            //No se encuentra --> lo doy de alta
+            this.clientes.push(oCliente);
+            sMensaje = "Alta cliente OK";
+        }
+        else {
+            sMensaje = "El cliente ya estaba registrado";
+        }
+
+        return sMensaje;
+  }
+
+  altaReserva(oReserva){
+        let sMensaje = "";
+
+        if (this.reservas.filter(reserva => reserva.id == oReserva.id).length == 0) {
+            //No se encuentra --> lo doy de alta
+            this.reservas.push(oReserva);
+            sMensaje = "Alta reserva OK";
+        }
+        else {
+            sMensaje = "La reserva ya estaba registrada";
+        }
+
+        return sMensaje;
+  }
+
+  altaProveedor(oProveedor){
+        let sMensaje = "";
+
+        if (this.proveedores.filter(proveedor => proveedor.cif == oProveedor.cif).length == 0) {
+            //No se encuentra --> lo doy de alta
+            this.proveedores.push(oProveedor);
+            sMensaje = "Alta proveedor OK";
+        }
+        else {
+            sMensaje = "El proveedor ya estaba registrado";
+        }
+
+        return sMensaje;
+  }
 
 }
