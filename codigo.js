@@ -8,35 +8,35 @@ var divListado = document.getElementById("listado");
 /*---------------MENU ALTA-------------*/
 
 var menuAltaCliente = document.getElementById("altaCliente");
-menuAltaCliente.addEventListener("click", altaCliente, false);
+menuAltaCliente.addEventListener("click", mostrarAltaCliente, false);
 
 var menuAltaReserva = document.getElementById("altaReserva");
-menuAltaReserva.addEventListener("click", altaReserva, false);
+menuAltaReserva.addEventListener("click", mostrarAltaReserva, false);
 
 var menuAltaProveedor = document.getElementById("altaProveedor");
-menuAltaProveedor.addEventListener("click", altaProveedor, false);
+menuAltaProveedor.addEventListener("click", mostrarAltaProveedor, false);
 
 var menuAltaActividad = document.getElementById("altaActividad");
-menuAltaActividad.addEventListener("click", altaActividad, false);
+menuAltaActividad.addEventListener("click", mostrarAltaActividad, false);
 
 
 /*---------------MENU BAJA-------------*/
 
 var menuBajaCliente = document.getElementById("bajaCliente");
-menuBajaCliente.addEventListener("click", bajaCliente, false);
+menuBajaCliente.addEventListener("click", mostrarBajaCliente, false);
 
 var menuBajaReserva = document.getElementById("bajaReserva");
-menuBajaReserva.addEventListener("click", bajaReserva, false);
+menuBajaReserva.addEventListener("click", mostrarBajaReserva, false);
 
 
 
 /*---------------MENU MODIFICAR-------------*/
 
 var menuModificarCliente = document.getElementById("modificarCliente");
-menuModificarCliente.addEventListener("click", modificarCliente, false);
+menuModificarCliente.addEventListener("click", mostrarModificarCliente, false);
 
 var menuModificarReserva = document.getElementById("modificarReserva");
-menuModificarReserva.addEventListener("click", modificarReserva, false);
+menuModificarReserva.addEventListener("click", mostrarModificarReserva, false);
 
 
 
@@ -78,15 +78,56 @@ botonModificarReserva.addEventListener("click", aceptarModificarReserva, false);
 /*-------------FUNCIONES-----------------*/
 
 function aceptarAltaCliente(){
-    alert("asdasd");
+    // Recoger valores del formulario
+    let sDni = frmAltaCliente.txtNifAlta.value.trim();
+    let sNombre = frmAltaCliente.txtNombreClienteAlta.value.trim();
+    let iTelefono = parseInt(frmAltaCliente.txtTelefonoClienteAlta.value.trim());
+    let sDireccion = frmAltaCliente.txtDireccionAlta.value.trim();
+    let sEmail = frmAltaCliente.txtEmailAlta.value.trim();
+    let iNumTarjeta = parseInt(frmAltaCliente.txtNTarjetaAlta.value.trim());
+
+    // Creamos el objeto cliente
+    let oCliente = new Cliente(sDni, sNombre, iTelefono, sDireccion, sEmail, iNumTarjeta);
+
+    // Alta de cliente en UPOCAMPO
+    let sMensaje = oUPOCampo.altaCliente(oCliente);
+
+    alert(sMensaje);
+    frmAltaCliente.reset();
 }
 
 function aceptarAltaReserva(){
-    alert("abcd");
+    // Recoger valores del formulario
+    let iID = parseInt(frmAltaReserva.txtIdAlta.value.trim());
+    let iNumPersonas = parseInt(frmAltaReserva.txtNumAlta.value.trim());
+    let dCheckin = frmAltaReserva.txtEntradaAlta.value.trim();
+    let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
+    let fPrecio = parseFloat(frmAltaReserva.txtPrecioAlta.value.trim());
+
+    // Creamos el objeto reserva
+    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio);
+
+    // Alta de reserva en UPOCAMPO
+    let sMensaje = oUPOCampo.altaReserva(oReserva);
+
+    alert(sMensaje);
+    frmAltaReserva.reset();
 }
 
 function aceptarAltaProveedor(){
-    alert("abcdefghi");
+    // Recoger valores del formulario
+    let sCIF = frmAltaProveedor.txtCifAlta.value.trim();
+    let sNombre = frmAltaProveedor.txtNombreProveedorAlta.value.trim();
+    let iTelefono = frmAltaProveedor.txtTelefonoProveedorAlta.value.trim();
+
+    // Creamos el objeto proveedor
+    let oProveedor = new Proveedores(sCIF, sNombre, iTelefono);
+
+    // Alta de proveedor en UPOCAMPO
+    let sMensaje = oUPOCampo.altaProveedor(oProveedor);
+
+    alert(sMensaje);
+    frmAltaProveedor.reset();
 }
 
 function aceptarBajaCliente(){
@@ -111,7 +152,7 @@ function aceptarAltaActividade(){
 //Mostrar Formularios
 
 //Mostrar formulario cliente(anadir los otros formularios mientras los vais creando)
-function altaCliente() {
+function mostrarAltaCliente() {
     frmAltaCliente.style.display = "block";
     frmAltaReserva.style.display = "none";
     frmAltaProveedor.style.display = "none";
@@ -122,7 +163,7 @@ function altaCliente() {
     frmAltaActividades.style.display = "none";
 }
 
-function altaReserva() {
+function mostrarAltaReserva() {
 	frmAltaReserva.style.display = "block";
 	frmAltaCliente.style.display = "none";
 	frmAltaProveedor.style.display = "none";
@@ -134,7 +175,7 @@ function altaReserva() {
 
 }
 
-function altaProveedor() {
+function mostrarAltaProveedor() {
 	frmAltaProveedor.style.display = "block";
 	frmAltaReserva.style.display = "none";
 	frmAltaCliente.style.display = "none";
@@ -146,7 +187,7 @@ function altaProveedor() {
 
 }
 
-function bajaCliente() {
+function mostrarBajaCliente() {
 	frmBajaCliente.style.display = "block";
     frmAltaCliente.style.display = "none";
     frmAltaReserva.style.display = "none";
@@ -158,7 +199,7 @@ function bajaCliente() {
 
 }
 
-function bajaReserva() {
+function mostrarBajaReserva() {
 	frmBajaReserva.style.display = "block";
 	frmBajaCliente.style.display = "none";
     frmAltaCliente.style.display = "none";
@@ -170,7 +211,7 @@ function bajaReserva() {
 
 }
 
-function modificarCliente() {
+function mostrarModificarCliente() {
 	frmModificarCliente.style.display = "block";
 	frmBajaReserva.style.display = "none";
 	frmBajaCliente.style.display = "none";
@@ -182,7 +223,7 @@ function modificarCliente() {
 
 }
 
-function modificarReserva() {
+function mostrarModificarReserva() {
 	frmModificarReserva.style.display = "block";
 	frmModificarCliente.style.display = "none";
 	frmBajaReserva.style.display = "none";
@@ -193,7 +234,7 @@ function modificarReserva() {
     frmAltaActividades.style.display = "none";
 
 }
-function altaActividad(){
+function mostrarAltaActividad(){
     frmAltaActividades.style.display = "block";  
     frmModificarReserva.style.display = "none";
 	frmModificarCliente.style.display = "none";
