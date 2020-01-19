@@ -145,6 +145,16 @@ constructor()
 
         return sMensaje;
   }
+  altaHabitacion(oHabitacion){
+      this.habitaciones.push(oHabitacion);
+  }
+  altaParking(oParking){
+    this.parking.push(oParking);
+}
+altaRegimenAlimenticio(oRegimen){
+    this.regimenAlimentario.push(oRegimen);
+}
+
 
   bajaCliente(sNif){
         let sMensaje = "";

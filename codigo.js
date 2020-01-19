@@ -38,6 +38,15 @@ menuModificarCliente.addEventListener("click", mostrarModificarCliente, false);
 var menuModificarReserva = document.getElementById("modificarReserva");
 menuModificarReserva.addEventListener("click", mostrarModificarReserva, false);
 
+/*---------------MENULISTADOS GENERALES--------------------*/
+var menuListadosHabitaciones = document.getElementById("listadoHabitaciones");
+menuListadosHabitaciones.addEventListener("click", listadosHabitaciones, false);
+
+
+
+
+
+
 
 
 
@@ -162,6 +171,9 @@ function aceptarModificarReserva(){
 function aceptarAltaActividade(){
     alert("ñam ñam");
 }
+function listadosHabitaciones(){
+    alert("ñoqui ñoqui");
+}
 
 //Mostrar Formularios
 
@@ -258,3 +270,74 @@ function mostrarAltaActividad(){
     frmAltaReserva.style.display = "none";
     frmAltaProveedor.style.display = "none";
 }
+//Datos prueba de habitaciones
+
+oUPOCampo.altaHabitacion(new Habitacion(0, "simple", 28.90, 2));
+oUPOCampo.altaHabitacion(new Habitacion(1, "doble", 40.50, 4));
+oUPOCampo.altaHabitacion(new Habitacion(2, "simple", 28.90, 2));
+oUPOCampo.altaHabitacion(new Habitacion(3, "doble", 40.50, 4));
+oUPOCampo.altaHabitacion(new Habitacion(4, "simple", 28.90, 2));
+oUPOCampo.altaHabitacion(new Habitacion(5, "doble", 40.50, 4));
+oUPOCampo.altaHabitacion(new Habitacion(6, "doble", 40.50, 4));
+oUPOCampo.altaHabitacion(new Habitacion(7, "doble", 40.50, 4));
+oUPOCampo.altaHabitacion(new Habitacion(8, "simple", 28.90, 2));
+oUPOCampo.altaHabitacion(new Habitacion(9, "simple", 28.90, 2));
+oUPOCampo.altaHabitacion(new Habitacion(10, "simple", 28.90, 2));
+oUPOCampo.altaHabitacion(new Habitacion(11, "simple", 28.90, 2));
+oUPOCampo.altaHabitacion(new Habitacion(12, "doble", 40.50, 4));
+oUPOCampo.altaHabitacion(new Habitacion(13, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(14, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(15, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(16, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(17, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(18, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(19, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(20, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(21, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(22, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(23, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(24, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(25, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(26, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(27, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(28, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(29, "triple", 75.95, 6));
+oUPOCampo.altaHabitacion(new Habitacion(30, "premium", 149.99, 2));
+oUPOCampo.altaHabitacion(new Habitacion(31, "premium", 149.99, 2));
+oUPOCampo.altaHabitacion(new Habitacion(32, "premium", 149.99, 2));
+oUPOCampo.altaHabitacion(new Habitacion(33, "premium", 149.99, 2));
+oUPOCampo.altaHabitacion(new Habitacion(34, "premium", 149.99, 2));
+oUPOCampo.altaHabitacion(new Habitacion(35, "premium", 149.99, 2));
+
+//Datos pruebas Parking
+
+oUPOCampo.altaParking(new Parking(0, 25, false));
+oUPOCampo.altaParking(new Parking(1, 25, true));
+oUPOCampo.altaParking(new Parking(2, 25, false));
+oUPOCampo.altaParking(new Parking(3, 25, true));
+oUPOCampo.altaParking(new Parking(4, 25, false));
+oUPOCampo.altaParking(new Parking(5, 25, true));
+oUPOCampo.altaParking(new Parking(6, 25, false));
+oUPOCampo.altaParking(new Parking(7, 25, true));
+oUPOCampo.altaParking(new Parking(8, 25, false));
+oUPOCampo.altaParking(new Parking(9, 25, true));
+oUPOCampo.altaParking(new Parking(10, 25, false));
+oUPOCampo.altaParking(new Parking(11, 25, true));
+oUPOCampo.altaParking(new Parking(12, 25, false));
+oUPOCampo.altaParking(new Parking(13, 25, true));
+oUPOCampo.altaParking(new Parking(14, 25, false));
+oUPOCampo.altaParking(new Parking(15, 25, true));
+oUPOCampo.altaParking(new Parking(16, 25, false));
+oUPOCampo.altaParking(new Parking(17, 25, true));
+oUPOCampo.altaParking(new Parking(18, 25, false));
+oUPOCampo.altaParking(new Parking(19, 25, true));
+oUPOCampo.altaParking(new Parking(20, 25, true));
+
+//Datos pruebas Reguime alimenticio
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(0, 12.50));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(1, 8.99));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(2, 22.50));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(3, 55.75));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(4, 5));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(6, 25));
+
