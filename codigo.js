@@ -131,11 +131,25 @@ function aceptarAltaProveedor(){
 }
 
 function aceptarBajaCliente(){
-    alert("bcbcbcbc");
+    // Recoger valores del formulario
+    let sNif = frmBajaCliente.txtNifBaja.value.trim();
+
+    // Baja de cliente en UPOCAMPO
+    let sMensaje = oUPOCampo.bajaCliente(sNif);
+
+    alert(sMensaje);
+    frmBajaCliente.reset();
 }
 
 function aceptarBajaReserva(){
-    alert("aqwert");
+    // Recoger valores del formulario
+    let iID = frmBajaReserva.txtIdBaja.value.trim();
+
+    // Baja de reserva en UPOCAMPO
+    let sMensaje = oUPOCampo.bajaReserva(iID);
+
+    alert(sMensaje);
+    frmBajaReserva.reset();
 }
 
 function aceptarModificarCliente(){
