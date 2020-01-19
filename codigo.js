@@ -38,6 +38,13 @@ menuModificarCliente.addEventListener("click", mostrarModificarCliente, false);
 var menuModificarReserva = document.getElementById("modificarReserva");
 menuModificarReserva.addEventListener("click", mostrarModificarReserva, false);
 
+/*------------SELECCIONAR ELEMENTOS MODIFICAR------------*/
+
+var seleccionarClienteModificar = document.getElementById("btnSeleccionarCliente");
+seleccionarClienteModificar.addEventListener("click", seleccionarCliente, false);
+
+
+
 /*---------------MENULISTADOS GENERALES--------------------*/
 var menuListadosHabitaciones = document.getElementById("listadoHabitaciones");
 menuListadosHabitaciones.addEventListener("click", listadosHabitaciones, false);
@@ -159,6 +166,12 @@ function aceptarBajaReserva(){
 
     alert(sMensaje);
     frmBajaReserva.reset();
+}
+
+function seleccionarCliente(){
+    let sNif = frmModificarCliente.txtNifModificar.value.trim();
+    oUPOCampo.buscarCliente(sNif);
+
 }
 
 function aceptarModificarCliente(){
