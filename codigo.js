@@ -158,7 +158,6 @@ function aceptarAltaActividade(){
     alert("ñam ñam");
 }
 function listadosHabitaciones(){
-
     alert("ñoqui ñoqui");
 }
 
