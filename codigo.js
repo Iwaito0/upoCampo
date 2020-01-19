@@ -38,6 +38,15 @@ menuModificarCliente.addEventListener("click", mostrarModificarCliente, false);
 var menuModificarReserva = document.getElementById("modificarReserva");
 menuModificarReserva.addEventListener("click", mostrarModificarReserva, false);
 
+/*---------------MENULISTADOS GENERALES--------------------*/
+var menuListadosHabitaciones = document.getElementById("listadoHabitaciones");
+menuListadosHabitaciones.addEventListener("click", listadosHabitaciones, false);
+
+
+
+
+
+
 
 
 
@@ -147,6 +156,10 @@ function aceptarModificarReserva(){
 }
 function aceptarAltaActividade(){
     alert("ñam ñam");
+}
+function listadosHabitaciones(){
+
+    alert("ñoqui ñoqui");
 }
 
 //Mostrar Formularios
@@ -283,5 +296,35 @@ oUPOCampo.altaHabitacion(new Habitacion(33, "premium", 149.99, 2));
 oUPOCampo.altaHabitacion(new Habitacion(34, "premium", 149.99, 2));
 oUPOCampo.altaHabitacion(new Habitacion(35, "premium", 149.99, 2));
 
+//Datos pruebas Parking
 
+oUPOCampo.altaParking(new Parking(0, 25, false));
+oUPOCampo.altaParking(new Parking(1, 25, true));
+oUPOCampo.altaParking(new Parking(2, 25, false));
+oUPOCampo.altaParking(new Parking(3, 25, true));
+oUPOCampo.altaParking(new Parking(4, 25, false));
+oUPOCampo.altaParking(new Parking(5, 25, true));
+oUPOCampo.altaParking(new Parking(6, 25, false));
+oUPOCampo.altaParking(new Parking(7, 25, true));
+oUPOCampo.altaParking(new Parking(8, 25, false));
+oUPOCampo.altaParking(new Parking(9, 25, true));
+oUPOCampo.altaParking(new Parking(10, 25, false));
+oUPOCampo.altaParking(new Parking(11, 25, true));
+oUPOCampo.altaParking(new Parking(12, 25, false));
+oUPOCampo.altaParking(new Parking(13, 25, true));
+oUPOCampo.altaParking(new Parking(14, 25, false));
+oUPOCampo.altaParking(new Parking(15, 25, true));
+oUPOCampo.altaParking(new Parking(16, 25, false));
+oUPOCampo.altaParking(new Parking(17, 25, true));
+oUPOCampo.altaParking(new Parking(18, 25, false));
+oUPOCampo.altaParking(new Parking(19, 25, true));
+oUPOCampo.altaParking(new Parking(20, 25, true));
+
+//Datos pruebas Reguime alimenticio
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(0, 12.50));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(1, 8.99));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(2, 22.50));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(3, 55.75));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(4, 5));
+oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(6, 25));
 
