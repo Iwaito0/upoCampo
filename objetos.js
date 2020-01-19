@@ -194,4 +194,8 @@ altaRegimenAlimenticio(oRegimen){
         return sMensaje;
   }
 
+  buscarCliente(sNif){
+        
+  }
+
 }
