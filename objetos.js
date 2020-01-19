@@ -145,5 +145,8 @@ constructor()
 
         return sMensaje;
   }
+  altaHabitacion(oHabitacion){
+      //this.habitaciones.push(oHabitacion);
+  }
 
 }
