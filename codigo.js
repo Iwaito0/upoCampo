@@ -46,8 +46,24 @@ seleccionarClienteModificar.addEventListener("click", seleccionarCliente, false)
 
 
 /*---------------MENULISTADOS GENERALES--------------------*/
+var menuListadosActividades = document.getElementById("listadoActividades");
+menuListadosActividades.addEventListener("click", listadosActividades, false);
+
+var menuListadosProveedores = document.getElementById("listadoProveedores");
+menuListadosProveedores.addEventListener("click", listadosProveedores, false);
+
+var menuListadosClientes = document.getElementById("listadoClientes");
+menuListadosClientes.addEventListener("click", listadosClientes, false);
+
+var menuListadosReservas = document.getElementById("listadoReservas");
+menuListadosReservas.addEventListener("click", listadosReservas, false);
+
 var menuListadosHabitaciones = document.getElementById("listadoHabitaciones");
 menuListadosHabitaciones.addEventListener("click", listadosHabitaciones, false);
+
+var menuListadosParking = document.getElementById("listadoParking");
+menuListadosParking.addEventListener("click", listadosParking, false);
+
 
 
 
@@ -96,6 +112,7 @@ botonModificarReserva.addEventListener("click", aceptarModificarReserva, false);
 /*-------------ALTA-------------*/
 
 function aceptarAltaCliente(){
+    let sMensaje="";
     // Recoger valores del formulario
     let sDni = frmAltaCliente.txtNifAlta.value.trim();
     let sNombre = frmAltaCliente.txtNombreClienteAlta.value.trim();
@@ -104,14 +121,76 @@ function aceptarAltaCliente(){
     let sEmail = frmAltaCliente.txtEmailAlta.value.trim();
     let iNumTarjeta = parseInt(frmAltaCliente.txtNTarjetaAlta.value.trim());
 
+    if(!/^\d{8}[a-zA-Z]$/.test(sDni)){
+        sMensaje+="El campo DNI esta mal\n";
+        frmAltaCliente.txtNifAlta.classList.add("error");
+    }
+    else{
+        frmAltaCliente.txtNifAlta.classList.remove("error");  
+    }
+
+    if(!/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/.test(sNombre)){
+        sMensaje+="El campo nombre esta mal\n";
+        frmAltaCliente.txtNombreClienteAlta.classList.add("error");
+    }
+    else{
+        frmAltaCliente.txtNombreClienteAlta.classList.remove("error");  
+    }
+
+
+    if(!/^(\+34|0034|34)?[6|7|9][0-9]{8}$/g.test(iTelefono)){
+        sMensaje+="El campo telefono esta mal (Recuerde poner el prefijo )\n";
+        frmAltaCliente.txtTelefonoClienteAlta.classList.add("error");
+    }
+    else{
+        frmAltaCliente.txtTelefonoClienteAlta.classList.remove("error");  
+    }
+    
+    if(!/[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?(( |\-)[a-zA-Z1-9À-ÖØ-öø-ÿ]+\.?)*/.test(sDireccion)){
+        sMensaje+="El campo direccion esta mal\n";
+        frmAltaCliente.txtDireccionAlta.classList.add("error");
+    }
+    else{
+        frmAltaCliente.txtDireccionAlta.classList.remove("error");  
+    }
+
+    if(!/^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/g.test(sEmail)){
+        sMensaje+="El campo email esta mal\n";
+        frmAltaCliente.txtEmailAlta.classList.add("error");
+    }
+    else{
+        frmAltaCliente.txtEmailAlta.classList.remove("error");  
+    }
+    if(!/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$/.test(iNumTarjeta)){
+        sMensaje+="El campo del numero de la tarjeta esta mal\n";
+        frmAltaCliente.txtNTarjetaAlta.classList.add("error");
+    }
+    else{
+        frmAltaCliente.txtNTarjetaAlta.classList.remove("error");  
+    }
+
+    if(sMensaje==""){
+    // Creamos el objeto cliente
+    let oCliente = new Cliente(sDni, sNombre, iTelefono, sDireccion, sEmail, iNumTarjeta);
+
+    // Alta de cliente en UPOCAMPO
+    sMensaje = oUPOCampo.altaCliente(oCliente);
+    alert(sMensaje);    
+    frmAltaCliente.reset();    
+    }
+    else{
+        alert(sMensaje);
+    }
+
+
+    /*
     // Creamos el objeto cliente
     let oCliente = new Cliente(sDni, sNombre, iTelefono, sDireccion, sEmail, iNumTarjeta);
 
     // Alta de cliente en UPOCAMPO
     let sMensaje = oUPOCampo.altaCliente(oCliente);
-
-    alert(sMensaje);
-    frmAltaCliente.reset();
+*/
+    //frmAltaCliente.reset();
 }
 
 function aceptarAltaReserva(){
@@ -277,6 +356,10 @@ function aceptarModificarReserva(){
 
 /*-------------LISTADOS-------------*/
 
+function aceptarAltaActividade(){
+    alert("ñam ñam");
+}
+
 function listadosHabitaciones(){
     let pestana=window.open()
     let arrayHabitaciones=oUPOCampo.getArrayHabitaciones();
@@ -319,6 +402,240 @@ function listadosHabitaciones(){
         oCelda.textContent = arrayHabitaciones[i].ocupacionMaxima;
     }
 
+    pestana.document.body.append(oTabla);
+}
+
+function listadosParking(){
+    let pestana=window.open()
+    let arrayParking=oUPOCampo.getArrayParking();
+    
+    //Creacion de la tabla
+    var oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    var oTHead=oTabla.createTHead();
+    var oFila=oTHead.insertRow(-1);
+    var oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Numero de parking";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="precio";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Ancho especial";
+    
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+    
+    for(let i=0; i<arrayParking.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayParking[i].id;
+    
+         oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayParking[i].precio;
+        
+         oCelda = oFila.insertCell(-1);
+        if(arrayParking[i].anchoespecial==false){
+            oCelda.textContent = "No";
+        }
+        else{
+            oCelda.textContent = "Si";
+   
+        }
+    }
+    
+    pestana.document.body.append(oTabla);  
+}
+function listadosClientes(){
+    let pestana=window.open()
+    let arrayClientes=oUPOCampo.getArrayClientes();
+    
+    //Creacion de la tabla
+    var oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tablais
+    var oTHead=oTabla.createTHead();
+    var oFila=oTHead.insertRow(-1);
+    var oCelda=oFila.insertCell(-1);
+    oCelda.textContent="NIF";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Nombre";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Telefono";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Direccion";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Email";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Numero de Tarjeta";
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+    
+    for(let i=0; i<arrayClientes.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayClientes[i].nif;
+    
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayClientes[i].nombre;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayClientes[i].telefono;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayClientes[i].direccion;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayClientes[i].email;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayClientes[i].numeroTarjeta;
+        
+    }
+    
+    pestana.document.body.append(oTabla); 
+}
+
+function listadosProveedores(){
+    let pestana=window.open()
+    let arrayProveedor=oUPOCampo.getArrayProveedor();
+    
+    //Creacion de la tabla
+    var oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    var oTHead=oTabla.createTHead();
+    var oFila=oTHead.insertRow(-1);
+    var oCelda=oFila.insertCell(-1);
+    oCelda.textContent="CIF";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Nombre";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Telefono";
+    
+    
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+    
+    for(let i=0; i<arrayProveedor.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayProveedor[i].cif;
+    
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayProveedor[i].nombre;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayProveedor[i].telefono;
+        
+    }
+    
+    pestana.document.body.append(oTabla);
+}
+function listadosActividades(){
+    let pestana=window.open()
+    let arrayActividades=oUPOCampo.getArrayActividades();
+    
+    //Creacion de la tabla
+    var oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    var oTHead=oTabla.createTHead();
+    var oFila=oTHead.insertRow(-1);
+    var oCelda=oFila.insertCell(-1);
+    oCelda.textContent="ID";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Nombre";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Precio";
+    
+    
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+    
+    for(let i=0; i<arrayActividades.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayActividades[i].id;
+    
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayActividades[i].nombre;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayActividades[i].precio;
+        
+    }
+    
+    pestana.document.body.append(oTabla);
+}
+function listadosReservas(){
+    let pestana=window.open()
+    let arrayReservas=oUPOCampo.getArrayReservas();
+    
+    //Creacion de la tabla
+    var oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    var oTHead=oTabla.createTHead();
+    var oFila=oTHead.insertRow(-1);
+    var oCelda=oFila.insertCell(-1);
+    oCelda.textContent="ID";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Numero de Personas";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Entrada";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Salida";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Precio";
+    
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+    
+    for(let i=0; i<arrayReservas.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayReservas[i].id;
+    
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayReservas[i].numPersonas;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayReservas[i].checkin;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayReservas[i].checkout;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayReservas[i].precio;
+        
+        
+    }
+    
     pestana.document.body.append(oTabla);
 }
 
