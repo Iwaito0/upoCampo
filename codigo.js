@@ -53,9 +53,10 @@ menuListadosHabitaciones.addEventListener("click", listadosHabitaciones, false);
 
 
 
+/*--------------------------CANCELAR--------------------------*/
 
-
-
+var botonCancelarClienteMod = document.getElementById("btnCancelarModificarCliente");
+botonCancelarClienteMod.addEventListener("click", cancelarModificarCliente, false);
 
 
 /*---------------ACEPTAR ALTA--------------------*/
@@ -92,6 +93,7 @@ botonModificarReserva.addEventListener("click", aceptarModificarReserva, false);
 
 
 /*-------------FUNCIONES-----------------*/
+/*-------------ALTA-------------*/
 
 function aceptarAltaCliente(){
     // Recoger valores del formulario
@@ -146,6 +148,12 @@ function aceptarAltaProveedor(){
     frmAltaProveedor.reset();
 }
 
+function aceptarAltaActividade(){
+    alert("ñam ñam");
+}
+
+/*-------------BAJA-------------*/
+
 function aceptarBajaCliente(){
     // Recoger valores del formulario
     let sNif = frmBajaCliente.txtNifBaja.value.trim();
@@ -168,65 +176,150 @@ function aceptarBajaReserva(){
     frmBajaReserva.reset();
 }
 
+/*-------------SELECCIONAR-------------*/
+
 function seleccionarCliente(){
     let sNif = frmModificarCliente.txtNifModificar.value.trim();
-    oUPOCampo.buscarCliente(sNif);
+
+    let botonSeleccionar = document.getElementById("btnSeleccionarCliente");
+    let btnModificarCliente = document.getElementById("btnAceptarModificarCliente");
+    let btnCacelarModCliente = document.getElementById("btnCancelarModificarCliente");
+    let inputNif = document.getElementById("txtNifModificar");
+    let inputNombre = document.getElementById("txtNombreClienteModificar");
+    let inputTelefono = document.getElementById("txtTelefonoClienteModificar");
+    let inputDireccion = document.getElementById("txtDireccionModificar");
+    let inputEmail = document.getElementById("txtEmailModificar");
+    let inputNumTarjeta = document.getElementById("txtNTarjetaModificar");
+
+    let clienteSeleccionado = oUPOCampo.buscarCliente(sNif);
+
+    if (clienteSeleccionado != "") {
+        inputNif.disabled = true;
+        botonSeleccionar.disabled = true;
+
+        inputNombre.disabled = false;
+        inputTelefono.disabled = false;
+        inputDireccion.disabled = false;
+        inputEmail.disabled = false;
+        inputNumTarjeta.disabled = false;
+        btnModificarCliente.disabled = false;
+        btnCacelarModCliente.disabled = false;
+
+        inputNombre.value = clienteSeleccionado[0].nombre;
+        inputTelefono.value = clienteSeleccionado[0].telefono;
+        inputDireccion.value = clienteSeleccionado[0].direccion;
+        inputEmail.value = clienteSeleccionado[0].email;
+        inputNumTarjeta.value = clienteSeleccionado[0].numeroTarjeta;
+    }
+
+    else {
+        alert("No se encuentra ningun cliente con ese NIF");
+
+        inputNif.disabled = false;
+        botonSeleccionar.disabled = false;
+
+        inputNombre.disabled = true;
+        inputTelefono.disabled = true;
+        inputDireccion.disabled = true;
+        inputEmail.disabled = true;
+        inputNumTarjeta.disabled = true;
+        btnModificarCliente.disabled = true;
+        btnCacelarModCliente.disabled = true;
+
+        frmModificarCliente.reset();
+    }
 
 }
 
+/*--------------CANCELAR--------------*/
+
+function cancelarModificarCliente(){
+    let botonSeleccionar = document.getElementById("btnSeleccionarCliente");
+    let btnModificarCliente = document.getElementById("btnAceptarModificarCliente");
+    let btnCacelarModCliente = document.getElementById("btnCancelarModificarCliente");
+    let inputNif = document.getElementById("txtNifModificar");
+    let inputNombre = document.getElementById("txtNombreClienteModificar");
+    let inputTelefono = document.getElementById("txtTelefonoClienteModificar");
+    let inputDireccion = document.getElementById("txtDireccionModificar");
+    let inputEmail = document.getElementById("txtEmailModificar");
+    let inputNumTarjeta = document.getElementById("txtNTarjetaModificar");
+
+    inputNif.disabled = false;
+    botonSeleccionar.disabled = false;
+
+    inputNombre.disabled = true;
+    inputTelefono.disabled = true;
+    inputDireccion.disabled = true;
+    inputEmail.disabled = true;
+    inputNumTarjeta.disabled = true;
+    btnModificarCliente.disabled = true;
+    btnCacelarModCliente.disabled = true;
+
+    frmModificarCliente.reset();
+}
+
+/*-------------MODIFICAR-------------*/
+
 function aceptarModificarCliente(){
-    alert("qqqqq");
+    let sNif = frmModificarCliente.txtNifModificar.value.trim();
+    let sNombre = frmModificarCliente.txtNombreClienteModificar.value.trim();
+    let iTelefono = frmModificarCliente.txtTelefonoClienteModificar.value.trim();
+    let sDireccion = frmModificarCliente.txtDireccionModificar.value.trim();
+    let sEmail = frmModificarCliente.txtEmailModificar.value.trim();
+    let iNumTarjeta = frmModificarCliente.txtNTarjetaModificar.value.trim();
+
+    
 }
 
 function aceptarModificarReserva(){
 	alert("mmmmm");
 }
-function aceptarAltaActividade(){
-    alert("ñam ñam");
-}
+
+/*-------------LISTADOS-------------*/
+
 function listadosHabitaciones(){
-let pestana=window.open()
-let arrayHabitaciones=oUPOCampo.getArrayHabitaciones();
+    let pestana=window.open()
+    let arrayHabitaciones=oUPOCampo.getArrayHabitaciones();
 
-//Creacion de la tabla
-var oTabla=document.createElement("TABLE");
-oTabla.setAttribute("border","1");
-//El encabezado de la tabla
-var oTHead=oTabla.createTHead();
-var oFila=oTHead.insertRow(-1);
-var oCelda=oFila.insertCell(-1);
-oCelda.textContent="Numero de habitacion";
+    //Creacion de la tabla
+    var oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    var oTHead=oTabla.createTHead();
+    var oFila=oTHead.insertRow(-1);
+    var oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Numero de habitacion";
 
-oCelda=oFila.insertCell(-1);
-oCelda.textContent="Tipo";
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Tipo";
 
-oCelda=oFila.insertCell(-1);
-oCelda.textContent="Precio";
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Precio";
 
-oCelda=oFila.insertCell(-1);
-oCelda.textContent="Ocupacion Maxima";
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Ocupacion Maxima";
 
-//El cuerpo de la tabla
-let oTBody = document.createElement("TBODY");
-oTabla.appendChild(oTBody);
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
 
-for(let i=0; i<arrayHabitaciones.length; i++){
-    let oFila = oTBody.insertRow(-1);
+    for(let i=0; i<arrayHabitaciones.length; i++){
+        let oFila = oTBody.insertRow(-1);
 
-    let oCelda = oFila.insertCell(-1);
-    oCelda.textContent = arrayHabitaciones[i].id;
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayHabitaciones[i].id;
 
-     oCelda = oFila.insertCell(-1);
-    oCelda.textContent = arrayHabitaciones[i].tipo;
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayHabitaciones[i].tipo;
 
-     oCelda = oFila.insertCell(-1);
-    oCelda.textContent = arrayHabitaciones[i].precio;
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayHabitaciones[i].precio;
 
-     oCelda = oFila.insertCell(-1);
-    oCelda.textContent = arrayHabitaciones[i].ocupacionMaxima;
-}
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayHabitaciones[i].ocupacionMaxima;
+    }
 
-pestana.document.body.append(oTabla);
+    pestana.document.body.append(oTabla);
 }
 
 //Mostrar Formularios
@@ -317,9 +410,9 @@ function mostrarModificarReserva() {
 function mostrarAltaActividad(){
     frmAltaActividades.style.display = "block";  
     frmModificarReserva.style.display = "none";
-	frmModificarCliente.style.display = "none";
-	frmBajaReserva.style.display = "none";
-	frmBajaCliente.style.display = "none";
+    frmModificarCliente.style.display = "none";
+    frmBajaReserva.style.display = "none";
+    frmBajaCliente.style.display = "none";
     frmAltaCliente.style.display = "none";
     frmAltaReserva.style.display = "none";
     frmAltaProveedor.style.display = "none";
