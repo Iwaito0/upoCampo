@@ -34,12 +34,12 @@ function Parking(iID, fPrecio, bAnchoEspecial) {
 }
 Parking.prototype.toString = function() {
     if(this.anchoespecial==true){
-    let sMensaje = "El parking " +this.id+ " con un precio de " +this.precio+ " y con ancho especial";
-    return sMensaje;
+        let sMensaje = "El parking " +this.id+ " con un precio de " +this.precio+ " y con ancho especial";
+        return sMensaje;
     }
     else{
-    let sMensaje = "El parking " +this.id+ " con un precio de " +this.precio+ " y sin ancho especial";
-    return sMensaje;
+        let sMensaje = "El parking " +this.id+ " con un precio de " +this.precio+ " y sin ancho especial";
+        return sMensaje;
     }
 }
 
@@ -90,7 +90,7 @@ Reservas.prototype.toString = function() {
 //Clase principal
 class UpoCampo{
 
-constructor() 
+    constructor() 
     {
         this.clientes = [];
         this.reservas = [];
@@ -101,7 +101,7 @@ constructor()
         this.regimenAlimentario = [];
     }
 
-  altaCliente(oCliente) {
+    altaCliente(oCliente) {
         let sMensaje = "";
 
         if (this.clientes.filter(cliente => cliente.nif == oCliente.nif).length == 0) {
@@ -114,9 +114,9 @@ constructor()
         }
 
         return sMensaje;
-  }
+    }
 
-  altaReserva(oReserva){
+    altaReserva(oReserva){
         let sMensaje = "";
 
         if (this.reservas.filter(reserva => reserva.id == oReserva.id).length == 0) {
@@ -129,9 +129,9 @@ constructor()
         }
 
         return sMensaje;
-  }
+    }
 
-  altaProveedor(oProveedor){
+    altaProveedor(oProveedor){
         let sMensaje = "";
 
         if (this.proveedores.filter(proveedor => proveedor.cif == oProveedor.cif).length == 0) {
@@ -144,23 +144,26 @@ constructor()
         }
 
         return sMensaje;
-  }
-  altaHabitacion(oHabitacion){
+    }
+
+    altaHabitacion(oHabitacion){
       this.habitaciones.push(oHabitacion);
-  }
-  altaParking(oParking){
-    this.parking.push(oParking);
-}
-altaRegimenAlimenticio(oRegimen){
-    this.regimenAlimentario.push(oRegimen);
-}
+    }
 
-getArrayHabitaciones(){
-    return this.habitaciones;
-}
+    altaParking(oParking){
+        this.parking.push(oParking);
+    }
+
+    altaRegimenAlimenticio(oRegimen){
+        this.regimenAlimentario.push(oRegimen);
+    }
+
+    getArrayHabitaciones(){
+        return this.habitaciones;
+    }
 
 
-  bajaCliente(sNif){
+    bajaCliente(sNif){
         let sMensaje = "";
         let bEncontrado = false;
 
@@ -177,9 +180,9 @@ getArrayHabitaciones(){
         }
 
         return sMensaje;
-  }
+    }
 
-  bajaReserva(iID) {
+    bajaReserva(iID) {
         let sMensaje = "";
         let bEncontrado = false;
 
@@ -196,10 +199,18 @@ getArrayHabitaciones(){
         }
 
         return sMensaje;
-  }
+    }
 
-  buscarCliente(sNif){
-        
-  }
+    buscarCliente(sNif){
+        let aCliente = [];
+
+        for (let i = 0; i < this.clientes.length; i++) {
+            if (this.clientes[i].nif == sNif) {
+                aCliente.push(this.clientes[i]);
+            }
+        }
+
+        return aCliente;
+    }
 
 }
