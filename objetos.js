@@ -158,6 +158,21 @@ altaRegimenAlimenticio(oRegimen){
 getArrayHabitaciones(){
     return this.habitaciones;
 }
+getArrayParking(){
+    return this.parking;
+}
+getArrayClientes(){
+    return this.clientes;
+}
+getArrayProveedor(){
+    return this.proveedores;
+}
+getArrayActividades(){
+    return this.actividades;
+}
+getArrayReservas(){
+    return this.reservas;
+}
 
 
   bajaCliente(sNif){
