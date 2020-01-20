@@ -160,4 +160,46 @@ getArrayHabitaciones(){
 }
 
 
+  bajaCliente(sNif){
+        let sMensaje = "";
+        let bEncontrado = false;
+
+        for (let i = 0; i < this.clientes.length; i++) {
+            if (this.clientes[i].nif == sNif) {
+                this.clientes.splice(i, 1);
+                sMensaje = "Cliente borrado correctamente";
+                bEncontrado = true;
+            }
+        }
+
+        if (bEncontrado == false) {
+            sMensaje = "No se encuentra ningun cliente con ese NIF";
+        }
+
+        return sMensaje;
+  }
+
+  bajaReserva(iID) {
+        let sMensaje = "";
+        let bEncontrado = false;
+
+        for (let i = 0; i < this.reservas.length; i++) {
+            if (this.reservas[i].id == iID) {
+                this.reservas.splice(i, 1);
+                sMensaje = "Reserva borrada correctamente";
+                bEncontrado = true;
+            }
+        }
+
+        if (bEncontrado == false) {
+            sMensaje = "No se encuentra ninguna reserva con ese ID";
+        }
+
+        return sMensaje;
+  }
+
+  buscarCliente(sNif){
+        
+  }
+
 }

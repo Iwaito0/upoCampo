@@ -38,6 +38,13 @@ menuModificarCliente.addEventListener("click", mostrarModificarCliente, false);
 var menuModificarReserva = document.getElementById("modificarReserva");
 menuModificarReserva.addEventListener("click", mostrarModificarReserva, false);
 
+/*------------SELECCIONAR ELEMENTOS MODIFICAR------------*/
+
+var seleccionarClienteModificar = document.getElementById("btnSeleccionarCliente");
+seleccionarClienteModificar.addEventListener("click", seleccionarCliente, false);
+
+
+
 /*---------------MENULISTADOS GENERALES--------------------*/
 var menuListadosHabitaciones = document.getElementById("listadoHabitaciones");
 menuListadosHabitaciones.addEventListener("click", listadosHabitaciones, false);
@@ -140,11 +147,31 @@ function aceptarAltaProveedor(){
 }
 
 function aceptarBajaCliente(){
-    alert("bcbcbcbc");
+    // Recoger valores del formulario
+    let sNif = frmBajaCliente.txtNifBaja.value.trim();
+
+    // Baja de cliente en UPOCAMPO
+    let sMensaje = oUPOCampo.bajaCliente(sNif);
+
+    alert(sMensaje);
+    frmBajaCliente.reset();
 }
 
 function aceptarBajaReserva(){
-    alert("aqwert");
+    // Recoger valores del formulario
+    let iID = frmBajaReserva.txtIdBaja.value.trim();
+
+    // Baja de reserva en UPOCAMPO
+    let sMensaje = oUPOCampo.bajaReserva(iID);
+
+    alert(sMensaje);
+    frmBajaReserva.reset();
+}
+
+function seleccionarCliente(){
+    let sNif = frmModificarCliente.txtNifModificar.value.trim();
+    oUPOCampo.buscarCliente(sNif);
+
 }
 
 function aceptarModificarCliente(){
