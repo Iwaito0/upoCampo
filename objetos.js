@@ -155,5 +155,9 @@ altaRegimenAlimenticio(oRegimen){
     this.regimenAlimentario.push(oRegimen);
 }
 
+getArrayHabitaciones(){
+    return this.habitaciones;
+}
+
 
 }
