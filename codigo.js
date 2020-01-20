@@ -185,10 +185,48 @@ function aceptarAltaActividade(){
     alert("ñam ñam");
 }
 function listadosHabitaciones(){
-let pestanaNueva=window.open()
+let pestana=window.open()
 let arrayHabitaciones=oUPOCampo.getArrayHabitaciones();
 
-pestanaNueva.document.body.append("hola");
+//Creacion de la tabla
+var oTabla=document.createElement("TABLE");
+oTabla.setAttribute("border","1");
+//El encabezado de la tabla
+var oTHead=oTabla.createTHead();
+var oFila=oTHead.insertRow(-1);
+var oCelda=oFila.insertCell(-1);
+oCelda.textContent="Numero de habitacion";
+
+oCelda=oFila.insertCell(-1);
+oCelda.textContent="Tipo";
+
+oCelda=oFila.insertCell(-1);
+oCelda.textContent="Precio";
+
+oCelda=oFila.insertCell(-1);
+oCelda.textContent="Ocupacion Maxima";
+
+//El cuerpo de la tabla
+let oTBody = document.createElement("TBODY");
+oTabla.appendChild(oTBody);
+
+for(let i=0; i<arrayHabitaciones.length; i++){
+    let oFila = oTBody.insertRow(-1);
+
+    let oCelda = oFila.insertCell(-1);
+    oCelda.textContent = arrayHabitaciones[i].id;
+
+     oCelda = oFila.insertCell(-1);
+    oCelda.textContent = arrayHabitaciones[i].tipo;
+
+     oCelda = oFila.insertCell(-1);
+    oCelda.textContent = arrayHabitaciones[i].precio;
+
+     oCelda = oFila.insertCell(-1);
+    oCelda.textContent = arrayHabitaciones[i].ocupacionMaxima;
+}
+
+pestana.document.body.append(oTabla);
 }
 
 //Mostrar Formularios
