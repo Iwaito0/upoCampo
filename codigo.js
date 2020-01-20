@@ -158,7 +158,10 @@ function aceptarAltaActividade(){
     alert("ñam ñam");
 }
 function listadosHabitaciones(){
-    alert("ñoqui ñoqui");
+let pestanaNueva=window.open()
+let arrayHabitaciones=oUPOCampo.getArrayHabitaciones();
+
+pestanaNueva.document.body.append("hola");
 }
 
 //Mostrar Formularios
