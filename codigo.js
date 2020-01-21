@@ -181,16 +181,6 @@ function aceptarAltaCliente(){
     else{
         alert(sMensaje);
     }
-
-
-    /*
-    // Creamos el objeto cliente
-    let oCliente = new Cliente(sDni, sNombre, iTelefono, sDireccion, sEmail, iNumTarjeta);
-
-    // Alta de cliente en UPOCAMPO
-    let sMensaje = oUPOCampo.altaCliente(oCliente);
-*/
-    //frmAltaCliente.reset();
 }
 
 function aceptarAltaReserva(){
