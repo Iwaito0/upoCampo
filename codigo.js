@@ -43,7 +43,8 @@ menuModificarReserva.addEventListener("click", mostrarModificarReserva, false);
 var seleccionarClienteModificar = document.getElementById("btnSeleccionarCliente");
 seleccionarClienteModificar.addEventListener("click", seleccionarCliente, false);
 
-
+var seleccionarReservaModificar = document.getElementById("btnSeleccionarReserva");
+seleccionarReservaModificar.addEventListener("click", seleccionarReserva, false);
 
 /*---------------MENULISTADOS GENERALES--------------------*/
 var menuListadosActividades = document.getElementById("listadoActividades");
@@ -74,6 +75,8 @@ menuListadosParking.addEventListener("click", listadosParking, false);
 var botonCancelarClienteMod = document.getElementById("btnCancelarModificarCliente");
 botonCancelarClienteMod.addEventListener("click", cancelarModificarCliente, false);
 
+var botonCancelarReservaMod = document.getElementById("btnCancelarModificarReserva");
+botonCancelarReservaMod.addEventListener("click", cancelarModificarReserva, false);
 
 /*---------------ACEPTAR ALTA--------------------*/
 
@@ -284,21 +287,52 @@ function seleccionarCliente(){
     else {
         alert("No se encuentra ningun cliente con ese NIF");
 
-        inputNif.disabled = false;
-        botonSeleccionar.disabled = false;
-
-        inputNombre.disabled = true;
-        inputTelefono.disabled = true;
-        inputDireccion.disabled = true;
-        inputEmail.disabled = true;
-        inputNumTarjeta.disabled = true;
-        btnModificarCliente.disabled = true;
-        btnCacelarModCliente.disabled = true;
-
-        frmModificarCliente.reset();
+        cancelarModificarCliente();
     }
 
 }
+
+function seleccionarReserva() {
+    let iID = parseInt(frmModificarReserva.txtIdModificar.value.trim());
+
+    let botonSeleccionar = document.getElementById("btnSeleccionarReserva");
+    let btnModificarReserva = document.getElementById("btnAceptarModificarReserva");
+    let btnCacelarModReserva = document.getElementById("btnCancelarModificarReserva");
+
+    let inputId = document.getElementById("txtIdModificar");
+    let inputNumPersonas = document.getElementById("txtNumModificar");
+    let inputEntrada = document.getElementById("txtEntradaModificar");
+    let inputSalida = document.getElementById("txtSalidaModificar");
+    let inputPrecio = document.getElementById("txtPrecioModificar");
+
+    let reservaSeleccionada = oUPOCampo.buscarReserva(iID);
+
+    if (reservaSeleccionada != "") {
+        inputId.disabled = true;
+        botonSeleccionar.disabled = true;
+
+        inputNumPersonas.disabled = false;
+        inputEntrada.disabled = false;
+        inputSalida.disabled = false;
+        inputPrecio.disabled = false;
+
+        btnModificarReserva.disabled = false;
+        btnCacelarModReserva.disabled = false;
+
+        inputNumPersonas.value = reservaSeleccionada[0].numPersonas;
+        inputEntrada.value = reservaSeleccionada[0].checkin;
+        inputSalida.value = reservaSeleccionada[0].checkout;
+        inputPrecio.value = reservaSeleccionada[0].precio;
+    }
+
+    else {
+        alert("No se encuentra ninguna reserva con ese ID");
+
+        cancelarModificarReserva();
+    }
+}
+
+
 
 /*--------------CANCELAR--------------*/
 
@@ -327,21 +361,60 @@ function cancelarModificarCliente(){
     frmModificarCliente.reset();
 }
 
+function cancelarModificarReserva(){
+    let botonSeleccionar = document.getElementById("btnSeleccionarReserva");
+    let btnModificarReserva = document.getElementById("btnAceptarModificarReserva");
+    let btnCacelarModReserva = document.getElementById("btnCancelarModificarReserva");
+
+    let inputId = document.getElementById("txtIdModificar");
+    let inputNumPersonas = document.getElementById("txtNumModificar");
+    let inputEntrada = document.getElementById("txtEntradaModificar");
+    let inputSalida = document.getElementById("txtSalidaModificar");
+    let inputPrecio = document.getElementById("txtPrecioModificar");
+
+    inputId.disabled = false;
+    botonSeleccionar.disabled = false;
+
+    inputNumPersonas.disabled = true;
+    inputEntrada.disabled = true;
+    inputSalida.disabled = true;
+    inputPrecio.disabled = true;
+
+    btnModificarReserva.disabled = true;
+    btnCacelarModReserva.disabled = true;
+
+    frmModificarReserva.reset();
+}
+
 /*-------------MODIFICAR-------------*/
 
 function aceptarModificarCliente(){
     let sNif = frmModificarCliente.txtNifModificar.value.trim();
     let sNombre = frmModificarCliente.txtNombreClienteModificar.value.trim();
-    let iTelefono = frmModificarCliente.txtTelefonoClienteModificar.value.trim();
+    let iTelefono = parseInt(frmModificarCliente.txtTelefonoClienteModificar.value.trim());
     let sDireccion = frmModificarCliente.txtDireccionModificar.value.trim();
     let sEmail = frmModificarCliente.txtEmailModificar.value.trim();
-    let iNumTarjeta = frmModificarCliente.txtNTarjetaModificar.value.trim();
+    let iNumTarjeta = parseInt(frmModificarCliente.txtNTarjetaModificar.value.trim());
 
-    
+    let oCliente = new Cliente(sNif, sNombre, iTelefono, sDireccion, sEmail, iNumTarjeta);
+    let sMensaje = oUPOCampo.modificarCliente(oCliente);
+
+    alert(sMensaje);
+    cancelarModificarCliente();
 }
 
 function aceptarModificarReserva(){
-	alert("mmmmm");
+	let iID = parseInt(frmModificarReserva.txtIdModificar.value.trim());
+    let iNumPersonas = parseInt(frmModificarReserva.txtNumModificar.value.trim());
+    let dCheckin = frmModificarReserva.txtEntradaModificar.value.trim();
+    let dCheckout = frmModificarReserva.txtSalidaModificar.value.trim();
+    let fPrecio = parseFloat(frmModificarReserva.txtPrecioModificar.value.trim());
+
+    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio);
+    let sMensaje = oUPOCampo.modificarReserva(oReserva);
+
+    alert(sMensaje);
+    cancelarModificarReserva();
 }
 
 /*-------------LISTADOS-------------*/
