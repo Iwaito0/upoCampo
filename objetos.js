@@ -219,6 +219,41 @@ getArrayReservas(){
         return sMensaje;
     }
 
+    modificarCliente(oCliente){
+        let sMensaje = "";
+
+        for (let i = 0; i < this.clientes.length; i++) {
+            if (this.clientes[i].nif == oCliente.nif) {
+                this.clientes[i].nombre = oCliente.nombre;
+                this.clientes[i].telefono = oCliente.telefono;
+                this.clientes[i].direccion = oCliente.direccion;
+                this.clientes[i].email = oCliente.email;
+                this.clientes[i].numeroTarjeta = oCliente.numeroTarjeta;
+
+                sMensaje = "Cliente modificado correctamente";
+            }
+        }
+
+        return sMensaje;
+    }
+
+    modificarReserva(oReserva){
+        let sMensaje = "";
+
+        for (let i = 0; i < this.reservas.length; i++) {
+            if (this.reservas[i].id == oReserva.id) {
+                this.reservas[i].numPersonas = oReserva.numPersonas;
+                this.reservas[i].checkin = oReserva.checkin;
+                this.reservas[i].checkout = oReserva.checkout;
+                this.reservas[i].precio = oReserva.precio;
+
+                sMensaje = "Reserva modificada correctamente";
+            }
+        }
+
+        return sMensaje;
+    }
+
     buscarCliente(sNif){
         let aCliente = [];
 
@@ -231,4 +266,15 @@ getArrayReservas(){
         return aCliente;
     }
 
+    buscarReserva(iID){
+        let aReserva = [];
+
+        for (let i = 0; i < this.reservas.length; i++) {
+            if (this.reservas[i].id == iID) {
+                aReserva.push(this.reservas[i]);
+            }
+        }
+
+        return aReserva;
+    }
 }
