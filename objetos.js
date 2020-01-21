@@ -145,6 +145,20 @@ class UpoCampo{
 
         return sMensaje;
     }
+    altaActividad(oActividad){
+        let sMensaje = "";
+
+        if (this.actividades.filter(actividad => actividad.id == oActividad.id).length == 0) {
+            //No se encuentra --> lo doy de alta
+            this.actividades.push(oActividad);
+            sMensaje = "Alta actividad OK";
+        }
+        else {
+            sMensaje = "La actividad ya estaba registrada";
+        }
+
+        return sMensaje; 
+    }
 
     altaHabitacion(oHabitacion){
       this.habitaciones.push(oHabitacion);
