@@ -162,7 +162,7 @@ function aceptarAltaCliente(){
         frmAltaCliente.txtEmailAlta.classList.remove("error");  
     }
     if(!/^(?:4[0-9]{12}(?:[0-9]{3})?|5[1-5][0-9]{14}|6(?:011|5[0-9][0-9])[0-9]{12}|3[47][0-9]{13}|3(?:0[0-5]|[68][0-9])[0-9]{11}|(?:2131|1800|35d{3})d{11})$/.test(iNumTarjeta)){
-        sMensaje+="El campo del numero de la tarjeta esta mal\n";
+        sMensaje+="El campo del numero de la tarjeta esta mal(recuerde que son 16 numeros y que empieza por 4)\n";
         frmAltaCliente.txtNTarjetaAlta.classList.add("error");
     }
     else{
@@ -184,6 +184,8 @@ function aceptarAltaCliente(){
 }
 
 function aceptarAltaReserva(){
+    let sMensaje="";
+
     // Recoger valores del formulario
     let iID = parseInt(frmAltaReserva.txtIdAlta.value.trim());
     let iNumPersonas = parseInt(frmAltaReserva.txtNumAlta.value.trim());
@@ -191,34 +193,137 @@ function aceptarAltaReserva(){
     let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
     let fPrecio = parseFloat(frmAltaReserva.txtPrecioAlta.value.trim());
 
+
+    if(!/^\d+$/.test(iID)){
+        sMensaje+="El campo ID esta mal. El campo ID debe ser un numero\n";
+        frmAltaReserva.txtIdAlta.classList.add("error");
+    }
+    else{
+        frmAltaReserva.txtIdAlta.classList.remove("error");  
+    }
+    if(!/^\d+$/.test(iNumPersonas)){
+        sMensaje+="El campo numero de personas esta mal\n";
+        frmAltaReserva.txtNumAlta.classList.add("error");
+    }
+    else{
+        frmAltaReserva.txtNumAlta.classList.remove("error");  
+    }
+    if(!/^[0-9]+([.][0-9]+)?$/.test(fPrecio)){
+        sMensaje+="El campo precio esta mal (ten cuidado que el separador de decimales es el punto)\n";
+        frmAltaReserva.txtPrecioAlta.classList.add("error");
+    }
+    else{
+        frmAltaReserva.txtPrecioAlta.classList.remove("error");  
+    }
+
+
+
+    if(sMensaje==""){
     // Creamos el objeto reserva
     let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio);
-
     // Alta de reserva en UPOCAMPO
     let sMensaje = oUPOCampo.altaReserva(oReserva);
+    alert(sMensaje);    
+    frmAltaReserva.reset();    
+    }
+    else{
+        alert(sMensaje);
+    }
+    
 
-    alert(sMensaje);
-    frmAltaReserva.reset();
+
+    
+    
 }
 
 function aceptarAltaProveedor(){
+    let sMensaje="";
+
     // Recoger valores del formulario
     let sCIF = frmAltaProveedor.txtCifAlta.value.trim();
     let sNombre = frmAltaProveedor.txtNombreProveedorAlta.value.trim();
     let iTelefono = frmAltaProveedor.txtTelefonoProveedorAlta.value.trim();
 
-    // Creamos el objeto proveedor
-    let oProveedor = new Proveedores(sCIF, sNombre, iTelefono);
+    if(!/^\d{8}[a-zA-Z]$/.test(sCIF)){
+        sMensaje+="El campo CIF esta mal.\n";
+        frmAltaProveedor.txtCifAlta.classList.add("error");
+    }
+    else{
+        frmAltaProveedor.txtCifAlta.classList.remove("error");  
+    }
+    if(!/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/.test(sNombre)){
+        sMensaje+="El campo nombre esta mal\n";
+        frmAltaProveedor.txtNombreProveedorAlta.classList.add("error");
+    }
+    else{
+        frmAltaProveedor.txtNombreProveedorAlta.classList.remove("error");  
+    }
+    if(!/^(\+34|0034|34)?[6|7|9][0-9]{8}$/g.test(iTelefono)){
+        sMensaje+="El campo telefono esta mal (Recuerde poner el prefijo )\n";
+        frmAltaProveedor.txtTelefonoProveedorAlta.classList.add("error");
+    }
+    else{
+        frmAltaProveedor.txtTelefonoProveedorAlta.classList.remove("error");  
+    }
 
-    // Alta de proveedor en UPOCAMPO
-    let sMensaje = oUPOCampo.altaProveedor(oProveedor);
 
-    alert(sMensaje);
-    frmAltaProveedor.reset();
+    if(sMensaje==""){
+       // Creamos el objeto proveedor
+       let oProveedor = new Proveedores(sCIF, sNombre, iTelefono);
+
+       // Alta de proveedor en UPOCAMPO
+       let sMensaje = oUPOCampo.altaProveedor(oProveedor);
+       alert(sMensaje);
+       frmAltaProveedor.reset();   
+    }
+    else{
+        alert(sMensaje);
+    }
+
+
 }
-
 function aceptarAltaActividade(){
-    alert("ñam ñam");
+    let sMensaje="";
+
+    // Recoger valores del formulario
+    let iID = frmAltaActividades.txtID.value.trim();
+    let sNombre = frmAltaActividades.txtNombreClienteAlta.value.trim();
+    let fPrecio = parseFloat(frmAltaActividades.txtPrecioAltaActividades.value.trim());
+
+    if(!/^\d+$/.test(iID)){
+        sMensaje+="El campo ID esta mal. El campo ID debe ser un numero\n";
+        frmAltaActividades.txtID.classList.add("error");
+    }
+    else{
+        frmAltaActividades.txtID.classList.remove("error");  
+    }
+    if(!/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/.test(sNombre)){
+        sMensaje+="El campo nombre esta mal\n";
+        frmAltaActividades.txtNombreClienteAlta.classList.add("error");
+    }
+    else{
+        frmAltaActividades.txtNombreClienteAlta.classList.remove("error");  
+    }
+    if(!/^[0-9]+([.][0-9]+)?$/.test(fPrecio)){
+        sMensaje+="El campo precio esta mal (ten cuidado que el separador de decimales es el punto)\n";
+        frmAltaActividades.txtPrecioAltaActividades.classList.add("error");
+    }
+    else{
+        frmAltaActividades.txtPrecioAltaActividades.classList.remove("error");  
+    }
+
+    if(sMensaje==""){
+       // Creamos el objeto proveedor
+       let oActividad = new Actividades(iID, sNombre, fPrecio);
+
+       // Alta de proveedor en UPOCAMPO
+       let sMensaje = oUPOCampo.altaActividad(oActividad);
+       alert(sMensaje);
+       frmAltaActividades.reset();   
+    }
+    else{
+        alert(sMensaje);
+    }
 }
 
 /*-------------BAJA-------------*/
@@ -346,9 +451,6 @@ function aceptarModificarReserva(){
 
 /*-------------LISTADOS-------------*/
 
-function aceptarAltaActividade(){
-    alert("ñam ñam");
-}
 
 function listadosHabitaciones(){
     let pestana=window.open()
