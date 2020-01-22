@@ -245,7 +245,7 @@ function aceptarAltaProveedor(){
     // Recoger valores del formulario
     let sCIF = frmAltaProveedor.txtCifAlta.value.trim();
     let sNombre = frmAltaProveedor.txtNombreProveedorAlta.value.trim();
-    let iTelefono = frmAltaProveedor.txtTelefonoProveedorAlta.value.trim();
+    let iTelefono = parseInt(frmAltaProveedor.txtTelefonoProveedorAlta.value.trim());
 
     if(!/^\d{8}[a-zA-Z]$/.test(sCIF)){
         sMensaje+="El campo CIF esta mal.\n";
@@ -982,4 +982,24 @@ oUPOCampo.altaCliente(new Cliente("54664665A", "Manuel", 34685695247, "Av portim
 oUPOCampo.altaCliente(new Cliente("68546545G", "Amparo", 34758265925, "Calle la esperanza n 9", "amparo1993@gmail.com", 4782695321584582));
 oUPOCampo.altaCliente(new Cliente("98866866S", "Lucia", 34658951235, "Plaza de parma 21 3B", "luciabogados@gmail.com", 4859652148536258));
 
+//Datos pruebas actividades
+oUPOCampo.altaActividad(new Actividades(1, "Piragüismo", 45.20));
+oUPOCampo.altaActividad(new Actividades(2, "Alpinismo", 55.50));
+oUPOCampo.altaActividad(new Actividades(3, "Tenis", 7.50));
+oUPOCampo.altaActividad(new Actividades(4, "Futbol", 4.20));
+oUPOCampo.altaActividad(new Actividades(5, "Buceo", 12.50));
+oUPOCampo.altaActividad(new Actividades(6, "Buceo con bombona", 45.20));
+oUPOCampo.altaActividad(new Actividades(7, "Tiro con arco", 19.95));
+oUPOCampo.altaActividad(new Actividades(8, "Baloncesto", 8.50));
+oUPOCampo.altaActividad(new Actividades(9, "Exploracion de cuevas", 50));
+oUPOCampo.altaActividad(new Actividades(10, "Juegos infantiles", 2.50));
+oUPOCampo.altaActividad(new Actividades(11, "Bingo", 0));
+oUPOCampo.altaActividad(new Actividades(12, "Rafting", 65.50));
+
+//Datos proveedor
+oUPOCampo.altaProveedor(new Proveedores("25852563D", "Victor", 34758962534));
+oUPOCampo.altaProveedor(new Proveedores("59354285G", "Laura", 34658952574));
+oUPOCampo.altaProveedor(new Proveedores("52928526D", "Rodrigo", 34685127963));
+oUPOCampo.altaProveedor(new Proveedores("45826584T", "Pepe", 34652895123));
+oUPOCampo.altaProveedor(new Proveedores("58102605U", "Paula", 34658215985));
 
