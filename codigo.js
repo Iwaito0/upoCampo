@@ -30,6 +30,11 @@ menuBajaCliente.addEventListener("click", mostrarBajaCliente, false);
 var menuBajaReserva = document.getElementById("bajaReserva");
 menuBajaReserva.addEventListener("click", mostrarBajaReserva, false);
 
+var menuBajaActividad = document.getElementById("bajaActividad");
+menuBajaActividad.addEventListener("click", mostrarBajaActividad, false);
+
+var menuBajaProveedor = document.getElementById("bajaProveedor");
+menuBajaProveedor.addEventListener("click", mostrarBajaProveedor, false);
 
 
 /*---------------MENU MODIFICAR-------------*/
@@ -103,7 +108,12 @@ botonBajaCliente.addEventListener("click", aceptarBajaCliente, false);
 var botonBajaReserva = document.getElementById("btnAceptarBajaReserva");
 botonBajaReserva.addEventListener("click", aceptarBajaReserva, false);
 
+var botonAceptarBajaActividad = document.getElementById("btnAceptarBajaActividad");
+botonAceptarBajaActividad.addEventListener("click", aceptarBajaActividad, false);
 
+
+var botonAceptarBajaProveedor = document.getElementById("btnAceptarBajaProveedor");
+botonAceptarBajaProveedor.addEventListener("click", aceptarBajaProveedor, false);
 /*---------------ACEPTAR MODIFICAR--------------------*/
 
 var botonModificarCliente = document.getElementById("btnAceptarModificarCliente");
@@ -265,7 +275,7 @@ function aceptarAltaProveedor(){
     // Recoger valores del formulario
     let sCIF = frmAltaProveedor.txtCifAlta.value.trim();
     let sNombre = frmAltaProveedor.txtNombreProveedorAlta.value.trim();
-    let iTelefono = frmAltaProveedor.txtTelefonoProveedorAlta.value.trim();
+    let iTelefono = parseInt(frmAltaProveedor.txtTelefonoProveedorAlta.value.trim());
 
     if(!/^\d{8}[a-zA-Z]$/.test(sCIF)){
         sMensaje+="El campo CIF esta mal.\n";
@@ -365,14 +375,33 @@ function aceptarBajaCliente(){
 function aceptarBajaReserva(){
     // Recoger valores del formulario
     let iID = frmBajaReserva.txtIdBaja.value.trim();
-
+    
     // Baja de reserva en UPOCAMPO
     let sMensaje = oUPOCampo.bajaReserva(iID);
 
     alert(sMensaje);
     frmBajaReserva.reset();
 }
+function aceptarBajaActividad(){
+    // Recoger valores del formulario
+    let iID = frmBajaActividad.txtIdBaja.value.trim();
 
+    // Baja de reserva en UPOCAMPO
+    let sMensaje = oUPOCampo.bajaActividad(iID);
+
+    alert(sMensaje);
+    frmBajaActividad.reset();
+}
+function aceptarBajaProveedor(){
+    // Recoger valores del formulario
+    let iID = frmBajaProveedores.txtIdBaja.value.trim();
+
+    // Baja de reserva en UPOCAMPO
+    let sMensaje = oUPOCampo.bajaProveedor(iID);
+
+    alert(sMensaje);
+    frmBajaProveedores.reset();
+}
 /*-------------SELECCIONAR-------------*/
 
 function seleccionarCliente(){
@@ -842,6 +871,10 @@ function mostrarAltaCliente() {
     frmModificarCliente.style.display = "none";
     frmModificarReserva.style.display = "none";
     frmAltaActividades.style.display = "none";
+    frmBajaActividad.style.display = "none";
+    frmBajaProveedores.style.display="none";
+
+
 }
 
 function mostrarAltaReserva() {
@@ -853,8 +886,11 @@ function mostrarAltaReserva() {
 	frmModificarCliente.style.display = "none";
     frmModificarReserva.style.display = "none";
     frmAltaActividades.style.display = "none";
+
     mostrarHabitaciones();
 
+    frmBajaActividad.style.display = "none";
+    frmBajaProveedores.style.display="none";
 }
 
 function mostrarAltaProveedor() {
@@ -866,6 +902,10 @@ function mostrarAltaProveedor() {
 	frmModificarCliente.style.display = "none";
     frmModificarReserva.style.display = "none";
     frmAltaActividades.style.display = "none";
+    frmBajaActividad.style.display = "none";
+    frmBajaProveedores.style.display="none";
+
+
 
 }
 
@@ -878,6 +918,8 @@ function mostrarBajaCliente() {
     frmModificarCliente.style.display = "none";
     frmModificarReserva.style.display = "none";
     frmAltaActividades.style.display = "none";
+    frmBajaActividad.style.display = "none";
+    frmBajaProveedores.style.display="none";
 
 }
 
@@ -890,7 +932,37 @@ function mostrarBajaReserva() {
     frmModificarCliente.style.display = "none";
     frmModificarReserva.style.display = "none";
     frmAltaActividades.style.display = "none";
+    frmBajaActividad.style.display = "none";
+    frmBajaProveedores.style.display="none";
 
+
+
+}
+function mostrarBajaActividad(){
+    frmBajaActividad.style.display = "block";
+    frmBajaReserva.style.display = "none";
+	frmBajaCliente.style.display = "none";
+    frmAltaCliente.style.display = "none";
+    frmAltaReserva.style.display = "none";
+    frmAltaProveedor.style.display = "none";
+    frmModificarCliente.style.display = "none";
+    frmModificarReserva.style.display = "none";
+    frmAltaActividades.style.display = "none";
+    frmBajaProveedores.style.display="none";
+  
+}
+function mostrarBajaProveedor(){
+    frmBajaProveedores.style.display="block";
+    frmModificarCliente.style.display = "none";
+	frmBajaReserva.style.display = "none";
+	frmBajaCliente.style.display = "none";
+    frmAltaCliente.style.display = "none";
+    frmAltaReserva.style.display = "none";
+    frmAltaProveedor.style.display = "none";
+    frmModificarReserva.style.display = "none";
+    frmAltaActividades.style.display = "none";
+    frmBajaActividad.style.display = "none";
+    
 }
 
 function mostrarModificarCliente() {
@@ -902,6 +974,9 @@ function mostrarModificarCliente() {
     frmAltaProveedor.style.display = "none";
     frmModificarReserva.style.display = "none";
     frmAltaActividades.style.display = "none";
+    frmBajaActividad.style.display = "none";
+    frmBajaProveedores.style.display="none";
+
 
 }
 
@@ -914,6 +989,10 @@ function mostrarModificarReserva() {
     frmAltaReserva.style.display = "none";
     frmAltaProveedor.style.display = "none";
     frmAltaActividades.style.display = "none";
+    frmBajaActividad.style.display = "none";
+    frmBajaProveedores.style.display="none";
+
+
 
 }
 function mostrarAltaActividad(){
@@ -925,6 +1004,10 @@ function mostrarAltaActividad(){
     frmAltaCliente.style.display = "none";
     frmAltaReserva.style.display = "none";
     frmAltaProveedor.style.display = "none";
+    frmBajaActividad.style.display = "none";
+    frmBajaProveedores.style.display="none";
+
+
 }
 //Datos prueba de habitaciones
 
@@ -1007,6 +1090,7 @@ function datosRegimen() {
 }
 
 
+
 //Datos pruebas clientes
 
 function datosCliente() {
@@ -1021,3 +1105,25 @@ function datosCliente() {
     oUPOCampo.altaCliente(new Cliente("68546545G", "Amparo", 34758265925, "Calle la esperanza n 9", "amparo1993@gmail.com", 4782695321584582));
     oUPOCampo.altaCliente(new Cliente("98866866S", "Lucia", 34658951235, "Plaza de parma 21 3B", "luciabogados@gmail.com", 4859652148536258));
 }
+
+//Datos pruebas actividades
+oUPOCampo.altaActividad(new Actividades(1, "Piragüismo", 45.20));
+oUPOCampo.altaActividad(new Actividades(2, "Alpinismo", 55.50));
+oUPOCampo.altaActividad(new Actividades(3, "Tenis", 7.50));
+oUPOCampo.altaActividad(new Actividades(4, "Futbol", 4.20));
+oUPOCampo.altaActividad(new Actividades(5, "Buceo", 12.50));
+oUPOCampo.altaActividad(new Actividades(6, "Buceo con bombona", 45.20));
+oUPOCampo.altaActividad(new Actividades(7, "Tiro con arco", 19.95));
+oUPOCampo.altaActividad(new Actividades(8, "Baloncesto", 8.50));
+oUPOCampo.altaActividad(new Actividades(9, "Exploracion de cuevas", 50));
+oUPOCampo.altaActividad(new Actividades(10, "Juegos infantiles", 2.50));
+oUPOCampo.altaActividad(new Actividades(11, "Bingo", 0));
+oUPOCampo.altaActividad(new Actividades(12, "Rafting", 65.50));
+
+//Datos proveedor
+oUPOCampo.altaProveedor(new Proveedores("25852563D", "Victor", 34758962534));
+oUPOCampo.altaProveedor(new Proveedores("59354285G", "Laura", 34658952574));
+oUPOCampo.altaProveedor(new Proveedores("52928526D", "Rodrigo", 34685127963));
+oUPOCampo.altaProveedor(new Proveedores("45826584T", "Pepe", 34652895123));
+oUPOCampo.altaProveedor(new Proveedores("58102605U", "Paula", 34658215985));
+
