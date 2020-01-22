@@ -232,6 +232,40 @@ getArrayReservas(){
 
         return sMensaje;
     }
+    bajaActividad(iID){
+        let sMensaje = "";
+        let bEncontrado = false;
+
+        for (let i = 0; i < this.actividades.length; i++) {
+            if (this.actividades[i].id == iID) {
+                this.actividades.splice(i, 1);
+                sMensaje = "Actividad borrada correctamente";
+                bEncontrado = true;
+            }
+        }
+
+        if (bEncontrado == false) {
+            sMensaje = "No se encuentra ninguna actividad con ese ID";
+        }
+        return sMensaje;
+    }
+    bajaProveedor(iID){
+        let sMensaje = "";
+        let bEncontrado = false;
+
+        for (let i = 0; i < this.proveedores.length; i++) {
+            if (this.proveedores[i].cif == iID) {
+                this.proveedores.splice(i, 1);
+                sMensaje = "Proveedor borrado correctamente";
+                bEncontrado = true;
+            }
+        }
+
+        if (bEncontrado == false) {
+            sMensaje = "No se encuentra ningun proveedor con ese CIF";
+        }
+        return sMensaje;  
+    }
 
     modificarCliente(oCliente){
         let sMensaje = "";
