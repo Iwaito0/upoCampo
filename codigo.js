@@ -3,6 +3,9 @@
 var oUPOCampo = new UpoCampo();
 var divListado = document.getElementById("listado");
 
+var dFechaIni = new Date();
+var dFechaFin = new Date();
+
 datosHabitaciones();
 
 /*--------------EVENTOS DE MENU----------------*/
@@ -72,10 +75,13 @@ menuListadosHabitaciones.addEventListener("click", listadosHabitaciones, false);
 var menuListadosParking = document.getElementById("listadoParking");
 menuListadosParking.addEventListener("click", listadosParking, false);
 
+/*-----------------------------FOCO-----------------------------*/
 
+var recogerFechaInicio = document.getElementById("txtEntradaAlta");
+recogerFechaInicio.addEventListener("blur", recogerFechaIni, false);
 
-
-
+var recogerFechaFinal = document.getElementById("txtSalidaAlta");
+recogerFechaFinal.addEventListener("blur", recogerFechaFin, false);
 
 /*--------------------------CANCELAR--------------------------*/
 
@@ -198,16 +204,34 @@ function aceptarAltaCliente(){
     }
 }
 
+function recogerFechaIni(){
+	dFechaIni = frmAltaReserva.txtEntradaAlta.value.trim();
+	mostrarHabitaciones();
+}
+
+function recogerFechaFin(){
+	dFechaFin = frmAltaReserva.txtSalidaAlta.value.trim();
+	mostrarHabitaciones();
+}
+
+
 function mostrarHabitaciones()  {
     document.getElementById("selectListaHab").length = 0;
     let aReserva = oUPOCampo.getArrayReservas();
     let aHabitaciones = oUPOCampo.getArrayHabitaciones();
 
+    //alert(dFechaIni+" "+dFechaFin);
+
     for (let i = 0; i < aHabitaciones.length; i++) {
         for (let j = 0; j < aReserva.length; j++) {
             if (aHabitaciones[i].id == aReserva[j].numHabitaciones) {
-                aHabitaciones.splice(i, 1);
-                i--;
+            	if ((aReserva[j].checkin > dFechaIni && aReserva[j].checkin <= dFechaFin && aReserva[j].checkout >= dFechaFin) || 
+            		(aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaFin) || 
+            		(aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaIni && aReserva[j].checkout < dFechaFin) || 
+            		(aReserva[j].checkin > dFechaIni && aReserva[j].checkout < dFechaFin)) {
+            		aHabitaciones.splice(i, 1);
+                	i--;
+            	}
             }
         }
     }
@@ -261,7 +285,9 @@ function aceptarAltaReserva(){
     // Alta de reserva en UPOCAMPO
     let sMensaje = oUPOCampo.altaReserva(oReserva);
     alert(sMensaje);
-    mostrarHabitaciones();    
+    //mostrarHabitaciones();
+    dFechaIni = new Date();
+    dFechaIni = new Date();
     frmAltaReserva.reset();    
     }
     else{
