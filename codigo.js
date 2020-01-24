@@ -45,6 +45,9 @@ menuModificarCliente.addEventListener("click", mostrarModificarCliente, false);
 var menuModificarReserva = document.getElementById("modificarReserva");
 menuModificarReserva.addEventListener("click", mostrarModificarReserva, false);
 
+var menuModificarActividad = document.getElementById("modificarActividad");
+menuModificarActividad.addEventListener("click", mostrarModificarActividad, false);
+
 /*------------SELECCIONAR ELEMENTOS MODIFICAR------------*/
 
 var seleccionarClienteModificar = document.getElementById("btnSeleccionarCliente");
@@ -53,6 +56,8 @@ seleccionarClienteModificar.addEventListener("click", seleccionarCliente, false)
 var seleccionarReservaModificar = document.getElementById("btnSeleccionarReserva");
 seleccionarReservaModificar.addEventListener("click", seleccionarReserva, false);
 
+var seleccionarActividadesModificar = document.getElementById("btnSeleccionarActividades");
+seleccionarActividadesModificar.addEventListener("click", seleccionarActividades, false);
 /*---------------MENULISTADOS GENERALES--------------------*/
 var menuListadosActividades = document.getElementById("listadoActividades");
 menuListadosActividades.addEventListener("click", listadosActividades, false);
@@ -84,6 +89,10 @@ botonCancelarClienteMod.addEventListener("click", cancelarModificarCliente, fals
 
 var botonCancelarReservaMod = document.getElementById("btnCancelarModificarReserva");
 botonCancelarReservaMod.addEventListener("click", cancelarModificarReserva, false);
+
+var botonCancelarActividadesMod = document.getElementById("btnACancelarModificarActividades");
+botonCancelarActividadesMod.addEventListener("click", cancelarModificarActividades, false);
+
 
 /*---------------ACEPTAR ALTA--------------------*/
 
@@ -122,6 +131,8 @@ botonModificarCliente.addEventListener("click", aceptarModificarCliente, false);
 var botonModificarReserva = document.getElementById("btnAceptarModificarReserva");
 botonModificarReserva.addEventListener("click", aceptarModificarReserva, false);
 
+var botonModificarActividad = document.getElementById("btnAceptarModificarActividades");
+botonModificarActividad.addEventListener("click", aceptarModificarActividad, false);
 
 /*-------------FUNCIONES-----------------*/
 /*-------------ALTA-------------*/
@@ -485,6 +496,40 @@ function seleccionarReserva() {
         cancelarModificarReserva();
     }
 }
+function seleccionarActividades(){
+    let iID = parseInt(frmModificaActividades.txtID.value.trim());
+
+    let botonSeleccionar = document.getElementById("btnSeleccionarActividades");
+    let btnModificarActividades = document.getElementById("btnAceptarModificarActividades");
+   let btnCacelarModActividades = document.getElementById("btnACancelarModificarActividades");
+
+    let inputId = document.getElementById("txtIDModificarActividades");
+    let inputNombre = document.getElementById("txtNombreActividadModifica");
+    let inputPrecio = document.getElementById("txtPrecioModificaActividades");
+
+    let ActividadSeleccionada = oUPOCampo.buscarActividad(iID);
+
+    if (ActividadSeleccionada != "") {
+        inputId.disabled = true;
+        botonSeleccionar.disabled = true;
+
+        inputNombre.disabled = false;
+        inputPrecio.disabled = false;
+
+        btnModificarActividades.disabled = false;
+        btnCacelarModActividades.disabled = false;
+
+        inputNombre.value = ActividadSeleccionada[0].nombre;
+        inputPrecio.value = ActividadSeleccionada[0].precio;
+    }
+
+    else {
+        alert("No se encuentra ninguna actividad con ese ID");
+
+        cancelarModificarActividades();
+    }
+
+}
 
 
 
@@ -539,6 +584,23 @@ function cancelarModificarReserva(){
 
     frmModificarReserva.reset();
 }
+function cancelarModificarActividades(){
+    let botonSeleccionar = document.getElementById("btnSeleccionarActividades");
+    let btnModificarActividades = document.getElementById("btnAceptarModificarActividades");
+    let btnCacelarModActividades = document.getElementById("btnACancelarModificarActividades");
+    let inputId = document.getElementById("txtIDModificarActividades");
+    let inputNombre = document.getElementById("txtNombreActividadModifica");
+    let inputPrecio = document.getElementById("txtPrecioModificaActividades");
+
+    inputId.disabled = false;
+    botonSeleccionar.disabled = false;
+    btnModificarActividades.disabled = true;
+    btnCacelarModActividades.disabled = true;
+    inputNombre.disabled = true;
+    inputPrecio.disabled = true;
+
+    frmModificaActividades.reset();
+}
 
 /*-------------MODIFICAR-------------*/
 
@@ -569,6 +631,49 @@ function aceptarModificarReserva(){
 
     alert(sMensaje);
     cancelarModificarReserva();
+}
+function aceptarModificarActividad(){
+    let sMensaje="";
+
+    // Recoger valores del formulario
+    let iID = frmModificaActividades.txtIDModificarActividades.value.trim();
+    let sNombre = frmModificaActividades.txtNombreActividadModifica.value.trim();
+    let fPrecio = parseFloat(frmModificaActividades.txtPrecioModificaActividades.value.trim());
+
+    if(!/^\d+$/.test(iID)){
+        sMensaje+="El campo ID esta mal. El campo ID debe ser un numero\n";
+        frmModificaActividades.txtIDModificarActividades.classList.add("error");
+    }
+    else{
+        frmModificaActividades.txtIDModificarActividades.classList.remove("error");  
+    }
+    if(!/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/.test(sNombre)){
+        sMensaje+="El campo nombre esta mal\n";
+        frmModificaActividades.txtNombreActividadModifica.classList.add("error");
+    }
+    else{
+        frmModificaActividades.txtNombreActividadModifica.classList.remove("error");  
+    }
+    if(!/^[0-9]+([.][0-9]+)?$/.test(fPrecio)){
+        sMensaje+="El campo precio esta mal (ten cuidado que el separador de decimales es el punto)\n";
+        frmModificaActividades.txtPrecioModificaActividades.classList.add("error");
+    }
+    else{
+        frmModificaActividades.txtPrecioModificaActividades.classList.remove("error");  
+    }
+
+    if(sMensaje==""){
+       // Creamos el objeto proveedor
+       let oActividad = new Actividades(iID, sNombre, fPrecio);
+
+       // Alta de proveedor en UPOCAMPO
+       let sMensaje = oUPOCampo.modificaActividades(oActividad);
+       alert(sMensaje);
+       cancelarModificarActividades();
+        }
+    else{
+        alert(sMensaje);
+    }
 }
 
 /*-------------LISTADOS-------------*/
@@ -891,6 +996,8 @@ function mostrarAltaReserva() {
 
     frmBajaActividad.style.display = "none";
     frmBajaProveedores.style.display="none";
+    frmModificaActividades.style.display = "none";
+
 }
 
 function mostrarAltaProveedor() {
@@ -904,8 +1011,7 @@ function mostrarAltaProveedor() {
     frmAltaActividades.style.display = "none";
     frmBajaActividad.style.display = "none";
     frmBajaProveedores.style.display="none";
-
-
+    frmModificaActividades.style.display = "none";
 
 }
 
@@ -920,6 +1026,7 @@ function mostrarBajaCliente() {
     frmAltaActividades.style.display = "none";
     frmBajaActividad.style.display = "none";
     frmBajaProveedores.style.display="none";
+    frmModificaActividades.style.display = "none";
 
 }
 
@@ -934,9 +1041,7 @@ function mostrarBajaReserva() {
     frmAltaActividades.style.display = "none";
     frmBajaActividad.style.display = "none";
     frmBajaProveedores.style.display="none";
-
-
-
+    frmModificaActividades.style.display = "none";
 }
 function mostrarBajaActividad(){
     frmBajaActividad.style.display = "block";
@@ -949,7 +1054,7 @@ function mostrarBajaActividad(){
     frmModificarReserva.style.display = "none";
     frmAltaActividades.style.display = "none";
     frmBajaProveedores.style.display="none";
-  
+    frmModificaActividades.style.display = "none";  
 }
 function mostrarBajaProveedor(){
     frmBajaProveedores.style.display="block";
@@ -962,7 +1067,7 @@ function mostrarBajaProveedor(){
     frmModificarReserva.style.display = "none";
     frmAltaActividades.style.display = "none";
     frmBajaActividad.style.display = "none";
-    
+    frmModificaActividades.style.display = "none";
 }
 
 function mostrarModificarCliente() {
@@ -976,8 +1081,7 @@ function mostrarModificarCliente() {
     frmAltaActividades.style.display = "none";
     frmBajaActividad.style.display = "none";
     frmBajaProveedores.style.display="none";
-
-
+    frmModificaActividades.style.display = "none";
 }
 
 function mostrarModificarReserva() {
@@ -991,9 +1095,20 @@ function mostrarModificarReserva() {
     frmAltaActividades.style.display = "none";
     frmBajaActividad.style.display = "none";
     frmBajaProveedores.style.display="none";
-
-
-
+    frmModificaActividades.style.display = "none";
+}
+function mostrarModificarActividad(){
+    frmModificaActividades.style.display = "block";
+    frmAltaProveedor.style.display = "none";
+	frmAltaReserva.style.display = "none";
+	frmAltaCliente.style.display = "none";
+	frmBajaCliente.style.display = "none";
+	frmBajaReserva.style.display = "none";
+	frmModificarCliente.style.display = "none";
+    frmModificarReserva.style.display = "none";
+    frmAltaActividades.style.display = "none";
+    frmBajaActividad.style.display = "none";
+    frmBajaProveedores.style.display="none";
 }
 function mostrarAltaActividad(){
     frmAltaActividades.style.display = "block";  
@@ -1006,8 +1121,7 @@ function mostrarAltaActividad(){
     frmAltaProveedor.style.display = "none";
     frmBajaActividad.style.display = "none";
     frmBajaProveedores.style.display="none";
-
-
+    frmModificaActividades.style.display = "none";
 }
 //Datos prueba de habitaciones
 
