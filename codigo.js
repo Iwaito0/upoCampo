@@ -48,6 +48,9 @@ menuModificarReserva.addEventListener("click", mostrarModificarReserva, false);
 var menuModificarActividad = document.getElementById("modificarActividad");
 menuModificarActividad.addEventListener("click", mostrarModificarActividad, false);
 
+var menuModificarProveedor = document.getElementById("modificarProveedor");
+menuModificarProveedor.addEventListener("click", mostrarModificarProveedor, false);
+
 /*------------SELECCIONAR ELEMENTOS MODIFICAR------------*/
 
 var seleccionarClienteModificar = document.getElementById("btnSeleccionarCliente");
@@ -58,6 +61,9 @@ seleccionarReservaModificar.addEventListener("click", seleccionarReserva, false)
 
 var seleccionarActividadesModificar = document.getElementById("btnSeleccionarActividades");
 seleccionarActividadesModificar.addEventListener("click", seleccionarActividades, false);
+
+var seleccionarProveedorModificar = document.getElementById("btnSelecionarProveedor");
+seleccionarProveedorModificar.addEventListener("click", seleccionarProveedor, false);
 /*---------------MENULISTADOS GENERALES--------------------*/
 var menuListadosActividades = document.getElementById("listadoActividades");
 menuListadosActividades.addEventListener("click", listadosActividades, false);
@@ -92,6 +98,9 @@ botonCancelarReservaMod.addEventListener("click", cancelarModificarReserva, fals
 
 var botonCancelarActividadesMod = document.getElementById("btnACancelarModificarActividades");
 botonCancelarActividadesMod.addEventListener("click", cancelarModificarActividades, false);
+
+var botonCancelarProveedorMod = document.getElementById("btnCancelarProveedor");
+botonCancelarProveedorMod.addEventListener("click", cancelarModificarProveedor, false);
 
 
 /*---------------ACEPTAR ALTA--------------------*/
@@ -133,6 +142,9 @@ botonModificarReserva.addEventListener("click", aceptarModificarReserva, false);
 
 var botonModificarActividad = document.getElementById("btnAceptarModificarActividades");
 botonModificarActividad.addEventListener("click", aceptarModificarActividad, false);
+
+var botonModificarProveedor = document.getElementById("btnModificarProveedor");
+botonModificarProveedor.addEventListener("click", aceptarModificarProveedor, false);
 
 /*-------------FUNCIONES-----------------*/
 /*-------------ALTA-------------*/
@@ -530,6 +542,39 @@ function seleccionarActividades(){
     }
 
 }
+function seleccionarProveedor(){
+    let iCIF =frmModificaProveedor.txtCifModifica.value.trim();
+
+    let botonSeleccionar = document.getElementById("btnSelecionarProveedor");
+    let btnModificarActividades = document.getElementById("btnModificarProveedor");
+   let btnCacelarModActividades = document.getElementById("btnCancelarProveedor");
+
+    let inputId = document.getElementById("txtCifModifica");
+    let inputNombre = document.getElementById("txtNombreProveedorModifica");
+    let inputTelefono = document.getElementById("txtTelefonoProveedorModifica");
+
+    let ProveedorSeleccionado = oUPOCampo.buscarProveedor(iCIF);
+
+    if (ProveedorSeleccionado != "") {
+        inputId.disabled = true;
+        botonSeleccionar.disabled = true;
+
+        inputNombre.disabled = false;
+        inputTelefono.disabled = false;
+
+        btnModificarActividades.disabled = false;
+        btnCacelarModActividades.disabled = false;
+
+        inputNombre.value = ProveedorSeleccionado[0].nombre;
+        inputTelefono.value = ProveedorSeleccionado[0].telefono;
+    }
+
+    else {
+        alert("No se encuentra ningun proveedor con ese ID");
+
+        cancelarModificarProveedor();
+    } 
+}
 
 
 
@@ -601,6 +646,27 @@ function cancelarModificarActividades(){
 
     frmModificaActividades.reset();
 }
+function  cancelarModificarProveedor(){
+    let botonSeleccionar = document.getElementById("btnSelecionarProveedor");
+    let btnModificarActividades = document.getElementById("btnModificarProveedor");
+    let btnCacelarModActividades = document.getElementById("btnCancelarProveedor");
+
+    let inputId = document.getElementById("txtCifModifica");
+    let inputNombre = document.getElementById("txtNombreProveedorModifica");
+    let inputTelefono = document.getElementById("txtTelefonoProveedorModifica");
+
+    inputId.disabled = false;
+    botonSeleccionar.disabled = false;
+
+    inputNombre.disabled = true;
+    inputTelefono.disabled = true;
+
+    btnModificarActividades.disabled = true;
+    btnCacelarModActividades.disabled = true;
+    
+    frmModificaProveedor.reset();
+}
+
 
 /*-------------MODIFICAR-------------*/
 
@@ -674,6 +740,54 @@ function aceptarModificarActividad(){
     else{
         alert(sMensaje);
     }
+}
+
+function aceptarModificarProveedor(){
+
+    let sMensaje="";
+
+    // Recoger valores del formulario
+    let sCIF = frmModificaProveedor.txtCifModifica.value.trim();
+    let sNombre = frmModificaProveedor.txtNombreProveedorModifica.value.trim();
+    let iTelefono = parseInt(frmModificaProveedor.txtTelefonoProveedorModifica.value.trim());
+
+    if(!/^\d{8}[a-zA-Z]$/.test(sCIF)){
+        sMensaje+="El campo CIF esta mal.\n";
+        frmModificaProveedor.txtCifModifica.classList.add("error");
+    }
+    else{
+        frmModificaProveedor.txtCifModifica.classList.remove("error");  
+    }
+    if(!/^[a-zA-ZÑñÁáÉéÍíÓóÚúÜü\s]+$/.test(sNombre)){
+        sMensaje+="El campo nombre esta mal\n";
+        frmModificaProveedor.txtNombreProveedorModifica.classList.add("error");
+    }
+    else{
+        frmModificaProveedor.txtNombreProveedorModifica.classList.remove("error");  
+    }
+    if(!/^(\+34|0034|34)?[6|7|9][0-9]{8}$/g.test(iTelefono)){
+        sMensaje+="El campo telefono esta mal (Recuerde poner el prefijo )\n";
+        frmModificaProveedor.txtTelefonoProveedorModifica.classList.add("error");
+    }
+    else{
+        frmModificaProveedor.txtTelefonoProveedorModifica.classList.remove("error");  
+    }
+
+
+    if(sMensaje==""){
+       // Creamos el objeto proveedor
+       let oProveedor = new Proveedores(sCIF, sNombre, iTelefono);
+
+       // Alta de proveedor en UPOCAMPO
+       let sMensaje = oUPOCampo.modificaProveedor(oProveedor);
+       alert(sMensaje);
+       cancelarModificarProveedor();
+  
+    }
+    else{
+        alert(sMensaje);
+    }
+
 }
 
 /*-------------LISTADOS-------------*/
@@ -968,160 +1082,75 @@ function listadosReservas(){
 
 //Mostrar formulario cliente(anadir los otros formularios mientras los vais creando)
 function mostrarAltaCliente() {
+    esconderTodosLosFormularios();
     frmAltaCliente.style.display = "block";
-    frmAltaReserva.style.display = "none";
-    frmAltaProveedor.style.display = "none";
-    frmBajaCliente.style.display = "none";
-    frmBajaReserva.style.display = "none";
-    frmModificarCliente.style.display = "none";
-    frmModificarReserva.style.display = "none";
-    frmAltaActividades.style.display = "none";
-    frmBajaActividad.style.display = "none";
-    frmBajaProveedores.style.display="none";
-
-
 }
 
 function mostrarAltaReserva() {
+    esconderTodosLosFormularios();
 	frmAltaReserva.style.display = "block";
-	frmAltaCliente.style.display = "none";
-	frmAltaProveedor.style.display = "none";
-	frmBajaCliente.style.display = "none";
-	frmBajaReserva.style.display = "none";
-	frmModificarCliente.style.display = "none";
-    frmModificarReserva.style.display = "none";
-    frmAltaActividades.style.display = "none";
-
     mostrarHabitaciones();
-
-    frmBajaActividad.style.display = "none";
-    frmBajaProveedores.style.display="none";
-    frmModificaActividades.style.display = "none";
-
 }
 
 function mostrarAltaProveedor() {
+    esconderTodosLosFormularios();
 	frmAltaProveedor.style.display = "block";
-	frmAltaReserva.style.display = "none";
-	frmAltaCliente.style.display = "none";
-	frmBajaCliente.style.display = "none";
-	frmBajaReserva.style.display = "none";
-	frmModificarCliente.style.display = "none";
-    frmModificarReserva.style.display = "none";
-    frmAltaActividades.style.display = "none";
-    frmBajaActividad.style.display = "none";
-    frmBajaProveedores.style.display="none";
-    frmModificaActividades.style.display = "none";
-
 }
 
 function mostrarBajaCliente() {
+    esconderTodosLosFormularios();
 	frmBajaCliente.style.display = "block";
-    frmAltaCliente.style.display = "none";
-    frmAltaReserva.style.display = "none";
-    frmAltaProveedor.style.display = "none";
-    frmBajaReserva.style.display = "none";
-    frmModificarCliente.style.display = "none";
-    frmModificarReserva.style.display = "none";
-    frmAltaActividades.style.display = "none";
-    frmBajaActividad.style.display = "none";
-    frmBajaProveedores.style.display="none";
-    frmModificaActividades.style.display = "none";
-
 }
 
 function mostrarBajaReserva() {
+    esconderTodosLosFormularios();
 	frmBajaReserva.style.display = "block";
-	frmBajaCliente.style.display = "none";
-    frmAltaCliente.style.display = "none";
-    frmAltaReserva.style.display = "none";
-    frmAltaProveedor.style.display = "none";
-    frmModificarCliente.style.display = "none";
-    frmModificarReserva.style.display = "none";
-    frmAltaActividades.style.display = "none";
-    frmBajaActividad.style.display = "none";
-    frmBajaProveedores.style.display="none";
-    frmModificaActividades.style.display = "none";
 }
 function mostrarBajaActividad(){
+    esconderTodosLosFormularios();
     frmBajaActividad.style.display = "block";
-    frmBajaReserva.style.display = "none";
-	frmBajaCliente.style.display = "none";
-    frmAltaCliente.style.display = "none";
-    frmAltaReserva.style.display = "none";
-    frmAltaProveedor.style.display = "none";
-    frmModificarCliente.style.display = "none";
-    frmModificarReserva.style.display = "none";
-    frmAltaActividades.style.display = "none";
-    frmBajaProveedores.style.display="none";
-    frmModificaActividades.style.display = "none";  
 }
 function mostrarBajaProveedor(){
+    esconderTodosLosFormularios();
     frmBajaProveedores.style.display="block";
-    frmModificarCliente.style.display = "none";
-	frmBajaReserva.style.display = "none";
-	frmBajaCliente.style.display = "none";
-    frmAltaCliente.style.display = "none";
-    frmAltaReserva.style.display = "none";
-    frmAltaProveedor.style.display = "none";
-    frmModificarReserva.style.display = "none";
-    frmAltaActividades.style.display = "none";
-    frmBajaActividad.style.display = "none";
-    frmModificaActividades.style.display = "none";
 }
 
 function mostrarModificarCliente() {
+    esconderTodosLosFormularios();
 	frmModificarCliente.style.display = "block";
-	frmBajaReserva.style.display = "none";
-	frmBajaCliente.style.display = "none";
-    frmAltaCliente.style.display = "none";
-    frmAltaReserva.style.display = "none";
-    frmAltaProveedor.style.display = "none";
-    frmModificarReserva.style.display = "none";
-    frmAltaActividades.style.display = "none";
-    frmBajaActividad.style.display = "none";
-    frmBajaProveedores.style.display="none";
-    frmModificaActividades.style.display = "none";
 }
 
 function mostrarModificarReserva() {
+    esconderTodosLosFormularios();
 	frmModificarReserva.style.display = "block";
-	frmModificarCliente.style.display = "none";
-	frmBajaReserva.style.display = "none";
-	frmBajaCliente.style.display = "none";
-    frmAltaCliente.style.display = "none";
-    frmAltaReserva.style.display = "none";
-    frmAltaProveedor.style.display = "none";
-    frmAltaActividades.style.display = "none";
-    frmBajaActividad.style.display = "none";
-    frmBajaProveedores.style.display="none";
-    frmModificaActividades.style.display = "none";
 }
 function mostrarModificarActividad(){
+    esconderTodosLosFormularios();
     frmModificaActividades.style.display = "block";
-    frmAltaProveedor.style.display = "none";
-	frmAltaReserva.style.display = "none";
-	frmAltaCliente.style.display = "none";
-	frmBajaCliente.style.display = "none";
-	frmBajaReserva.style.display = "none";
-	frmModificarCliente.style.display = "none";
-    frmModificarReserva.style.display = "none";
-    frmAltaActividades.style.display = "none";
-    frmBajaActividad.style.display = "none";
-    frmBajaProveedores.style.display="none";
+}
+function mostrarModificarProveedor(){
+    esconderTodosLosFormularios();
+    frmModificaProveedor.style.display="block";
 }
 function mostrarAltaActividad(){
+    esconderTodosLosFormularios();
     frmAltaActividades.style.display = "block";  
-    frmModificarReserva.style.display = "none";
-    frmModificarCliente.style.display = "none";
-    frmBajaReserva.style.display = "none";
-    frmBajaCliente.style.display = "none";
+}
+function esconderTodosLosFormularios(){
     frmAltaCliente.style.display = "none";
     frmAltaReserva.style.display = "none";
     frmAltaProveedor.style.display = "none";
+    frmAltaActividades.style.display = "none";
+
+    frmModificarCliente.style.display = "none"; 
+    frmModificarReserva.style.display = "none";
+    frmModificaActividades.style.display = "none";
+    frmModificaProveedor.style.display="none";
+
+    frmBajaCliente.style.display = "none";
+    frmBajaReserva.style.display = "none";
     frmBajaActividad.style.display = "none";
     frmBajaProveedores.style.display="none";
-    frmModificaActividades.style.display = "none";
 }
 //Datos prueba de habitaciones
 
