@@ -411,7 +411,7 @@
     <!--FORMULARIO MODIFICAR ACTIVIDADES-->
     <form class="form-horizontal" name="frmModificaActividades" id="frmModificaActividades">
         <fieldset>
-            <legend>Alta de actividades</legend>
+            <legend>Modificacion de actividades</legend>
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtID">ID</label>
                 <div class="col-md-4">
@@ -448,12 +448,13 @@
 
     <form class="form-horizontal" name="frmModificaProveedor" id="frmModificaProveedor">
         <fieldset>
-            <legend>Alta de proveedores</legend>
+            <legend>Modificacion de proveedores</legend>
 
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtCif">CIF</label>
                 <div class="col-md-4">
                     <input id="txtCifModifica" name="txtCif" type="text" placeholder="" class="form-control input-md" required="">
+                    <br>
                     <input type="button" id="btnSelecionarProveedor" name="btnSelecionarProveedor" class="btn btn-primary" value="Selecionar" />
                 </div>
             </div>
@@ -461,22 +462,22 @@
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtNombre">Nombre</label>
                 <div class="col-md-4">
-                    <input id="txtNombreProveedorModifica" name="txtNombre" type="text" class="form-control input-md" required="">
+                    <input id="txtNombreProveedorModifica" name="txtNombre" type="text" class="form-control input-md" required="" disabled>
 
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-4 control-label" for="txtTelefono">Telefono</label>
                 <div class="col-md-4">
-                    <input id="txtTelefonoProveedorModifica" name="txtTelefono" type="text" placeholder="" class="form-control input-md" required="">
+                    <input id="txtTelefonoProveedorModifica" name="txtTelefono" type="text" placeholder="" class="form-control input-md" required="" disabled>
 
                 </div>
             </div>
             <div class="form-group">
                 <label class="col-md-4 control-label" for="btnAceptar"></label>
                 <div class="col-md-4">
-                    <input type="button" id="btnModificarProveedor" name="btnModificarProveedor" class="btn btn-primary" value="Modificar" />
-                    <input type="button" id="btnCancelarProveedor" name="btnCancelarProveedor" class="btn btn-primary" value="Cancelar" />               
+                    <input type="button" id="btnModificarProveedor" name="btnModificarProveedor" class="btn btn-primary" value="Modificar" disabled/>
+                    <input type="button" id="btnCancelarProveedor" name="btnCancelarProveedor" class="btn btn-primary" value="Cancelar" disabled/>               
                 </div>
             </div>
         </fieldset>
