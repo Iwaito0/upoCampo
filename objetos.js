@@ -322,6 +322,20 @@ getArrayReservas(){
 
         return sMensaje;
     }
+    modificaProveedor(oProveedor){
+        let sMensaje = "";
+
+        for (let i = 0; i < this.proveedores.length; i++) {
+            if (this.proveedores[i].cif == oProveedor.cif) {
+                this.proveedores[i].nombre = oProveedor.nombre;
+                this.proveedores[i].telefono = oProveedor.telefono;
+
+                sMensaje = "Proveedor modificado correctamente";
+            }
+        }
+
+        return sMensaje;
+    }
 
     buscarCliente(sNif){
         let aCliente = [];
@@ -357,5 +371,16 @@ getArrayReservas(){
         }
 
         return aActividad;
+    }
+    buscarProveedor(iCIF){
+        let aProveedor = [];
+
+        for (let i = 0; i < this.proveedores.length; i++) {
+            if (this.proveedores[i].cif == iCIF) {
+                aProveedor.push(this.proveedores[i]);
+            }
+        }
+
+        return aProveedor; 
     }
 }
