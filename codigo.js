@@ -65,6 +65,9 @@ menuModificarProveedor.addEventListener("click", mostrarModificarProveedor, fals
 var menuListarCliRes = document.getElementById("listadoClientesPorFecha");
 menuListarCliRes.addEventListener("click", mostrarListadoCliRes, false);
 
+var menuListarResFecha = document.getElementById("listadoReservasPorFecha");
+menuListarResFecha.addEventListener("click", mostrarListadoRes, false);
+
 /*------------SELECCIONAR ELEMENTOS MODIFICAR------------*/
 
 var seleccionarClienteModificar = document.getElementById("btnSeleccionarCliente");
@@ -170,6 +173,9 @@ botonModificarProveedor.addEventListener("click", aceptarModificarProveedor, fal
 
 var botonListarCliRes = document.getElementById("btnListarCliRes");
 botonListarCliRes.addEventListener("click", aceptarListadoCliRes, false);
+
+var botonListarResFecha = document.getElementById("btnListarResFecha");
+botonListarResFecha.addEventListener("click", aceptarListadoResFecha, false);
 
 /*-------------FUNCIONES-----------------*/
 /*-------------ALTA-------------*/
@@ -1232,7 +1238,7 @@ function aceptarListadoCliRes() {
 	let dSalida = frmListadoCliResFecha.txtSalidaCliRes.value.trim();
 	let pestana=window.open();
 	let aClientes = oUPOCampo.listadoClientePorFecha(dEntrada, dSalida);
-	alert(aClientes.toString());
+
 	//Creacion de la tabla
     var oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1295,7 +1301,73 @@ function aceptarListadoCliRes() {
     }
     
     pestana.document.body.append(oTabla);
+    frmListadoCliResFecha.reset();
+}
 
+function aceptarListadoResFecha() {
+	let dEntrada = frmListadoResFecha.txtEntradaResFecha.value.trim();
+	let dSalida = frmListadoResFecha.txtSalidaResFecha.value.trim();
+	let pestana=window.open();
+	let aReservas = oUPOCampo.listadoReservaPorFecha(dEntrada, dSalida);
+
+	//Creacion de la tabla
+    var oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    var oTHead=oTabla.createTHead();
+    var oFila=oTHead.insertRow(-1);
+    var oCelda=oFila.insertCell(-1);
+    oCelda.textContent="ID";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Numero de Personas";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Entrada";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Salida";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Precio";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Numero de habitacion";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="NIF Cliente";
+    
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+    
+    for(let i=0; i<aReservas.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aReservas[i].id;
+    
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aReservas[i].numPersonas;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aReservas[i].checkin;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aReservas[i].checkout;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aReservas[i].precio;
+        
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aReservas[i].numHabitaciones;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aReservas[i].nifCliente;
+    }
+
+    pestana.document.body.append(oTabla);
+    frmListadoResFecha.reset();
 }
 
 //Mostrar Formularios
@@ -1361,6 +1433,12 @@ function mostrarListadoCliRes(){
 	esconderTodosLosFormularios();
 	frmListadoCliResFecha.style.display = "block";
 }
+
+function mostrarListadoRes(){
+	esconderTodosLosFormularios();
+	frmListadoResFecha.style.display = "block";
+}
+
 function esconderTodosLosFormularios(){
     frmAltaCliente.style.display = "none";
     frmAltaReserva.style.display = "none";
@@ -1378,6 +1456,7 @@ function esconderTodosLosFormularios(){
     frmBajaProveedores.style.display="none";
 
     frmListadoCliResFecha.style.display = "none";
+    frmListadoResFecha.style.display = "none";
 }
 //Datos prueba de habitaciones
 
