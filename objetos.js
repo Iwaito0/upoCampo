@@ -436,4 +436,27 @@ getArrayReservas(){
 
         return aReservasRes;
     }
+
+    listadoHabDispPorFecha(dFechaEntrada, dFechaSalida){
+        let aReserva = oUPOCampo.getArrayReservas();
+        let aHabitaciones = oUPOCampo.getArrayHabitaciones();
+
+        //alert(dFechaIni+" "+dFechaFin);
+
+        for (let i = 0; i < aHabitaciones.length; i++) {
+            for (let j = 0; j < aReserva.length; j++) {
+                if (aHabitaciones[i].id == aReserva[j].numHabitaciones) {
+                    if ((aReserva[j].checkin > dFechaEntrada && aReserva[j].checkin <= dFechaSalida && aReserva[j].checkout >= dFechaSalida) || 
+                        (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaSalida) || 
+                        (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaEntrada && aReserva[j].checkout < dFechaSalida) || 
+                        (aReserva[j].checkin > dFechaEntrada && aReserva[j].checkout < dFechaSalida)) {
+                        aHabitaciones.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+        }
+
+        return aHabitaciones;
+    }
 }
