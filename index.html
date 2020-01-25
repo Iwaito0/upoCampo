@@ -89,7 +89,7 @@
            </li>
           <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Listado pr fechas</a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Listado clientes por fecha</a></li>
+              <li id="listadoClientesPorFecha"><a class="dropdown-item" href="#">Listado clientes por fecha</a></li>
               <li><a class="dropdown-item" href="#">Listado reserva por fecha</a></li>
               <li><a class="dropdown-item" href="#">Listado de habitaciones disponibles por fecha</a></li>
               <li><a class="dropdown-item" href="#">Listado de parking disponibles por fecha</a></li>
@@ -574,6 +574,32 @@
                 <label class="col-md-4 control-label" for="btnAceptar"></label>
                 <div class="col-md-4">
                     <input type="button" id="btnAceptarBajaProveedor" name="btnAceptarBajaProveedor" class="btn btn-primary" value="Baja" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+    <!-- FORMULARIO LISTADO CLIENTES POR FECHA -->
+
+    <form class="form-horizontal" name="frmListadoCliResFecha" id="frmListadoCliResFecha">
+        <fieldset>
+            <legend>Listado de Clientes reservados por fechas</legend>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="txtLisCliEntrada">Dia de entrada</label>
+                <div class="col-md-4">
+                    <input id="txtEntradaCliRes" name="txtEntradaCliRes" type="date" placeholder="" class="form-control input-md" required="">
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="txtLisCliSalida">Dia de salida</label>
+              <div class="col-md-4">
+                  <input id="txtSalidaCliRes" name="txtSalidaCliRes" type="date" placeholder="" class="form-control input-md" required="">
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnAceptar"></label>
+                <div class="col-md-4">
+                    <input type="button" id="btnListarCliRes" name="btnListarCliRes" class="btn btn-primary" value="Listar" />
                 </div>
             </div>
         </fieldset>
