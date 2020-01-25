@@ -8,6 +8,8 @@ function Cliente(sNIF, sNombre, iTelefono, sDireccion, sEmail, iNumTarjeta) {
     this.direccion = sDireccion;
     this.email = sEmail;
     this.numeroTarjeta = iNumTarjeta;
+    this.checkin = 0;
+    this.checkout = 0;
 }
 Cliente.prototype.toString = function() {
     let sMensaje = "El cliente " +this.nombre+" con DNI " +this.nif+ " y telefono " +this.telefono+" con la direccion "+this.direccion+" y email "+this.email+" y con un numero de tarjeta "+this.numeroTarjeta;
@@ -406,7 +408,9 @@ getArrayReservas(){
                         (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaSalida) || 
                         (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaEntrada && aReserva[j].checkout < dFechaSalida) || 
                         (aReserva[j].checkin > dFechaEntrada && aReserva[j].checkout < dFechaSalida)) {
-                        aClientes.push(aReserva[j].checkin,aReserva[j].checkout);
+
+                        aClientes[i].checkin = aReserva[j].checkin;
+                        aClientes[i].checkout = aReserva[j].checkout;
                         aClientesRes.push(aClientes[i]);
                     }
                 }
@@ -414,5 +418,22 @@ getArrayReservas(){
         }
 
         return aClientesRes; 
+    }
+
+    listadoReservaPorFecha(dFechaEntrada, dFechaSalida){
+        let aReserva = oUPOCampo.getArrayReservas();
+        let aReservasRes = [];
+
+        for (let j = 0; j < aReserva.length; j++) {
+            if ((aReserva[j].checkin > dFechaEntrada && aReserva[j].checkin <= dFechaSalida && aReserva[j].checkout >= dFechaSalida) || 
+                (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaSalida) || 
+                (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaEntrada && aReserva[j].checkout < dFechaSalida) || 
+                (aReserva[j].checkin > dFechaEntrada && aReserva[j].checkout < dFechaSalida)) {
+
+                aReservasRes.push(aReserva[j]);
+            }
+        }
+
+        return aReservasRes;
     }
 }
