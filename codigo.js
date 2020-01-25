@@ -5,8 +5,14 @@ var divListado = document.getElementById("listado");
 
 var dFechaIni = new Date();
 var dFechaFin = new Date();
+var iNumMaxPersonas = 0;
 
 datosHabitaciones();
+datosParking();
+datosRegimen();
+datosCliente();
+datosActividad();
+datosProveedor();
 
 /*--------------EVENTOS DE MENU----------------*/
 
@@ -93,6 +99,9 @@ recogerFechaInicio.addEventListener("blur", recogerFechaIni, false);
 
 var recogerFechaFinal = document.getElementById("txtSalidaAlta");
 recogerFechaFinal.addEventListener("blur", recogerFechaFin, false);
+
+var recogerNumPersonas = document.getElementById("txtNumAlta");
+recogerNumPersonas.addEventListener("blur", recogerNumPer, false);
 
 /*--------------------------CANCELAR--------------------------*/
 
@@ -237,6 +246,11 @@ function recogerFechaFin(){
 	mostrarHabitaciones();
 }
 
+function recogerNumPer(){
+	iNumMaxPersonas = parseInt(frmAltaReserva.txtNumAlta.value.trim());
+	mostrarHabitaciones();
+}
+
 
 function mostrarHabitaciones()  {
     document.getElementById("selectListaHab").length = 0;
@@ -257,6 +271,10 @@ function mostrarHabitaciones()  {
             	}
             }
         }
+        if (aHabitaciones[i].ocupacionMaxima < iNumMaxPersonas) {
+    		aHabitaciones.splice(i, 1);
+        	i--;
+    	}
     }
 
     for (let i = 0; i < aHabitaciones.length; i++) {
@@ -279,6 +297,7 @@ function aceptarAltaReserva(){
     let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
     let fPrecio = parseFloat(frmAltaReserva.txtPrecioAlta.value.trim());
     let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
+    let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
 
     if(!/^\d+$/.test(iID)){
         sMensaje+="El campo ID esta mal. El campo ID debe ser un numero\n";
@@ -304,13 +323,10 @@ function aceptarAltaReserva(){
 
     if(sMensaje==""){
     // Creamos el objeto reserva
-    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion);
+    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente);
     // Alta de reserva en UPOCAMPO
     let sMensaje = oUPOCampo.altaReserva(oReserva);
     alert(sMensaje);
-    //mostrarHabitaciones();
-    dFechaIni = new Date();
-    dFechaIni = new Date();
     frmAltaReserva.reset();    
     }
     else{
@@ -1163,6 +1179,9 @@ function listadosReservas(){
 
     oCelda=oFila.insertCell(-1);
     oCelda.textContent="Numero de habitacion";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="NIF Cliente";
     
     //El cuerpo de la tabla
     let oTBody = document.createElement("TBODY");
@@ -1188,6 +1207,9 @@ function listadosReservas(){
         
         oCelda = oFila.insertCell(-1);
         oCelda.textContent = arrayReservas[i].numHabitaciones;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayReservas[i].nifCliente;
     }
     
     pestana.document.body.append(oTabla);
@@ -1367,23 +1389,28 @@ function datosCliente() {
 }
 
 //Datos pruebas actividades
-oUPOCampo.altaActividad(new Actividades(1, "Piragüismo", 45.20));
-oUPOCampo.altaActividad(new Actividades(2, "Alpinismo", 55.50));
-oUPOCampo.altaActividad(new Actividades(3, "Tenis", 7.50));
-oUPOCampo.altaActividad(new Actividades(4, "Futbol", 4.20));
-oUPOCampo.altaActividad(new Actividades(5, "Buceo", 12.50));
-oUPOCampo.altaActividad(new Actividades(6, "Buceo con bombona", 45.20));
-oUPOCampo.altaActividad(new Actividades(7, "Tiro con arco", 19.95));
-oUPOCampo.altaActividad(new Actividades(8, "Baloncesto", 8.50));
-oUPOCampo.altaActividad(new Actividades(9, "Exploracion de cuevas", 50));
-oUPOCampo.altaActividad(new Actividades(10, "Juegos infantiles", 2.50));
-oUPOCampo.altaActividad(new Actividades(11, "Bingo", 0));
-oUPOCampo.altaActividad(new Actividades(12, "Rafting", 65.50));
+
+function datosActividad() {
+	oUPOCampo.altaActividad(new Actividades(1, "Piragüismo", 45.20));
+	oUPOCampo.altaActividad(new Actividades(2, "Alpinismo", 55.50));
+	oUPOCampo.altaActividad(new Actividades(3, "Tenis", 7.50));
+	oUPOCampo.altaActividad(new Actividades(4, "Futbol", 4.20));
+	oUPOCampo.altaActividad(new Actividades(5, "Buceo", 12.50));
+	oUPOCampo.altaActividad(new Actividades(6, "Buceo con bombona", 45.20));
+	oUPOCampo.altaActividad(new Actividades(7, "Tiro con arco", 19.95));
+	oUPOCampo.altaActividad(new Actividades(8, "Baloncesto", 8.50));
+	oUPOCampo.altaActividad(new Actividades(9, "Exploracion de cuevas", 50));
+	oUPOCampo.altaActividad(new Actividades(10, "Juegos infantiles", 2.50));
+	oUPOCampo.altaActividad(new Actividades(11, "Bingo", 0));
+	oUPOCampo.altaActividad(new Actividades(12, "Rafting", 65.50));
+}
 
 //Datos proveedor
-oUPOCampo.altaProveedor(new Proveedores("25852563D", "Victor", 34758962534));
-oUPOCampo.altaProveedor(new Proveedores("59354285G", "Laura", 34658952574));
-oUPOCampo.altaProveedor(new Proveedores("52928526D", "Rodrigo", 34685127963));
-oUPOCampo.altaProveedor(new Proveedores("45826584T", "Pepe", 34652895123));
-oUPOCampo.altaProveedor(new Proveedores("58102605U", "Paula", 34658215985));
 
+function datosProveedor() {
+	oUPOCampo.altaProveedor(new Proveedores("25852563D", "Victor", 34758962534));
+	oUPOCampo.altaProveedor(new Proveedores("59354285G", "Laura", 34658952574));
+	oUPOCampo.altaProveedor(new Proveedores("52928526D", "Rodrigo", 34685127963));
+	oUPOCampo.altaProveedor(new Proveedores("45826584T", "Pepe", 34652895123));
+	oUPOCampo.altaProveedor(new Proveedores("58102605U", "Paula", 34658215985));
+}
