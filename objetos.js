@@ -345,6 +345,8 @@ getArrayReservas(){
         return sMensaje;
     }
 
+
+
     buscarCliente(sNif){
         let aCliente = [];
 
@@ -390,5 +392,27 @@ getArrayReservas(){
         }
 
         return aProveedor; 
+    }
+
+    listadoClientePorFecha(dFechaEntrada, dFechaSalida) {
+        let aClientes = oUPOCampo.getArrayClientes();
+        let aReserva = oUPOCampo.getArrayReservas();
+        let aClientesRes = [];
+
+        for (let i = 0; i < aClientes.length; i++) {
+            for (let j = 0; j < aReserva.length; j++) {
+                if (aClientes[i].nif == aReserva[j].nifCliente) {
+                    if ((aReserva[j].checkin > dFechaEntrada && aReserva[j].checkin <= dFechaSalida && aReserva[j].checkout >= dFechaSalida) || 
+                        (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaSalida) || 
+                        (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaEntrada && aReserva[j].checkout < dFechaSalida) || 
+                        (aReserva[j].checkin > dFechaEntrada && aReserva[j].checkout < dFechaSalida)) {
+                        aClientes.push(aReserva[j].checkin,aReserva[j].checkout);
+                        aClientesRes.push(aClientes[i]);
+                    }
+                }
+            }
+        }
+
+        return aClientesRes; 
     }
 }
