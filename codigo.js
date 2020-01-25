@@ -68,6 +68,9 @@ menuListarCliRes.addEventListener("click", mostrarListadoCliRes, false);
 var menuListarResFecha = document.getElementById("listadoReservasPorFecha");
 menuListarResFecha.addEventListener("click", mostrarListadoRes, false);
 
+var menuListarHabDispFecha = document.getElementById("listadoHabDispFecha");
+menuListarHabDispFecha.addEventListener("click", mostrarListadoHabDisp, false);
+
 /*------------SELECCIONAR ELEMENTOS MODIFICAR------------*/
 
 var seleccionarClienteModificar = document.getElementById("btnSeleccionarCliente");
@@ -176,6 +179,9 @@ botonListarCliRes.addEventListener("click", aceptarListadoCliRes, false);
 
 var botonListarResFecha = document.getElementById("btnListarResFecha");
 botonListarResFecha.addEventListener("click", aceptarListadoResFecha, false);
+
+var botonListarHabDisp = document.getElementById("btnListarHabDispFecha");
+botonListarHabDisp.addEventListener("click", aceptarListadoHabDispFecha, false);
 
 /*-------------FUNCIONES-----------------*/
 /*-------------ALTA-------------*/
@@ -1370,6 +1376,53 @@ function aceptarListadoResFecha() {
     frmListadoResFecha.reset();
 }
 
+function aceptarListadoHabDispFecha() {
+	let dEntrada = frmListadoHabDispFecha.txtEntradaHabDispFecha.value.trim();
+	let dSalida = frmListadoHabDispFecha.txtSalidaHabDispFecha.value.trim();
+	let pestana=window.open();
+	let aHabitaciones = oUPOCampo.listadoHabDispPorFecha(dEntrada, dSalida);
+
+	//Creacion de la tabla
+    var oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    var oTHead=oTabla.createTHead();
+    var oFila=oTHead.insertRow(-1);
+    var oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Numero de habitacion";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Tipo";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Precio";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Ocupacion Maxima";
+
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+
+    for(let i=0; i<aHabitaciones.length; i++){
+        let oFila = oTBody.insertRow(-1);
+
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aHabitaciones[i].id;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aHabitaciones[i].tipo;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aHabitaciones[i].precio;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aHabitaciones[i].ocupacionMaxima;
+    }
+
+    pestana.document.body.append(oTabla);
+    frmListadoHabDispFecha.reset();
+}
 //Mostrar Formularios
 
 //Mostrar formulario cliente(anadir los otros formularios mientras los vais creando)
@@ -1439,6 +1492,11 @@ function mostrarListadoRes(){
 	frmListadoResFecha.style.display = "block";
 }
 
+function mostrarListadoHabDisp() {
+	esconderTodosLosFormularios();
+	frmListadoHabDispFecha.style.display = "block";
+}
+
 function esconderTodosLosFormularios(){
     frmAltaCliente.style.display = "none";
     frmAltaReserva.style.display = "none";
@@ -1457,6 +1515,7 @@ function esconderTodosLosFormularios(){
 
     frmListadoCliResFecha.style.display = "none";
     frmListadoResFecha.style.display = "none";
+    frmListadoHabDispFecha.style.display = "none";
 }
 //Datos prueba de habitaciones
 
