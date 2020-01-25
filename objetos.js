@@ -76,13 +76,14 @@ Proveedores.prototype.toString = function() {
 }
 
 //Clase Reservas
-function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones) {
+function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones, sNifCliente) {
     this.id = iID;
     this.numPersonas= iNumPersonas;
     this.checkin = dCheckIn;
     this.checkout = dCheckOut;
     this.precio = fPrecio;
     this.numHabitaciones = iNumHabitaciones;
+    this.nifCliente = sNifCliente;
 }
 Reservas.prototype.toString = function() {
     let sMensaje = "ID: "+this.id+" Numero personas: "+this.numPersonas+" CheckIn: "+this.checkin+" CheckOut: "+this.checkout+" Precio: "+this.precio;
@@ -122,8 +123,15 @@ class UpoCampo{
 
         if (this.reservas.filter(reserva => reserva.id == oReserva.id).length == 0) {
             //No se encuentra --> lo doy de alta
-            this.reservas.push(oReserva);
-            sMensaje = "Alta reserva OK";
+            if (this.clientes.filter(cliente => cliente.nif == oReserva.nifCliente).length == 0) {
+                //No existe el id de cliente --> Error
+                sMensaje = "El NIF de cliente que ha introducido no existe";
+            }
+            else {
+                //Existe --> lo doy de alta
+                this.reservas.push(oReserva);
+                sMensaje = "Alta reserva OK";
+            }
         }
         else {
             sMensaje = "La reserva ya estaba registrada";
