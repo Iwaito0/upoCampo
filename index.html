@@ -92,7 +92,7 @@
               <li id="listadoClientesPorFecha"><a class="dropdown-item" href="#">Listado clientes por fecha</a></li>
               <li id="listadoReservasPorFecha"><a class="dropdown-item" href="#">Listado reserva por fecha</a></li>
               <li id="listadoHabDispFecha"><a class="dropdown-item" href="#">Listado de habitaciones disponibles por fecha</a></li>
-              <li><a class="dropdown-item" href="#">Listado de parking disponibles por fecha</a></li>
+              <li id="listadoParkDispFecha"><a class="dropdown-item" href="#">Listado de parking disponibles por fecha</a></li>
             </ul>
            </li>
           <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Listado por reservas</a>
@@ -224,6 +224,17 @@
                 <label class="col-md-4 control-label" for="txtReservaCliente">NIF Cliente: </label>
                 <div class="col-md-4">
                     <input id="txtReservaClienteAlta" name="txtReservaClienteAlta" type="text" placeholder="" class="form-control input-md" required="">
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-4 control-label" for="txtListaParking">¿Quieres reservar un plaza en el parking?</label>
+                <div class="col-md-4">
+                  <input type="radio" name="radioParking" id="siParking" value="siParking">Si
+                  <input type="radio" name="radioParking" id="noParking" value="noParking" checked>No
+                  <br>
+                  <select name="selectListaParking" id="selectListaParking" style="display: none;">
+                      
+                  </select>
                 </div>
               </div>
             <div class="form-group">
@@ -652,6 +663,32 @@
                 <label class="col-md-4 control-label" for="btnAceptar"></label>
                 <div class="col-md-4">
                     <input type="button" id="btnListarHabDispFecha" name="btnListarHabDispFecha" class="btn btn-primary" value="Listar" />
+                </div>
+            </div>
+        </fieldset>
+    </form>
+
+    <!-- FORMULARIO LISTADO PARKING DISPONIBLES POR FECHA -->
+
+    <form class="form-horizontal" name="frmListadoParkDispFecha" id="frmListadoParkDispFecha">
+        <fieldset>
+            <legend>Listado de Parking Disponibles por fechas</legend>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="txtLisParkDispEntrada">Dia de entrada</label>
+                <div class="col-md-4">
+                    <input id="txtEntradaParkDispFecha" name="txtEntradaParkDispFecha" type="date" placeholder="" class="form-control input-md" required="">
+                </div>
+            </div>
+            <div class="form-group">
+              <label class="col-md-4 control-label" for="txtLisParkDispSalida">Dia de salida</label>
+              <div class="col-md-4">
+                  <input id="txtSalidaParkDispFecha" name="txtSalidaParkDispFecha" type="date" placeholder="" class="form-control input-md" required="">
+              </div>
+            </div>
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="btnAceptar"></label>
+                <div class="col-md-4">
+                    <input type="button" id="btnListarParkDispFecha" name="btnListarParkDispFecha" class="btn btn-primary" value="Listar" />
                 </div>
             </div>
         </fieldset>
