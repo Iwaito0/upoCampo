@@ -198,7 +198,13 @@ getArrayHabitaciones(){
     return aHabitacion;
 }
 getArrayParking(){
-    return this.parking;
+    let aParking = [];
+
+    for (let i = 0; i < this.parking.length;i++) {
+        aParking.push(this.parking[i]);
+    }
+
+    return aParking;
 }
 getArrayClientes(){
     return this.clientes;
@@ -464,24 +470,30 @@ getArrayReservas(){
 
     listadoParkDispPorFecha(dFechaEntrada, dFechaSalida) {
         let aReserva = oUPOCampo.getArrayReservas();
-        let aParking = oUPOCampo.getArrayParking();
+        let aParkings = oUPOCampo.getArrayParking();
 
         //alert(dFechaIni+" "+dFechaFin);
 
-        for (let i = 0; i < aParking.length; i++) {
+        for (let i = 0; i < aParkings.length; i++) {
             for (let j = 0; j < aReserva.length; j++) {
-                if (aParking[i].id == aReserva[j].parkingID) {
+                if (aParkings[i].id == aReserva[j].parkingID) {
                     if ((aReserva[j].checkin > dFechaEntrada && aReserva[j].checkin <= dFechaSalida && aReserva[j].checkout >= dFechaSalida) || 
                         (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaSalida) || 
                         (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaEntrada && aReserva[j].checkout < dFechaSalida) || 
                         (aReserva[j].checkin > dFechaEntrada && aReserva[j].checkout < dFechaSalida)) {
-                        aParking.splice(i, 1);
-                        i--;
+                        if (aParkings[i].id == 1) {
+                            aParkings.splice(i, 1);
+                        }
+                        else {
+                            aParkings.splice(i, 1);
+                            i--;
+                        } 
                     }
                 }
             }
         }
+        alert(JSON.stringify(aParkings));
 
-        return aParking;
+        return aParkings;
     }
 }
