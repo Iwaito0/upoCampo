@@ -71,6 +71,9 @@ menuListarResFecha.addEventListener("click", mostrarListadoRes, false);
 var menuListarHabDispFecha = document.getElementById("listadoHabDispFecha");
 menuListarHabDispFecha.addEventListener("click", mostrarListadoHabDisp, false);
 
+var menuListarParkDispFecha = document.getElementById("listadoParkDispFecha");
+menuListarParkDispFecha.addEventListener("click", mostrarListadoParkDisp, false);
+
 /*------------SELECCIONAR ELEMENTOS MODIFICAR------------*/
 
 var seleccionarClienteModificar = document.getElementById("btnSeleccionarCliente");
@@ -113,6 +116,12 @@ recogerFechaFinal.addEventListener("blur", recogerFechaFin, false);
 
 var recogerNumPersonas = document.getElementById("txtNumAlta");
 recogerNumPersonas.addEventListener("blur", recogerNumPer, false);
+
+var estadoHabParking = document.getElementById("siParking");
+estadoHabParking.addEventListener("click", habDesParking, false);
+
+var estadoDesParking = document.getElementById("noParking");
+estadoDesParking.addEventListener("click", habDesParking, false);
 
 /*--------------------------CANCELAR--------------------------*/
 
@@ -182,6 +191,9 @@ botonListarResFecha.addEventListener("click", aceptarListadoResFecha, false);
 
 var botonListarHabDisp = document.getElementById("btnListarHabDispFecha");
 botonListarHabDisp.addEventListener("click", aceptarListadoHabDispFecha, false);
+
+var botonListarParkDisp = document.getElementById("btnListarParkDispFecha");
+botonListarParkDisp.addEventListener("click", aceptarListadoParkDispFecha, false);
 
 /*-------------FUNCIONES-----------------*/
 /*-------------ALTA-------------*/
@@ -261,11 +273,13 @@ function aceptarAltaCliente(){
 function recogerFechaIni(){
 	dFechaIni = frmAltaReserva.txtEntradaAlta.value.trim();
 	mostrarHabitaciones();
+    habDesParking();
 }
 
 function recogerFechaFin(){
 	dFechaFin = frmAltaReserva.txtSalidaAlta.value.trim();
 	mostrarHabitaciones();
+    habDesParking();
 }
 
 function recogerNumPer(){
@@ -309,6 +323,50 @@ function mostrarHabitaciones()  {
     
 }
 
+function mostrarParkingDisponibles() {
+    document.getElementById("selectListaParking").length = 0;
+    let aReserva = oUPOCampo.getArrayReservas();
+    let aParking = oUPOCampo.getArrayParking();
+
+    //alert(dFechaIni+" "+dFechaFin);
+
+    for (let i = 0; i < aParking.length; i++) {
+        for (let j = 0; j < aReserva.length; j++) {
+            if (aParking[i].id == aReserva[j].parkingID) {
+                if ((aReserva[j].checkin > dFechaIni && aReserva[j].checkin <= dFechaFin && aReserva[j].checkout >= dFechaFin) || 
+                    (aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaFin) || 
+                    (aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaIni && aReserva[j].checkout < dFechaFin) || 
+                    (aReserva[j].checkin > dFechaIni && aReserva[j].checkout < dFechaFin)) {
+                    aParking.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+    }
+
+    for (let i = 0; i < aParking.length; i++) {
+        let opc = document.createElement("option");
+        opc.setAttribute("value", aParking[i].id);
+        let texto = document.createTextNode(aParking[i].id);
+        opc.appendChild(texto);
+        document.getElementById("selectListaParking").appendChild(opc);
+    }
+}
+
+function habDesParking() {
+    
+    let selectParking = document.getElementById("selectListaParking");
+
+    if (estadoHabParking.checked) {
+        mostrarParkingDisponibles();
+        selectParking.style.display = "block";
+    }
+    else {
+        selectParking.length = 0;
+        selectParking.style.display = "none";
+    }
+}
+
 function aceptarAltaReserva(){
     let sMensaje="";
 
@@ -320,6 +378,11 @@ function aceptarAltaReserva(){
     let fPrecio = parseFloat(frmAltaReserva.txtPrecioAlta.value.trim());
     let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
     let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
+    let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
+
+    if (isNaN(iParkingID)) {
+        iParkingID = 0;
+    }
 
     if(!/^\d+$/.test(iID)){
         sMensaje+="El campo ID esta mal. El campo ID debe ser un numero\n";
@@ -345,11 +408,12 @@ function aceptarAltaReserva(){
 
     if(sMensaje==""){
     // Creamos el objeto reserva
-    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente);
+    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID);
     // Alta de reserva en UPOCAMPO
     let sMensaje = oUPOCampo.altaReserva(oReserva);
     alert(sMensaje);
-    frmAltaReserva.reset();    
+    frmAltaReserva.reset();
+    habDesParking();    
     }
     else{
         alert(sMensaje);
@@ -1204,6 +1268,9 @@ function listadosReservas(){
 
     oCelda=oFila.insertCell(-1);
     oCelda.textContent="NIF Cliente";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Parking";
     
     //El cuerpo de la tabla
     let oTBody = document.createElement("TBODY");
@@ -1232,6 +1299,14 @@ function listadosReservas(){
 
         oCelda = oFila.insertCell(-1);
         oCelda.textContent = arrayReservas[i].nifCliente;
+
+        oCelda = oFila.insertCell(-1);
+        if (arrayReservas[i].parkingID == 0) {
+            oCelda.textContent = "NO";
+        }
+        else {
+            oCelda.textContent = arrayReservas[i].parkingID;
+        }
     }
     
     pestana.document.body.append(oTabla);
@@ -1423,6 +1498,54 @@ function aceptarListadoHabDispFecha() {
     pestana.document.body.append(oTabla);
     frmListadoHabDispFecha.reset();
 }
+
+function aceptarListadoParkDispFecha() {
+    let dEntrada = frmListadoParkDispFecha.txtEntradaParkDispFecha.value.trim();
+    let dSalida = frmListadoParkDispFecha.txtSalidaParkDispFecha.value.trim();
+    let pestana=window.open();
+    let aParking = oUPOCampo.listadoParkDispPorFecha(dEntrada, dSalida);
+
+    //Creacion de la tabla
+    var oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    var oTHead=oTabla.createTHead();
+    var oFila=oTHead.insertRow(-1);
+    var oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Numero de parking";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="precio";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Ancho especial";
+    
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+    
+    for(let i=0; i<aParking.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aParking[i].id;
+    
+         oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aParking[i].precio;
+        
+         oCelda = oFila.insertCell(-1);
+        if(aParking[i].anchoespecial==false){
+            oCelda.textContent = "No";
+        }
+        else{
+            oCelda.textContent = "Si";
+   
+        }
+    }
+    
+    pestana.document.body.append(oTabla);
+    frmListadoParkDispFecha.reset();
+}
 //Mostrar Formularios
 
 //Mostrar formulario cliente(anadir los otros formularios mientras los vais creando)
@@ -1435,6 +1558,7 @@ function mostrarAltaReserva() {
     esconderTodosLosFormularios();
 	frmAltaReserva.style.display = "block";
     mostrarHabitaciones();
+    habDesParking();
 }
 
 function mostrarAltaProveedor() {
@@ -1497,6 +1621,11 @@ function mostrarListadoHabDisp() {
 	frmListadoHabDispFecha.style.display = "block";
 }
 
+function mostrarListadoParkDisp() {
+    esconderTodosLosFormularios();
+    frmListadoParkDispFecha.style.display = "block";
+}
+
 function esconderTodosLosFormularios(){
     frmAltaCliente.style.display = "none";
     frmAltaReserva.style.display = "none";
@@ -1516,6 +1645,7 @@ function esconderTodosLosFormularios(){
     frmListadoCliResFecha.style.display = "none";
     frmListadoResFecha.style.display = "none";
     frmListadoHabDispFecha.style.display = "none";
+    frmListadoParkDispFecha.style.display = "none";
 }
 //Datos prueba de habitaciones
 
@@ -1562,7 +1692,6 @@ function datosHabitaciones() {
 //Datos pruebas Parking
 
 function datosParking() {
-    oUPOCampo.altaParking(new Parking(0, 25, false));
     oUPOCampo.altaParking(new Parking(1, 25, true));
     oUPOCampo.altaParking(new Parking(2, 25, false));
     oUPOCampo.altaParking(new Parking(3, 25, true));
