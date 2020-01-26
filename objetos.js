@@ -10,6 +10,7 @@ function Cliente(sNIF, sNombre, iTelefono, sDireccion, sEmail, iNumTarjeta) {
     this.numeroTarjeta = iNumTarjeta;
     this.checkin = 0;
     this.checkout = 0;
+
 }
 Cliente.prototype.toString = function() {
     let sMensaje = "El cliente " +this.nombre+" con DNI " +this.nif+ " y telefono " +this.telefono+" con la direccion "+this.direccion+" y email "+this.email+" y con un numero de tarjeta "+this.numeroTarjeta;
@@ -78,7 +79,7 @@ Proveedores.prototype.toString = function() {
 }
 
 //Clase Reservas
-function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones, sNifCliente) {
+function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones, sNifCliente, iParkingID) {
     this.id = iID;
     this.numPersonas= iNumPersonas;
     this.checkin = dCheckIn;
@@ -86,6 +87,7 @@ function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitacio
     this.precio = fPrecio;
     this.numHabitaciones = iNumHabitaciones;
     this.nifCliente = sNifCliente;
+    this.parkingID = iParkingID;
 }
 Reservas.prototype.toString = function() {
     let sMensaje = "ID: "+this.id+" Numero personas: "+this.numPersonas+" CheckIn: "+this.checkin+" CheckOut: "+this.checkout+" Precio: "+this.precio;
@@ -458,5 +460,28 @@ getArrayReservas(){
         }
 
         return aHabitaciones;
+    }
+
+    listadoParkDispPorFecha(dFechaEntrada, dFechaSalida) {
+        let aReserva = oUPOCampo.getArrayReservas();
+        let aParking = oUPOCampo.getArrayParking();
+
+        //alert(dFechaIni+" "+dFechaFin);
+
+        for (let i = 0; i < aParking.length; i++) {
+            for (let j = 0; j < aReserva.length; j++) {
+                if (aParking[i].id == aReserva[j].parkingID) {
+                    if ((aReserva[j].checkin > dFechaEntrada && aReserva[j].checkin <= dFechaSalida && aReserva[j].checkout >= dFechaSalida) || 
+                        (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaSalida) || 
+                        (aReserva[j].checkin <= dFechaEntrada && aReserva[j].checkout >= dFechaEntrada && aReserva[j].checkout < dFechaSalida) || 
+                        (aReserva[j].checkin > dFechaEntrada && aReserva[j].checkout < dFechaSalida)) {
+                        aParking.splice(i, 1);
+                        i--;
+                    }
+                }
+            }
+        }
+
+        return aParking;
     }
 }
