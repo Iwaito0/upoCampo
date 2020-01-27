@@ -60,6 +60,8 @@ menuModificarProveedor.addEventListener("click", mostrarModificarProveedor, fals
 
 /*--------------MENU LISTAR POR FILTRO--------------*/
 
+/*--------------POR FECHA--------------*/
+
 var menuListarCliRes = document.getElementById("listadoClientesPorFecha");
 menuListarCliRes.addEventListener("click", mostrarListadoCliRes, false);
 
@@ -71,6 +73,17 @@ menuListarHabDispFecha.addEventListener("click", mostrarListadoHabDisp, false);
 
 var menuListarParkDispFecha = document.getElementById("listadoParkDispFecha");
 menuListarParkDispFecha.addEventListener("click", mostrarListadoParkDisp, false);
+
+/*-------------POR RESERVA-------------*/
+
+var menuListarParkRes = document.getElementById("listadoParkingReserva");
+menuListarParkRes.addEventListener("click", mostrarListadoParkRes, false);
+
+var menuListarRegRes = document.getElementById("listadoRegimenReserva");
+menuListarRegRes.addEventListener("click", mostrarListadoRegRes, false);
+
+var menuListarActRes = document.getElementById("listadoActividadReserva");
+menuListarActRes.addEventListener("click", mostrarListadoActRes, false);
 
 /*------------SELECCIONAR ELEMENTOS MODIFICAR------------*/
 
@@ -85,7 +98,7 @@ seleccionarActividadesModificar.addEventListener("click", seleccionarActividades
 
 var seleccionarProveedorModificar = document.getElementById("btnSelecionarProveedor");
 seleccionarProveedorModificar.addEventListener("click", seleccionarProveedor, false);
-/*---------------MENULISTADOS GENERALES--------------------*/
+/*---------------MENU LISTADOS GENERALES--------------------*/
 var menuListadosActividades = document.getElementById("listadoActividades");
 menuListadosActividades.addEventListener("click", listadosActividades, false);
 
@@ -1083,12 +1096,12 @@ function listadosHabitaciones(){
     let arrayHabitaciones=oUPOCampo.getArrayHabitaciones();
 
     //Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tabla
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="Numero de habitacion";
 
     oCelda=oFila.insertCell(-1);
@@ -1128,12 +1141,12 @@ function listadosParking(){
     let arrayParking=oUPOCampo.getArrayParking();
     
     //Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tabla
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="Numero de parking";
     
     oCelda=oFila.insertCell(-1);
@@ -1172,12 +1185,12 @@ function listadosClientes(){
     let arrayClientes=oUPOCampo.getArrayClientes();
     
     //Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tablais
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="NIF";
     
     oCelda=oFila.insertCell(-1);
@@ -1229,12 +1242,12 @@ function listadosProveedores(){
     let arrayProveedor=oUPOCampo.getArrayProveedor();
     
     //Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tabla
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="CIF";
     
     oCelda=oFila.insertCell(-1);
@@ -1269,12 +1282,12 @@ function listadosActividades(){
     let arrayActividades=oUPOCampo.getArrayActividades();
     
     //Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tabla
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="ID";
     
     oCelda=oFila.insertCell(-1);
@@ -1309,12 +1322,12 @@ function listadosReservas(){
     let arrayReservas=oUPOCampo.getArrayReservas();
     
     //Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tabla
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="ID";
     
     oCelda=oFila.insertCell(-1);
@@ -1404,12 +1417,12 @@ function aceptarListadoCliRes() {
 	let aClientes = oUPOCampo.listadoClientePorFecha(dEntrada, dSalida);
 
 	//Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tablais
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="NIF";
     
     oCelda=oFila.insertCell(-1);
@@ -1475,12 +1488,12 @@ function aceptarListadoResFecha() {
 	let aReservas = oUPOCampo.listadoReservaPorFecha(dEntrada, dSalida);
 
 	//Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tabla
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="ID";
     
     oCelda=oFila.insertCell(-1);
@@ -1541,12 +1554,12 @@ function aceptarListadoHabDispFecha() {
 	let aHabitaciones = oUPOCampo.listadoHabDispPorFecha(dEntrada, dSalida);
 
 	//Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tabla
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="Numero de habitacion";
 
     oCelda=oFila.insertCell(-1);
@@ -1589,12 +1602,12 @@ function aceptarListadoParkDispFecha() {
     let aParking = oUPOCampo.listadoParkDispPorFecha(dEntrada, dSalida);
 
     //Creacion de la tabla
-    var oTabla=document.createElement("TABLE");
+    let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
     //El encabezado de la tabla
-    var oTHead=oTabla.createTHead();
-    var oFila=oTHead.insertRow(-1);
-    var oCelda=oFila.insertCell(-1);
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
     oCelda.textContent="Numero de parking";
     
     oCelda=oFila.insertCell(-1);
@@ -1629,6 +1642,129 @@ function aceptarListadoParkDispFecha() {
     pestana.document.body.append(oTabla);
     frmListadoParkDispFecha.reset();
 }
+
+//---------------LISTADO POR RESERVAS---------------
+
+function mostrarListadoParkRes(){
+    let pestana=window.open()
+    let aPark=oUPOCampo.listadoReservaParking();
+
+    
+    //Creacion de la tabla
+    let oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Numero de parking";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="precio";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Ancho especial";
+    
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+    
+    for(let i=0; i<aPark.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aPark[i].id;
+    
+         oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aPark[i].precio;
+        
+         oCelda = oFila.insertCell(-1);
+        if(aPark[i].anchoespecial==false){
+            oCelda.textContent = "No";
+        }
+        else{
+            oCelda.textContent = "Si";
+   
+        }
+    }
+
+    pestana.document.body.append(oTabla);
+}
+
+function mostrarListadoRegRes() {
+    let pestana=window.open();
+    let aRegimen = oUPOCampo.listadoReservaRegimenA();
+
+    //Creacion de la tabla
+    let oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
+    oCelda.textContent="ID";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Precio por persona";
+
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+
+    for(let i=0; i<aRegimen.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aRegimen[i].id;
+    
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aRegimen[i].precioPersona;
+        
+    }
+
+    pestana.document.body.append(oTabla);
+}
+
+function mostrarListadoActRes() {
+    let pestana=window.open()
+    let aActividades=oUPOCampo.listadoReservaActividades();
+    
+    //Creacion de la tabla
+    let oTabla=document.createElement("TABLE");
+    oTabla.setAttribute("border","1");
+    //El encabezado de la tabla
+    let oTHead=oTabla.createTHead();
+    let oFila=oTHead.insertRow(-1);
+    let oCelda=oFila.insertCell(-1);
+    oCelda.textContent="ID";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Nombre";
+    
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Precio";
+    
+    
+    //El cuerpo de la tabla
+    let oTBody = document.createElement("TBODY");
+    oTabla.appendChild(oTBody);
+    
+    for(let i=0; i<aActividades.length; i++){
+        let oFila = oTBody.insertRow(-1);
+    
+        let oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aActividades[i].id;
+    
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aActividades[i].nombre;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aActividades[i].precio;
+        
+    }
+    
+    pestana.document.body.append(oTabla);
+}
+
 //Mostrar Formularios
 
 //Mostrar formulario cliente(anadir los otros formularios mientras los vais creando)
