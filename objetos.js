@@ -175,7 +175,7 @@ class UpoCampo{
       this.habitaciones.push(oHabitacion);
     }
 
-    altaParking(oParking){get
+    altaParking(oParking){
         this.parking.push(oParking);
     }
 
@@ -183,9 +183,9 @@ class UpoCampo{
         this.regimenAlimentario.push(oRegimen);
     }
 
-    getArrayHabitaciones(){
-        return this.habitaciones;
-    }
+    // getArrayHabitaciones(){
+    //     return this.habitaciones;
+    // }
     getArrayHabitaciones(){
         let aHabitacion = [];
 

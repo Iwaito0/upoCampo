@@ -30,7 +30,6 @@ menuAltaProveedor.addEventListener("click", mostrarAltaProveedor, false);
 var menuAltaActividad = document.getElementById("altaActividad");
 menuAltaActividad.addEventListener("click", mostrarAltaActividad, false);
 
-
 /*---------------MENU BAJA-------------*/
 
 var menuBajaCliente = document.getElementById("bajaCliente");
@@ -44,7 +43,6 @@ menuBajaActividad.addEventListener("click", mostrarBajaActividad, false);
 
 var menuBajaProveedor = document.getElementById("bajaProveedor");
 menuBajaProveedor.addEventListener("click", mostrarBajaProveedor, false);
-
 
 /*---------------MENU MODIFICAR-------------*/
 
@@ -273,13 +271,10 @@ function recogerNumPer(){
 	mostrarHabitaciones();
 }
 
-
 function mostrarHabitaciones()  {
     document.getElementById("selectListaHab").length = 0;
     let aReserva = oUPOCampo.getArrayReservas();
     let aHabitaciones = oUPOCampo.getArrayHabitaciones();
-
-    //alert(dFechaIni+" "+dFechaFin);
 
     for (let i = 0; i < aHabitaciones.length; i++) {
         for (let j = 0; j < aReserva.length; j++) {
