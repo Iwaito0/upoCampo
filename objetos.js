@@ -79,7 +79,7 @@ Proveedores.prototype.toString = function() {
 }
 
 //Clase Reservas
-function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones, sNifCliente, iParkingID, iActividadID) {
+function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones, sNifCliente, iParkingID, iActividadID, iRegimenID) {
     this.id = iID;
     this.numPersonas= iNumPersonas;
     this.checkin = dCheckIn;
@@ -89,6 +89,7 @@ function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitacio
     this.nifCliente = sNifCliente;
     this.parkingID = iParkingID;
     this.actividadID = iActividadID;
+    this.regimenID = iRegimenID;
 }
 Reservas.prototype.toString = function() {
     let sMensaje = "ID: "+this.id+" Numero personas: "+this.numPersonas+" CheckIn: "+this.checkin+" CheckOut: "+this.checkout+" Precio: "+this.precio;
@@ -407,6 +408,16 @@ class UpoCampo{
         }
 
         return aProveedor; 
+    }
+
+    buscarRegimen() {
+        let aRegimen = [];
+
+        for (let i = 0; i < this.regimenAlimentario.length; i++) {
+            aRegimen.push(this.regimenAlimentario[i]);
+        }
+
+        return aRegimen;
     }
 
     listadoClientePorFecha(dFechaEntrada, dFechaSalida) {
