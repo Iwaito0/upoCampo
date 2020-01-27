@@ -53,14 +53,14 @@
             <li id="listadoClientesPorFecha"><a class="dropdown-item" href="#">Listado clientes por fecha</a></li>
             <li id="listadoReservasPorFecha"><a class="dropdown-item" href="#">Listado reserva por fecha</a></li>
             <li id="listadoHabDispFecha"><a class="dropdown-item" href="#">Listado de habitaciones disponibles por fecha</a></li>
-            <li><a class="dropdown-item" href="#">Listado de parking disponibles por fecha</a></li>
+            <li id="listadoParkDispFecha"><a class="dropdown-item" href="#">Listado de parking disponibles por fecha</a></li>
           </ul>
         </li>
         <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Listado por reservas</a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Listado reserva parking</a></li>
-            <li><a class="dropdown-item" href="#">Listado reserva regimen</a></li>
-            <li><a class="dropdown-item" href="#">Listado reserva actividades</a></li>
+            <li id="listadoParkingReserva"><a class="dropdown-item" href="#">Listado reserva parking</a></li>
+            <li id="listadoRegimenReserva"><a class="dropdown-item" href="#">Listado reserva regimen</a></li>
+            <li id="listadoActividadReserva"><a class="dropdown-item" href="#">Listado reserva actividades</a></li>
           </ul>
         </li>
       </ul>
@@ -162,6 +162,26 @@
         <label class="col-md-4 control-label" for="txtReservaCliente">NIF Cliente: </label>
         <div class="col-md-4">
           <input id="txtReservaClienteAlta" name="txtReservaClienteAlta" type="text" class="form-control input-md" required>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="txtReservaPark">Parking</label>
+        <div class="col-md-4">
+          <input id="siParking" name="estadoParking" type="radio" >Si
+          <input id="noParking" name="estadoParking" type="radio" checked>No
+        </div>
+        <div class="col-md-4">
+          <select name="selectListaParking" id="selectListaParking"></select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="txtReservaActividad">Actividades</label>
+        <div class="col-md-4">
+          <input id="siActividad" name="estadoActividad" type="radio" >Si
+          <input id="noActividad" name="estadoActividad" type="radio" checked>No
+        </div>
+        <div class="col-md-4">
+          <select name="selectListaActividad" id="selectListaActividad"></select>
         </div>
       </div>
       <div class="form-group">
@@ -539,6 +559,36 @@
     </fieldset>
   </form>
 
+  <!-- FORMULARIO LISTADO PARKING DISPONIBLES POR FECHA -->
+
+  <form class="form-horizontal" name="frmListadoParkDispFecha" id="frmListadoParkDispFecha">
+    <fieldset>
+      <legend>Listado de Parking Disponibles por fechas</legend>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="txtLisParkDispEntrada">Dia de entrada</label>
+        <div class="col-md-4">
+          <input id="txtEntradaParkDispFecha" name="txtEntradaParkDispFecha" type="date" placeholder="" class="form-control input-md" required="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="txtLisParkDispSalida">Dia de salida</label>
+        <div class="col-md-4">
+          <input id="txtSalidaParkDispFecha" name="txtSalidaParkDispFecha" type="date" placeholder="" class="form-control input-md" required="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="col-md-4 control-label" for="btnAceptar"></label>
+        <div class="col-md-4">
+          <input type="button" id="btnListarParkDispFecha" name="btnListarParkDispFecha" class="btn btn-primary" value="Listar" />
+        </div>
+      </div>
+    </fieldset>
+  </form>
+
+<!-- A partir de aqui no se puede contruir formularios-->
+<div id="listado">
+
+</div>
 <script type="text/javascript" src="objetos.js"></script>
 <script type="text/javascript" src="codigo.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
