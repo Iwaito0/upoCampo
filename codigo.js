@@ -121,6 +121,12 @@ estadoHabParking.addEventListener("click", habDesParking, false);
 var estadoDesParking = document.getElementById("noParking");
 estadoDesParking.addEventListener("click", habDesParking, false);
 
+var estadoHabActividad = document.getElementById("siActividad");
+estadoHabActividad.addEventListener("click", habDesActividad, false);
+
+var estadoDesActividad = document.getElementById("noActividad");
+estadoDesActividad.addEventListener("click", habDesActividad, false);
+
 /*--------------------------CANCELAR--------------------------*/
 
 var botonCancelarClienteMod = document.getElementById("btnCancelarModificarCliente");
@@ -272,12 +278,14 @@ function recogerFechaIni(){
 	dFechaIni = frmAltaReserva.txtEntradaAlta.value.trim();
 	mostrarHabitaciones();
     habDesParking();
+    habDesActividad();
 }
 
 function recogerFechaFin(){
 	dFechaFin = frmAltaReserva.txtSalidaAlta.value.trim();
 	mostrarHabitaciones();
     habDesParking();
+    habDesActividad();
 }
 
 function recogerNumPer(){
@@ -348,6 +356,35 @@ function mostrarParkingDisponibles() {
     }
 }
 
+function mostrarActividades() {
+    document.getElementById("selectListaActividad").length = 0;
+    let aReserva = oUPOCampo.getArrayReservas();
+    let aActividad = oUPOCampo.getArrayActividades();
+
+    for (let i = 0; i < aActividad.length; i++) {
+        for (let j = 0; j < aReserva.length; j++) {
+            if (aActividad[i].id == aReserva[j].parkingID) {
+                if ((aReserva[j].checkin > dFechaIni && aReserva[j].checkin <= dFechaFin && aReserva[j].checkout >= dFechaFin) || 
+                    (aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaFin) || 
+                    (aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaIni && aReserva[j].checkout < dFechaFin) || 
+                    (aReserva[j].checkin > dFechaIni && aReserva[j].checkout < dFechaFin)) {
+                    aActividad.splice(i, 1);
+                    i--;
+                }
+            }
+        }
+    }
+
+    for (let i = 0; i < aActividad.length; i++) {
+        let opc = document.createElement("option");
+        opc.setAttribute("value", aActividad[i].id);
+        let texto = document.createTextNode(aActividad[i].nombre);
+        opc.appendChild(texto);
+        document.getElementById("selectListaActividad").appendChild(opc);
+    }
+}
+
+
 function habDesParking() {
     
     let selectParking = document.getElementById("selectListaParking");
@@ -359,6 +396,19 @@ function habDesParking() {
     else {
         selectParking.length = 0;
         selectParking.style.display = "none";
+    }
+}
+
+function habDesActividad() {
+    let selectActividad = document.getElementById("selectListaActividad");
+
+    if (estadoHabActividad.checked) {
+        mostrarActividades();
+        selectActividad.style.display = "block";
+    }
+    else {
+        selectActividad.length = 0;
+        selectActividad.style.display = "none";
     }
 }
 
@@ -374,9 +424,14 @@ function aceptarAltaReserva(){
     let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
     let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
     let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
+    let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
 
     if (isNaN(iParkingID)) {
         iParkingID = 0;
+    }
+
+    if(isNaN(iActividadID)){
+        iActividadID = 0;
     }
 
     if(!/^\d+$/.test(iID)){
@@ -403,12 +458,13 @@ function aceptarAltaReserva(){
 
     if(sMensaje==""){
     // Creamos el objeto reserva
-    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID);
+    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID);
     // Alta de reserva en UPOCAMPO
     let sMensaje = oUPOCampo.altaReserva(oReserva);
     alert(sMensaje);
     frmAltaReserva.reset();
-    habDesParking();    
+    habDesParking();
+    habDesActividad();    
     }
     else{
         alert(sMensaje);
@@ -1267,6 +1323,9 @@ function listadosReservas(){
     oCelda=oFila.insertCell(-1);
     oCelda.textContent="Parking";
     
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Actividad";
+
     //El cuerpo de la tabla
     let oTBody = document.createElement("TBODY");
     oTabla.appendChild(oTBody);
@@ -1301,6 +1360,14 @@ function listadosReservas(){
         }
         else {
             oCelda.textContent = arrayReservas[i].parkingID;
+        }
+
+        oCelda = oFila.insertCell(-1);
+        if (arrayReservas[i].actividadID == 0) {
+            oCelda.textContent = "NO";
+        }
+        else {
+            oCelda.textContent = arrayReservas[i].actividadID;
         }
     }
     
@@ -1554,6 +1621,7 @@ function mostrarAltaReserva() {
 	frmAltaReserva.style.display = "block";
     mostrarHabitaciones();
     habDesParking();
+    habDesActividad();
 }
 
 function mostrarAltaProveedor() {
