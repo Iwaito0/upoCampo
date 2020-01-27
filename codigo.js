@@ -1603,7 +1603,7 @@ function datosRegimen() {
 
 function datosCliente() {
     oUPOCampo.altaCliente(new Cliente("25518526A", "Sofia", 34652753182, "Plaza roma s/n 13 2C", "sofialadivina@gmail.com", 4125825674593258));
-    oUPOCampo.altaCliente(new Cliente("6298+369F", "Pedro", 34625635851, "Calle paraiso n5     ", "pedroelcrak@gmail.com  ", 4348521495426582));
+    oUPOCampo.altaCliente(new Cliente("30452198R", "Pedro", 34625635851, "Calle paraiso n5", "pedroelcrak@gmail.com  ", 4348521495426582));
     oUPOCampo.altaCliente(new Cliente("51483972H", "Raul ", 34785215953, "Av montequinto n5 ", "raulinformatico@gmail.com", 4654853696265553));
     oUPOCampo.altaCliente(new Cliente("25584568J", "Sara ", 34652983541, "plaza de parma 19 4A", "sara089@gmail.com", 4253852495328512));
     oUPOCampo.altaCliente(new Cliente("28569535T", "Paula", 34685257548, "Avenida alegria n3", "paula1999@hotmail.es",4582468528569514));

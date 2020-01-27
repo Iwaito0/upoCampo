@@ -175,7 +175,7 @@ class UpoCampo{
       this.habitaciones.push(oHabitacion);
     }
 
-    altaParking(oParking){
+    altaParking(oParking){get
         this.parking.push(oParking);
     }
 
@@ -186,30 +186,30 @@ class UpoCampo{
     getArrayHabitaciones(){
         return this.habitaciones;
     }
-getArrayHabitaciones(){
-    let aHabitacion = [];
+    getArrayHabitaciones(){
+        let aHabitacion = [];
 
-    for (let i = 0; i < this.habitaciones.length; i++) {
-        aHabitacion.push(this.habitaciones[i]);
+        for (let i = 0; i < this.habitaciones.length; i++) {
+            aHabitacion.push(this.habitaciones[i]);
+        }
+
+        return aHabitacion;
     }
-
-    return aHabitacion;
-}
-getArrayParking(){
-    return this.parking;
-}
-getArrayClientes(){
-    return this.clientes;
-}
-getArrayProveedor(){
-    return this.proveedores;
-}
-getArrayActividades(){
-    return this.actividades;
-}
-getArrayReservas(){
-    return this.reservas;
-}
+    getArrayParking(){
+        return this.parking;
+    }
+    getArrayClientes(){
+        return this.clientes;
+    }
+    getArrayProveedor(){
+        return this.proveedores;
+    }
+    getArrayActividades(){
+        return this.actividades;
+    }
+    getArrayReservas(){
+        return this.reservas;
+    }
 
 
     bajaCliente(sNif){
