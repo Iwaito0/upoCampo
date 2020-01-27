@@ -79,7 +79,7 @@ Proveedores.prototype.toString = function() {
 }
 
 //Clase Reservas
-function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones, sNifCliente, iParkingID) {
+function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones, sNifCliente, iParkingID, iActividadID) {
     this.id = iID;
     this.numPersonas= iNumPersonas;
     this.checkin = dCheckIn;
@@ -88,6 +88,7 @@ function Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitacio
     this.numHabitaciones = iNumHabitaciones;
     this.nifCliente = sNifCliente;
     this.parkingID = iParkingID;
+    this.actividadID = iActividadID;
 }
 Reservas.prototype.toString = function() {
     let sMensaje = "ID: "+this.id+" Numero personas: "+this.numPersonas+" CheckIn: "+this.checkin+" CheckOut: "+this.checkout+" Precio: "+this.precio;
@@ -211,7 +212,13 @@ class UpoCampo{
         return this.proveedores;
     }
     getArrayActividades(){
-        return this.actividades;
+        let aActividad = [];
+
+        for (let i = 0; i < this.actividades.length;i++) {
+            aActividad.push(this.actividades[i]);
+        }
+
+        return aActividad;
     }
     getArrayReservas(){
         return this.reservas;
@@ -490,7 +497,7 @@ class UpoCampo{
                 }
             }
         }
-        alert(JSON.stringify(aParkings));
+        //alert(JSON.stringify(aParkings));
 
         return aParkings;
     }
