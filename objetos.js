@@ -508,8 +508,55 @@ class UpoCampo{
                 }
             }
         }
-        //alert(JSON.stringify(aParkings));
 
         return aParkings;
+    }
+
+    listadoReservaParking(){
+        let aReserva = oUPOCampo.getArrayReservas();
+        let aParkings = oUPOCampo.getArrayParking();
+        let aParkRes = [];
+
+        for (let i = 0; i < aParkings.length; i++) {
+            for (let j = 0; j < aReserva.length; j++) {
+                if (aParkings[i].id == aReserva[j].parkingID) {
+                     aParkRes.push(aParkings[i]);
+                }
+            }
+        }
+
+        return aParkRes;
+    }
+
+    listadoReservaRegimenA() {
+        let aReserva = oUPOCampo.getArrayReservas();
+        let aRegimen = oUPOCampo.buscarRegimen();
+        let aRegRes = [];
+
+        for (let i = 0; i < aRegimen.length; i++) {
+            for (let j = 0; j < aReserva.length; j++) {
+                if (aRegimen[i].id == aReserva[j].regimenID) {
+                     aRegRes.push(aRegimen[i]);
+                }
+            }
+        }
+        
+        return aRegRes;
+    }
+
+    listadoReservaActividades() {
+        let aReserva = oUPOCampo.getArrayReservas();
+        let aActividad = oUPOCampo.getArrayActividades();
+        let aActRes = [];
+
+        for (let i = 0; i < aActividad.length; i++) {
+            for (let j = 0; j < aReserva.length; j++) {
+                if (aActividad[i].id == aReserva[j].actividadID) {
+                     aActRes.push(aActividad[i]);
+                }
+            }
+        }
+        
+        return aActRes;
     }
 }
