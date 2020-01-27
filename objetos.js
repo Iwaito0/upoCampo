@@ -185,39 +185,37 @@ class UpoCampo{
         this.regimenAlimentario.push(oRegimen);
     }
 
+
     getArrayHabitaciones(){
-        return this.habitaciones;
+        let aHabitacion = [];
+
+        for (let i = 0; i < this.habitaciones.length; i++) {
+            aHabitacion.push(this.habitaciones[i]);
+        }
+
+        return aHabitacion;
     }
-getArrayHabitaciones(){
-    let aHabitacion = [];
+    getArrayParking(){
+        let aParking = [];
 
-    for (let i = 0; i < this.habitaciones.length; i++) {
-        aHabitacion.push(this.habitaciones[i]);
+        for (let i = 0; i < this.parking.length;i++) {
+            aParking.push(this.parking[i]);
+        }
+
+        return aParking;
     }
-
-    return aHabitacion;
-}
-getArrayParking(){
-    let aParking = [];
-
-    for (let i = 0; i < this.parking.length;i++) {
-        aParking.push(this.parking[i]);
+    getArrayClientes(){
+        return this.clientes;
     }
-
-    return aParking;
-}
-getArrayClientes(){
-    return this.clientes;
-}
-getArrayProveedor(){
-    return this.proveedores;
-}
-getArrayActividades(){
-    return this.actividades;
-}
-getArrayReservas(){
-    return this.reservas;
-}
+    getArrayProveedor(){
+        return this.proveedores;
+    }
+    getArrayActividades(){
+        return this.actividades;
+    }
+    getArrayReservas(){
+        return this.reservas;
+    }
 
 
     bajaCliente(sNif){
