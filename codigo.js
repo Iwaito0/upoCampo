@@ -363,7 +363,7 @@ function mostrarActividades() {
 
     for (let i = 0; i < aActividad.length; i++) {
         for (let j = 0; j < aReserva.length; j++) {
-            if (aActividad[i].id == aReserva[j].parkingID) {
+            if (aActividad[i].id == aReserva[j].actividadID) {
                 if ((aReserva[j].checkin > dFechaIni && aReserva[j].checkin <= dFechaFin && aReserva[j].checkout >= dFechaFin) || 
                     (aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaFin) || 
                     (aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaIni && aReserva[j].checkout < dFechaFin) || 
@@ -381,6 +381,19 @@ function mostrarActividades() {
         let texto = document.createTextNode(aActividad[i].nombre);
         opc.appendChild(texto);
         document.getElementById("selectListaActividad").appendChild(opc);
+    }
+}
+
+function mostrarRegimenes() {
+    document.getElementById("selectListaReg").length = 0;
+    let aRegimen = oUPOCampo.buscarRegimen();
+
+    for (let i = 0; i < aRegimen.length; i++) {
+        let opc = document.createElement("option");
+        opc.setAttribute("value", aRegimen[i].id);
+        let texto = document.createTextNode(aRegimen[i].id);
+        opc.appendChild(texto);
+        document.getElementById("selectListaReg").appendChild(opc);
     }
 }
 
@@ -425,6 +438,7 @@ function aceptarAltaReserva(){
     let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
     let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
     let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
+    let iRegimenID = parseInt(frmAltaReserva.selectListaReg.value.trim());
 
     if (isNaN(iParkingID)) {
         iParkingID = 0;
@@ -458,13 +472,14 @@ function aceptarAltaReserva(){
 
     if(sMensaje==""){
     // Creamos el objeto reserva
-    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID);
+    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID, iRegimenID);
     // Alta de reserva en UPOCAMPO
     let sMensaje = oUPOCampo.altaReserva(oReserva);
     alert(sMensaje);
     frmAltaReserva.reset();
     habDesParking();
-    habDesActividad();    
+    habDesActividad();
+    mostrarRegimenes();    
     }
     else{
         alert(sMensaje);
@@ -1326,6 +1341,9 @@ function listadosReservas(){
     oCelda=oFila.insertCell(-1);
     oCelda.textContent="Actividad";
 
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Regimen";
+
     //El cuerpo de la tabla
     let oTBody = document.createElement("TBODY");
     oTabla.appendChild(oTBody);
@@ -1369,6 +1387,9 @@ function listadosReservas(){
         else {
             oCelda.textContent = arrayReservas[i].actividadID;
         }
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = arrayReservas[i].regimenID;
     }
     
     pestana.document.body.append(oTabla);
@@ -1622,6 +1643,7 @@ function mostrarAltaReserva() {
     mostrarHabitaciones();
     habDesParking();
     habDesActividad();
+    mostrarRegimenes();
 }
 
 function mostrarAltaProveedor() {
