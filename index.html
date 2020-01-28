@@ -1,18 +1,26 @@
 <!DOCtype html>
 <html lang="es">
-
 <head>
   <title>UPOCampo - Menú Principal</title>
   <meta charset="utf-8">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="icon" href="./img/favicon.png" type="image/png">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
-
 <!-- Menú donde van a ir cada uno de los botones para acceder a las Altas, Modificaciones, Bajas y Listados -->
-  <ul class="nav nav-var bg-dark ">
-    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Altas</a>
+  <div class="jumbotron">
+    <div class="jumboIzq col-5 col-sm-7 col-md-8 col-xl-10">
+      <h2>UPOCampo</h2>
+      <p class="lead">Gestión de alojamientos turísticos rurales</p>
+    </div>
+    <img src="./img/logoCamping.png">
+  </div>
+
+
+  <div id="menuPrincipal">
+    <ul class="nav nav-var">
+    <li class="nav-item dropdown mx-auto"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Altas</a>
       <ul class="dropdown-menu">
         <li id="altaCliente"><a class="dropdown-item" href="#">Alta cliente</a></li>
         <li id="altaReserva"><a class="dropdown-item" href="#">Alta reserva</a></li>
@@ -20,7 +28,7 @@
         <li id="altaProveedor"><a class="dropdown-item" href="#">Alta proveedor</a></li>
       </ul>
     </li>
-    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Modificar</a>
+    <li class="nav-item dropdown mx-auto"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Modificar</a>
       <ul class="dropdown-menu">
         <li id="modificarCliente"><a class="dropdown-item" href="#">Modificar cliente</a></li>
         <li id="modificarReserva"><a class="dropdown-item" href="#">Modificar reserva</a></li>
@@ -28,7 +36,7 @@
         <li id="modificarProveedor"><a class="dropdown-item" href="#">Modificar proveedor</a></li>
       </ul>
     </li>
-    <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Bajas</a>
+    <li class="nav-item dropdown mx-auto"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Bajas</a>
       <ul class="dropdown-menu">
         <li id="bajaProveedor"><a class="dropdown-item" href="#">Borrar proveedores</a></li>
         <li id="bajaActividad"><a class="dropdown-item" href="#">Borrar actividades</a></li>
@@ -36,7 +44,7 @@
         <li id="bajaReserva"><a class="dropdown-item" href="#">Borrar reservas</a></li>
       </ul>
     </li>
-    <li class="nav-item dropdown bg-dark"><a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">Listado</a>
+    <li class="nav-item dropdown mx-auto"><a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" href="#">Listado</a>
       <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Listados general</a>
           <ul class="dropdown-menu">
@@ -66,54 +74,40 @@
       </ul>
     </li>
   </ul>
-  <br>
-  <br>
    <!--A partir de aqui se construye los formularios. Los formularios no estan disponible por defecto 
      por una regla Style-->
   <!--AltaCliente-->
   <form class="form-horizontal" name="frmAltaCliente" id="frmAltaCliente">
     <fieldset>
       <legend>Alta de cliente</legend>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNif">DNI</label>
-        <div class="col-md-4">
-          <input id="txtNifAlta" name="txtNif" type="text"class="form-control input-md" required>
+      <div class="form-group ro6">
+        <label class="col-1 control-label" for="txtNif">DNI</label>
+        <div class="col-10 col-md-6">
+          <input id="txtNifAlta" name="txtNif" type="text"class="form-control input" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNombre">Nombre</label>
-        <div class="col-md-4">
-          <input id="txtNombreClienteAlta" name="txtNombre" type="text" class="form-control input-md" required>
+        <label class="col-1 control-label" for="txtNombre">Nombre</label>
+        <div class="col-10 col-md-6">
+          <input id="txtNombreClienteAlta" name="txtNombre" type="text" class="form-control input" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtTelefono">Telefono</label>
-        <div class="col-md-4">
-          <input id="txtTelefonoClienteAlta" name="txtTelefono" type="text"class="form-control input-md">
+        <label class="col-1 control-label" for="txtTelefono">Telefono</label>
+        <div class="col-10 col-md-6">
+          <input id="txtTelefonoClienteAlta" name="txtTelefono" type="text"class="form-control input">
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtDireccion">Direccion</label>
-        <div class="col-md-4">
-          <input id="txtDireccionAlta" name="txtDireccion" type="text" class="form-control input-md" required>
+        <label class="col-1 control-label" for="txtDireccion">Direccion</label>
+        <div class="col-10 col-md-6">
+          <input id="txtDireccionAlta" name="txtDireccion" type="text" class="form-control input" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtEmail">Email</label>
-        <div class="col-md-4">
-          <input id="txtEmailAlta" name="txtEmail" type="text" class="form-control input-md" required>
+        <label class="col-1 control-label" for="txtEmail">Email</label>
+        <div class="col-10 col-md-6">
+          <input id="txtEmailAlta" name="txtEmail" type="text" class="form-control input" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNTarjeta">Numero Tarjeta</label>
-        <div class="col-md-4">
-          <input id="txtNTarjetaAlta" name="txtNTarjeta" type="text" class="form-control input-md" required>
+        <label class="col-9 control-label" for="txtNTarjeta">Numero Tarjeta</label>
+        <div class="col-10 col-md-6">
+          <input id="txtNTarjetaAlta" name="txtNTarjeta" type="text" class="form-control input" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarAltaCliente" name="btnAceptarAltaCliente" class="btn btn-primary" value="Alta">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-10 col-md-6">
+          <input type="button" id="btnAceptarAltaCliente" name="btnAceptarAltaCliente" class="btn btn-success col-12" value="Alta">
         </div>
       </div>
     </fieldset>
@@ -123,77 +117,53 @@
     <fieldset>
       <legend>Alta de reservas</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtId">ID</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtId">ID</label>
+        <div class="col-10 col-md-6">
           <input id="txtIdAlta" name="txtIdAlta" type="text" class="form-control input-md" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNum">Numero de personas</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtNum">Numero de personas</label>
+        <div class="col-10 col-md-6">
           <input id="txtNumAlta" name="txtNum" type="number" min="0" max="6" class="form-control input-md" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtEntrada">Dia de entrada</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtEntrada">Dia de entrada</label>
+        <div class="col-10 col-md-6">
             <input id="txtEntradaAlta" name="txtEntrada" type="date" class="form-control input-md" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtSalida">Dia de salida</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtSalida">Dia de salida</label>
+        <div class="col-10 col-md-6">
             <input id="txtSalidaAlta" name="txtSalida" type="date" class="form-control input-md" required>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtPrecio">Precio</label>
-        <div class="col-md-4">
-          <input id="txtPrecioAlta" name="txtPrecio" type="text" class="form-control input-md" required>
-        </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtListaHab">Numero de habitacion: </label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtListaHab">Numero de habitacion: </label>
+        <div class="col-10 col-md-6">
           <select name="selectListaHab" id="selectListaHab"></select>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtReservaCliente">NIF Cliente: </label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtReservaCliente">NIF Cliente: </label>
+        <div class="col-10 col-md-6">
           <input id="txtReservaClienteAlta" name="txtReservaClienteAlta" type="text" class="form-control input-md" required>
         </div>
-      </div>
-      <div class="form-group">
         <label class="col-md-4 control-label" for="txtListaReg">Regimen alimentario</label>
         <div class="col-md-4">
           <select name="selectListaReg" id="selectListaReg"></select>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtReservaPark">Parking</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtReservaPark">Parking</label>
+        <div class="col-10 col-md-12">
           <input id="siParking" name="estadoParking" type="radio" >Si
           <input id="noParking" name="estadoParking" type="radio" checked>No
         </div>
-        <div class="col-md-4">
+        <div class="col-10 col-md-6">
           <select name="selectListaParking" id="selectListaParking"></select>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="txtReservaActividad">Actividades</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtReservaActividad">Actividades</label>
+        <div class="col-10 col-md-12">
           <input id="siActividad" name="estadoActividad" type="radio" >Si
           <input id="noActividad" name="estadoActividad" type="radio" checked>No
         </div>
-        <div class="col-md-4">
-          <select name="selectListaActividad" id="selectListaActividad"></select>
+        <div class="col-10 col-md-6">
+          <select name="selectListaActividad" id="selectListaActividad" multiple></select>
         </div>
-      </div>
-      <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarAltaReserva" name="btnAceptarAltaReserva" class="btn btn-primary" value="Alta">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-12 col-md-6">
+          <input type="button" id="btnAceptarAltaReserva" name="btnAceptarAltaReserva" class="btn btn-success col-12" value="Alta">
         </div>
       </div>
     </fieldset>
@@ -203,27 +173,27 @@
     <fieldset>
       <legend>Alta de proveedores</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtCif">CIF</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtCif">CIF</label>
+        <div class="col-10 col-md-6">
           <input id="txtCifAlta" name="txtCif" type="text" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNombre">Nombre</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtNombre">Nombre</label>
+        <div class="col-10 col-md-6">
           <input id="txtNombreProveedorAlta" name="txtNombre" type="text" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtTelefono">Telefono</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtTelefono">Telefono</label>
+        <div class="col-10 col-md-6">
           <input id="txtTelefonoProveedorAlta" name="txtTelefono" type="text" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarAltaProveedor" name="btnAceptarAltaProveedor" class="btn btn-primary" value="Alta">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-12 col-md-6">
+          <input type="button" id="btnAceptarAltaProveedor" name="btnAceptarAltaProveedor" class="btn btn-success col-12" value="Alta">
         </div>
       </div>
     </fieldset>
@@ -233,27 +203,27 @@
     <fieldset>
       <legend>Alta de actividades</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtID">ID</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtID">ID</label>
+        <div class="col-10 col-md-6">
           <input id="txtID" name="txtID" type="txtID" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNombre">Nombre</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtNombre">Nombre</label>
+        <div class="col-10 col-md-6">
           <input id="txtNombreClienteAlta" name="txtNombre" type="text" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtPrecio">Precio</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtPrecio">Precio</label>
+        <div class="col-10 col-md-6">
           <input id="txtPrecioAltaActividades" name="txtPrecioAltaActividades" type="text" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarAltaActividades" name="btnAceptarAltaActividades" class="btn btn-primary" value="Alta">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-1 col-md-6">
+          <input type="button" id="btnAceptarAltaActividades" name="btnAceptarAltaActividades" class="btn btn-success col-12" value="Alta">
         </div>
       </div>
     </fieldset>
@@ -263,48 +233,48 @@
     <fieldset>
       <legend>Modificar cliente</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNif">DNI</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtNif">DNI</label>
+        <div class="col-10 col-md-6">
           <input id="txtNifModificar" name="txtNif" type="text" class="form-control input-md" required>
           <br>
           <input type="button" id="btnSeleccionarCliente" name="btnSeleccionarCliente" class="btn btn-primary" value="Seleccionar">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNombre">Nombre</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtNombre">Nombre</label>
+        <div class="col-10 col-md-6">
           <input id="txtNombreClienteModificar" name="txtNombre" type="text"  class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtTelefono">Telefono</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtTelefono">Telefono</label>
+        <div class="col-10 col-md-6">
           <input id="txtTelefonoClienteModificar" name="txtTelefono" type="text" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtDireccion">Direccion</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtDireccion">Direccion</label>
+        <div class="col-10 col-md-6">
           <input id="txtDireccionModificar" name="txtDireccion" type="text" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtEmail">Email</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtEmail">Email</label>
+        <div class="col-10 col-md-6">
           <input id="txtEmailModificar" name="txtEmail" type="text" class="form-control input-md" required disabled>
         </div>
       </div>
     <div class="form-group">
-      <label class="col-md-4 control-label" for="txtNTarjeta">Numero Tarjeta</label>
-      <div class="col-md-4">
+      <label class="col-4 control-label" for="txtNTarjeta">Número de tarjeta</label>
+      <div class="col-10 col-md-6">
         <input id="txtNTarjetaModificar" name="txtNTarjeta" type="text" class="form-control input-md" required disabled>
       </div>
     </div>
     <div class="form-group">
-      <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarModificarCliente" name="btnAceptarModificarCliente" class="btn btn-primary" value="Modificar" disabled>
-          <input type="button" id="btnCancelarModificarCliente" name="btnCancelarModificarCliente" class="btn btn-secondary" value="Cancelar" disabled>
+      <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-1 col-md-6">
+          <input type="button" id="btnAceptarModificarCliente" name="btnAceptarModificarCliente" class="btn btn-info col-7" value="Modificar" disabled>
+          <input type="button" id="btnCancelarModificarCliente" name="btnCancelarModificarCliente" class="btn btn-secondary col-4" value="Cancelar" disabled>
         </div>
     </div>
   </fieldset>
@@ -314,42 +284,42 @@
     <fieldset>
       <legend>Modificar reservas</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtId">ID</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtId">ID</label>
+        <div class="col-10 col-md-6">
           <input id="txtIdModificar" name="txtId" type="text" class="form-control input-md" required>
           <br>
           <input type="button" id="btnSeleccionarReserva" name="btnSeleccionarReserva" class="btn btn-primary" value="Seleccionar">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNum">Numero de personas</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtNum">Numero de personas</label>
+        <div class="col-10 col-md-6">
           <input id="txtNumModificar" name="txtNum" type="number" min="0" max="4" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtEntrada">Dia de entrada</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtEntrada">Dia de entrada</label>
+        <div class="col-10 col-md-6">
           <input id="txtEntradaModificar" name="txtEntrada" type="date" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtSalida">Dia de salida</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtSalida">Dia de salida</label>
+        <div class="col-10 col-md-6">
           <input id="txtSalidaModificar" name="txtSalida" type="date" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtPrecio">Precio</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtPrecio">Precio</label>
+        <div class="col-10 col-md-6">
           <input id="txtPrecioModificar" name="txtPrecio" type="text" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarModificarReserva" name="btnAceptarModificarReserva" class="btn btn-primary" value="Modificar" disabled/>
-          <input type="button" id="btnCancelarModificarReserva" name="btnCancelarModificarReserva" class="btn btn-secondary" value="Cancelar" disabled/>
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-10 col-md-6">
+          <input type="button" id="btnAceptarModificarReserva" name="btnAceptarModificarReserva" class="btn btn-info col-7" value="Modificar" disabled/>
+          <input type="button" id="btnCancelarModificarReserva" name="btnCancelarModificarReserva" class="btn btn-secondary col-4" value="Cancelar" disabled/>
         </div>
       </div>
     </fieldset>
@@ -359,30 +329,30 @@
     <fieldset>
       <legend>Modificacion de actividades</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtID">ID</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtID">ID</label>
+        <div class="col-10 col-md-6">
           <input id="txtIDModificarActividades" name="txtID" type="txtID"  class="form-control input-md" required>
           <br>
           <input type="button" id="btnSeleccionarActividades" name="btnSeleccionarActividades" class="btn btn-primary" value="Seleccionar">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNombre">Nombre</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtNombre">Nombre</label>
+        <div class="col-10 col-md-6">
           <input id="txtNombreActividadModifica" name="txtNombre" type="text" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtPrecio">Precio</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtPrecio">Precio</label>
+        <div class="col-10 col-md-6">
           <input id="txtPrecioModificaActividades" name="txtPrecioModificaActividades" type="text" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarModificarActividades" name="btnAceptarModificarActividades" class="btn btn-primary" value="Modificar" disabled>
-          <input type="button" id="btnACancelarModificarActividades" name="btnACancelarModificarActividades" class="btn btn-primary" value="Cancelar" disabled>
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-10 col-md-6">
+          <input type="button" id="btnAceptarModificarActividades" name="btnAceptarModificarActividades" class="btn btn-info col-7" value="Modificar" disabled>
+          <input type="button" id="btnACancelarModificarActividades" name="btnACancelarModificarActividades" class="btn btn-secondary col-4" value="Cancelar" disabled>
         </div>
       </div>
     </fieldset>
@@ -392,30 +362,30 @@
     <fieldset>
       <legend>Modificacion de proveedores</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtCif">CIF</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtCif">CIF</label>
+        <div class="col-10 col-md-6">
           <input id="txtCifModifica" name="txtCif" type="text" class="form-control input-md" required>
           <br>
           <input type="button" id="btnSelecionarProveedor" name="btnSelecionarProveedor" class="btn btn-primary" value="Selecionar">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtNombre">Nombre</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtNombre">Nombre</label>
+        <div class="col-10 col-md-6">
           <input id="txtNombreProveedorModifica" name="txtNombre" type="text" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtTelefono">Telefono</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtTelefono">Telefono</label>
+        <div class="col-10 col-md-6">
           <input id="txtTelefonoProveedorModifica" name="txtTelefono" type="text" class="form-control input-md" required disabled>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnModificarProveedor" name="btnModificarProveedor" class="btn btn-primary" value="Modificar" disabled>
-          <input type="button" id="btnCancelarProveedor" name="btnCancelarProveedor" class="btn btn-primary" value="Cancelar" disabled>               
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-10 col-md-6">
+          <input type="button" id="btnModificarProveedor" name="btnModificarProveedor" class="btn btn-info col-7" value="Modificar" disabled>
+          <input type="button" id="btnCancelarProveedor" name="btnCancelarProveedor" class="btn btn-secondary col-4" value="Cancelar" disabled>               
         </div>
       </div>
     </fieldset>
@@ -425,15 +395,15 @@
     <fieldset>
       <legend>Baja de clientes</legend>
         <div class="form-group">
-          <label class="col-md-4 control-label" for="txtNif">DNI</label>
-          <div class="col-md-4">
+          <label class="col-1 control-label" for="txtNif">DNI</label>
+          <div class="col-10 col-md-6">
             <input id="txtNifBaja" name="txtNif" type="text" class="form-control input-md" required>
           </div>
         </div>
         <div class="form-group">
-          <label class="col-md-4 control-label" for="btnAceptar"></label>
-          <div class="col-md-4">
-            <input type="button" id="btnAceptarBajaCliente" name="btnAceptarBajaCliente" class="btn btn-primary" value="Baja">
+          <label class="col-1 control-label" for="btnAceptar"></label>
+          <div class="col-1 col-md-6">
+            <input type="button" id="btnAceptarBajaCliente" name="btnAceptarBajaCliente" class="btn btn-danger col-12" value="Baja">
           </div>
         </div>
     </fieldset>
@@ -443,15 +413,15 @@
     <fieldset>
       <legend>Baja de reservas</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtId">ID</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtId">ID</label>
+        <div class="col-10 col-md-6">
           <input id="txtIdBaja" name="txtId" type="text" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarBajaReserva" name="btnAceptarBajaReserva" class="btn btn-primary" value="Baja">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-1 col-md-6">
+          <input type="button" id="btnAceptarBajaReserva" name="btnAceptarBajaReserva" class="btn btn-danger col-12" value="Baja">
         </div>
       </div>
     </fieldset>
@@ -461,15 +431,15 @@
     <fieldset>
       <legend>Baja de actividad</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtId">ID</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtId">ID</label>
+        <div class="col-10 col-md-6">
           <input id="txtIdBaja" name="txtId" type="text" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarBajaActividad" name="btnAceptarBajaActividad" class="btn btn-primary" value="Baja">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-1 col-md-6">
+          <input type="button" id="btnAceptarBajaActividad" name="btnAceptarBajaActividad" class="btn btn-danger col-12" value="Baja">
         </div>
       </div>
     </fieldset>
@@ -479,15 +449,15 @@
     <fieldset>
       <legend>Baja de proveedor</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtId">CIF</label>
-        <div class="col-md-4">
+        <label class="col-1 control-label" for="txtId">CIF</label>
+        <div class="col-10 col-md-6">
           <input id="txtIdBaja" name="txtId" type="text" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnAceptarBajaProveedor" name="btnAceptarBajaProveedor" class="btn btn-primary" value="Baja">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-1 col-md-6">
+          <input type="button" id="btnAceptarBajaProveedor" name="btnAceptarBajaProveedor" class="btn btn-danger col-12" value="Baja">
         </div>
       </div>
     </fieldset>
@@ -495,23 +465,23 @@
   <!-- FORMULARIO LISTADO CLIENTES POR FECHA -->
   <form class="form-horizontal" name="frmListadoCliResFecha" id="frmListadoCliResFecha">
     <fieldset>
-      <legend>Listado de Clientes reservados por fechas</legend>
+      <legend>Listado de Clientes según fechas</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtLisCliEntrada">Dia de entrada</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtLisCliEntrada">Dia de entrada</label>
+        <div class="col-10 col-md-6">
           <input id="txtEntradaCliRes" name="txtEntradaCliRes" type="date" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtLisCliSalida">Dia de salida</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtLisCliSalida">Dia de salida</label>
+        <div class="col-10 col-md-6">
           <input id="txtSalidaCliRes" name="txtSalidaCliRes" type="date" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnListarCliRes" name="btnListarCliRes" class="btn btn-primary" value="Listar">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-1 col-md-6">
+          <input type="button" id="btnListarCliRes" name="btnListarCliRes" class="btn btn-primary col-12" value="Listar">
         </div>
       </div>
     </fieldset>
@@ -521,21 +491,21 @@
     <fieldset>
       <legend>Listado de Reservas por fechas</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtLisResEntrada">Dia de entrada</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtLisResEntrada">Dia de entrada</label>
+        <div class="col-10 col-md-6">
           <input id="txtEntradaResFecha" name="txtEntradaResFecha" type="date" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtLisResSalida">Dia de salida</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtLisResSalida">Dia de salida</label>
+        <div class="col-10 col-md-6">
           <input id="txtSalidaResFecha" name="txtSalidaResFecha" type="date" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnListarResFecha" name="btnListarResFecha" class="btn btn-primary" value="Listar">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-1 col-md-6">
+          <input type="button" id="btnListarResFecha" name="btnListarResFecha" class="btn btn-primary col-12" value="Listar">
         </div>
       </div>
     </fieldset>
@@ -543,23 +513,23 @@
   <!-- FORMULARIO LISTADO HABITACIONES DISPONIBLES POR FECHA -->
   <form class="form-horizontal" name="frmListadoHabDispFecha" id="frmListadoHabDispFecha">
     <fieldset>
-      <legend>Listado de Habitaciones Disponibles por fechas</legend>
+      <legend>Listado de Habitaciones Disponibles según fechas</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtLisHabDispEntrada">Dia de entrada</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtLisHabDispEntrada">Dia de entrada</label>
+        <div class="col-10 col-md-6">
           <input id="txtEntradaHabDispFecha" name="txtEntradaHabDispFecha" type="date" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtLisHabDispSalida">Dia de salida</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtLisHabDispSalida">Dia de salida</label>
+        <div class="col-10 col-md-6">
           <input id="txtSalidaHabDispFecha" name="txtSalidaHabDispFecha" type="date" class="form-control input-md" required>
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnListarHabDispFecha" name="btnListarHabDispFecha" class="btn btn-primary" value="Listar">
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-1 col-md-6">
+          <input type="button" id="btnListarHabDispFecha" name="btnListarHabDispFecha" class="btn btn-primary col-12" value="Listar">
         </div>
       </div>
     </fieldset>
@@ -569,32 +539,28 @@
 
   <form class="form-horizontal" name="frmListadoParkDispFecha" id="frmListadoParkDispFecha">
     <fieldset>
-      <legend>Listado de Parking Disponibles por fechas</legend>
+      <legend>Listado de Parking Disponibles según fechas</legend>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtLisParkDispEntrada">Dia de entrada</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtLisParkDispEntrada">Dia de entrada</label>
+        <div class="col-10 col-md-6">
           <input id="txtEntradaParkDispFecha" name="txtEntradaParkDispFecha" type="date" placeholder="" class="form-control input-md" required="">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="txtLisParkDispSalida">Dia de salida</label>
-        <div class="col-md-4">
+        <label class="col-4 control-label" for="txtLisParkDispSalida">Dia de salida</label>
+        <div class="col-10 col-md-6">
           <input id="txtSalidaParkDispFecha" name="txtSalidaParkDispFecha" type="date" placeholder="" class="form-control input-md" required="">
         </div>
       </div>
       <div class="form-group">
-        <label class="col-md-4 control-label" for="btnAceptar"></label>
-        <div class="col-md-4">
-          <input type="button" id="btnListarParkDispFecha" name="btnListarParkDispFecha" class="btn btn-primary" value="Listar" />
+        <label class="col-1 control-label" for="btnAceptar"></label>
+        <div class="col-1 col-md-6">
+          <input type="button" id="btnListarParkDispFecha" name="btnListarParkDispFecha" class="btn btn-primary col-12" value="Listar" />
         </div>
       </div>
     </fieldset>
   </form>
-
-<!-- A partir de aqui no se puede contruir formularios-->
-<div id="listado">
-
-</div>
+  </div>
 <script type="text/javascript" src="objetos.js"></script>
 <script type="text/javascript" src="codigo.js"></script>
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
