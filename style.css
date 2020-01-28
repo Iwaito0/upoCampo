@@ -46,8 +46,6 @@ form{
   border: 12px solid #710000;
   border-radius: 40px;
   width: 60vw;
-  height: 120vh;
-  z-index: 1;
   background-color: rgb(255, 255, 255, 0.7);
   box-shadow: 10px 10px 15px black;
 }
@@ -84,15 +82,11 @@ img{
   margin-top: -15px;
 }
 
-.form-horizontal{
-  margin-top: 50px;
-  font-size: 14px;
-}
-
-#frmModificarReserva{
-  margin-top: 20px;
-}
-
 select{
   width: 100%;
+}
+
+form{
+  padding: 15px;
+  font-size: 14px;
 }

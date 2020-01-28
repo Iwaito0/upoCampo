@@ -376,14 +376,10 @@ function mostrarActividades() {
 
     for (let i = 0; i < aActividad.length; i++) {
         for (let j = 0; j < aReserva.length; j++) {
-            if (aActividad[i].id == aReserva[j].actividadID) {
-                if ((aReserva[j].checkin > dFechaIni && aReserva[j].checkin <= dFechaFin && aReserva[j].checkout >= dFechaFin) || 
-                    (aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaFin) || 
-                    (aReserva[j].checkin <= dFechaIni && aReserva[j].checkout >= dFechaIni && aReserva[j].checkout < dFechaFin) || 
-                    (aReserva[j].checkin > dFechaIni && aReserva[j].checkout < dFechaFin)) {
-                    aActividad.splice(i, 1);
+            if (aActividad[i].id == aReserva[j].actividadID)
+            {
+                aActividad.splice(i, 1);
                     i--;
-                }
             }
         }
     }
@@ -446,7 +442,7 @@ function aceptarAltaReserva(){
     let iNumPersonas = parseInt(frmAltaReserva.txtNumAlta.value.trim());
     let dCheckin = frmAltaReserva.txtEntradaAlta.value.trim();
     let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
-    let fPrecio = parseFloat(frmAltaReserva.txtPrecioAlta.value.trim());
+    let fPrecio = 0; //funcion totalPrecio
     let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
     let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
     let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
@@ -462,7 +458,7 @@ function aceptarAltaReserva(){
     }
 
     if(!/^\d+$/.test(iID)){
-        sMensaje+="El campo ID esta mal. El campo ID debe ser un numero\n";
+        sMensaje+="Introduce una ID válida\n";
         frmAltaReserva.txtIdAlta.classList.add("error");
     }
     else{
@@ -474,13 +470,6 @@ function aceptarAltaReserva(){
     }
     else{
         frmAltaReserva.txtNumAlta.classList.remove("error");  
-    }
-    if(!/^[0-9]+([.][0-9]+)?$/.test(fPrecio)){
-        sMensaje+="El campo precio esta mal (ten cuidado que el separador de decimales es el punto)\n";
-        frmAltaReserva.txtPrecioAlta.classList.add("error");
-    }
-    else{
-        frmAltaReserva.txtPrecioAlta.classList.remove("error");  
     }
 
     if(sMensaje==""){
@@ -551,7 +540,6 @@ function aceptarAltaActividade(){
     // Recoger valores del formulario
     let iID = frmAltaActividades.txtID.value.trim();
     let sNombre = frmAltaActividades.txtNombreClienteAlta.value.trim();
-    let fPrecio = parseFloat(frmAltaActividades.txtPrecioAltaActividades.value.trim());
 
     if(!/^\d+$/.test(iID)){
         sMensaje+="El campo ID esta mal. El campo ID debe ser un numero\n";
@@ -687,7 +675,6 @@ function seleccionarReserva() {
     let inputNumPersonas = document.getElementById("txtNumModificar");
     let inputEntrada = document.getElementById("txtEntradaModificar");
     let inputSalida = document.getElementById("txtSalidaModificar");
-    let inputPrecio = document.getElementById("txtPrecioModificar");
 
     let reservaSeleccionada = oUPOCampo.buscarReserva(iID);
 
@@ -698,7 +685,6 @@ function seleccionarReserva() {
         inputNumPersonas.disabled = false;
         inputEntrada.disabled = false;
         inputSalida.disabled = false;
-        inputPrecio.disabled = false;
 
         btnModificarReserva.disabled = false;
         btnCacelarModReserva.disabled = false;
@@ -706,7 +692,6 @@ function seleccionarReserva() {
         inputNumPersonas.value = reservaSeleccionada[0].numPersonas;
         inputEntrada.value = reservaSeleccionada[0].checkin;
         inputSalida.value = reservaSeleccionada[0].checkout;
-        inputPrecio.value = reservaSeleccionada[0].precio;
     }
 
     else {
@@ -724,7 +709,6 @@ function seleccionarActividades(){
 
     let inputId = document.getElementById("txtIDModificarActividades");
     let inputNombre = document.getElementById("txtNombreActividadModifica");
-    let inputPrecio = document.getElementById("txtPrecioModificaActividades");
 
     let ActividadSeleccionada = oUPOCampo.buscarActividad(iID);
 
@@ -733,13 +717,11 @@ function seleccionarActividades(){
         botonSeleccionar.disabled = true;
 
         inputNombre.disabled = false;
-        inputPrecio.disabled = false;
 
         btnModificarActividades.disabled = false;
         btnCacelarModActividades.disabled = false;
 
         inputNombre.value = ActividadSeleccionada[0].nombre;
-        inputPrecio.value = ActividadSeleccionada[0].precio;
     }
 
     else {
@@ -821,7 +803,6 @@ function cancelarModificarReserva(){
     let inputNumPersonas = document.getElementById("txtNumModificar");
     let inputEntrada = document.getElementById("txtEntradaModificar");
     let inputSalida = document.getElementById("txtSalidaModificar");
-    let inputPrecio = document.getElementById("txtPrecioModificar");
 
     inputId.disabled = false;
     botonSeleccionar.disabled = false;
@@ -829,7 +810,6 @@ function cancelarModificarReserva(){
     inputNumPersonas.disabled = true;
     inputEntrada.disabled = true;
     inputSalida.disabled = true;
-    inputPrecio.disabled = true;
 
     btnModificarReserva.disabled = true;
     btnCacelarModReserva.disabled = true;
@@ -842,14 +822,12 @@ function cancelarModificarActividades(){
     let btnCacelarModActividades = document.getElementById("btnACancelarModificarActividades");
     let inputId = document.getElementById("txtIDModificarActividades");
     let inputNombre = document.getElementById("txtNombreActividadModifica");
-    let inputPrecio = document.getElementById("txtPrecioModificaActividades");
 
     inputId.disabled = false;
     botonSeleccionar.disabled = false;
     btnModificarActividades.disabled = true;
     btnCacelarModActividades.disabled = true;
     inputNombre.disabled = true;
-    inputPrecio.disabled = true;
 
     frmModificaActividades.reset();
 }
@@ -1002,7 +980,6 @@ function aceptarModificarActividad(){
     // Recoger valores del formulario
     let iID = frmModificaActividades.txtIDModificarActividades.value.trim();
     let sNombre = frmModificaActividades.txtNombreActividadModifica.value.trim();
-    let fPrecio = parseFloat(frmModificaActividades.txtPrecioModificaActividades.value.trim());
 
     if(!/^\d+$/.test(iID)){
         sMensaje+="El campo ID esta mal. El campo ID debe ser un numero\n";
@@ -1017,13 +994,6 @@ function aceptarModificarActividad(){
     }
     else{
         frmModificaActividades.txtNombreActividadModifica.classList.remove("error");  
-    }
-    if(!/^[0-9]+([.][0-9]+)?$/.test(fPrecio)){
-        sMensaje+="El campo precio esta mal (ten cuidado que el separador de decimales es el punto)\n";
-        frmModificaActividades.txtPrecioModificaActividades.classList.add("error");
-    }
-    else{
-        frmModificaActividades.txtPrecioModificaActividades.classList.remove("error");  
     }
 
     if(sMensaje==""){
@@ -1939,12 +1909,11 @@ function datosParking() {
 //Datos pruebas Reguime alimenticio
 
 function datosRegimen() {
-    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(0, 12.50));
-    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(1, 8.99));
-    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(2, 22.50));
-    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(3, 55.75));
-    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(4, 5));
-    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio(6, 25));
+    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Nada', 0));
+    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Solo desayuno', 8.99));
+    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Media Pensión', 22.50));
+    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Pensión Completa', 35.75));
+    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Todo Incluido', 60));
 }
 
 
