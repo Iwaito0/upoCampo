@@ -1641,10 +1641,13 @@ function mostrarListadoParkRes(){
     oCelda.textContent="Numero de parking";
     
     oCelda=oFila.insertCell(-1);
-    oCelda.textContent="precio";
+    oCelda.textContent="ID de Reserva";
     
     oCelda=oFila.insertCell(-1);
-    oCelda.textContent="Ancho especial";
+    oCelda.textContent="Fecha de entrada";
+
+    oCelda=oFila.insertCell(-1);
+    oCelda.textContent="Fecha de salida";
     
     //El cuerpo de la tabla
     let oTBody = document.createElement("TBODY");
@@ -1656,17 +1659,14 @@ function mostrarListadoParkRes(){
         let oCelda = oFila.insertCell(-1);
         oCelda.textContent = aPark[i].id;
     
-         oCelda = oFila.insertCell(-1);
-        oCelda.textContent = aPark[i].precio;
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aPark[i].resID;
         
-         oCelda = oFila.insertCell(-1);
-        if(aPark[i].anchoespecial==false){
-            oCelda.textContent = "No";
-        }
-        else{
-            oCelda.textContent = "Si";
-   
-        }
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aPark[i].checkin;
+
+        oCelda = oFila.insertCell(-1);
+        oCelda.textContent = aPark[i].checkout;
     }
 
     pestana.document.body.append(oTabla);
