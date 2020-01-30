@@ -34,6 +34,9 @@ function Parking(iID, fPrecio, bAnchoEspecial) {
     this.id = iID;
     this.precio = fPrecio;
     this.anchoespecial = bAnchoEspecial;
+    this.resID = 0;
+    this.checkin = 0;
+    this.checkout = 0;
 }
 Parking.prototype.toString = function() {
     if(this.anchoespecial==true){
@@ -520,7 +523,10 @@ class UpoCampo{
         for (let i = 0; i < aParkings.length; i++) {
             for (let j = 0; j < aReserva.length; j++) {
                 if (aParkings[i].id == aReserva[j].parkingID) {
-                     aParkRes.push(aParkings[i]);
+                    aParkings[i].resID = aReserva[j].id;
+                    aParkings[i].checkin = aReserva[j].checkin;
+                    aParkings[i].checkout = aReserva[j].checkout;
+                    aParkRes.push(aParkings[i]);
                 }
             }
         }
