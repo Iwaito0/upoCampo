@@ -447,7 +447,7 @@ function aceptarAltaReserva(){
     let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
     let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
     let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
-    let iRegimenID = parseInt(frmAltaReserva.selectListaReg.value.trim());
+    let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
 
     if (isNaN(iParkingID)) {
         iParkingID = 0;
@@ -456,6 +456,7 @@ function aceptarAltaReserva(){
     if(isNaN(iActividadID)){
         iActividadID = 0;
     }
+
 
     if(!/^\d+$/.test(iID)){
         sMensaje+="Introduce una ID válida\n";
@@ -474,7 +475,7 @@ function aceptarAltaReserva(){
 
     if(sMensaje==""){
     // Creamos el objeto reserva
-    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID, iRegimenID);
+    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID, sRegimenID);
     // Alta de reserva en UPOCAMPO
     let sMensaje = oUPOCampo.altaReserva(oReserva);
     alert(sMensaje);
@@ -1379,7 +1380,12 @@ function listadosReservas(){
         }
 
         oCelda = oFila.insertCell(-1);
-        oCelda.textContent = arrayReservas[i].regimenID;
+        if (arrayReservas[i].regimenID == "Nada") {
+            oCelda.textContent = "NO";
+        }
+        else {
+            oCelda.textContent = arrayReservas[i].regimenID;
+        }
     }
     
     pestana.document.body.append(oTabla);
