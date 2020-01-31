@@ -474,11 +474,14 @@ function aceptarAltaReserva(){
         let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, precioTotal(), iNumHabitacion, sNifCliente, iParkingID, aActividadesElegidas.join(', '), sRegimenID);
         // Alta de reserva en UPOCAMPO
         let sMensaje = oUPOCampo.altaReserva(oReserva);
+        divReservaComprobada.style.display = "none";
+        botonComprobarDatosReserva.disabled = false;
         alert(sMensaje);
         frmAltaReserva.reset();
         habDesParking();
         habDesActividad();
-        mostrarRegimenes(); 
+        mostrarRegimenes();
+        
 }
 
 function precioTotal()
@@ -678,6 +681,7 @@ function comprobarDatosReserva()
         document.querySelector("#divReservaComprobada #p2").appendChild(precioT);
         document.querySelector("#divReservaComprobada #p3").appendChild(ppn);
         botonComprobarDatosReserva.disabled = true;
+        divReservaComprobada.style.display = 'block';
     }
     
     else
