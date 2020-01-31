@@ -1300,7 +1300,7 @@ function aceptarModificarProveedor(){
 
 function listadosHabitaciones(){
     let pestana=window.open()
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Habitaciones</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     let arrayHabitaciones=oUPOCampo.getArrayHabitaciones();
 
     //Creacion de la tabla
@@ -1348,7 +1348,7 @@ function listadosHabitaciones(){
 function listadosParking(){
     let pestana=window.open()
     let arrayParking=oUPOCampo.getArrayParking();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Parking</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1393,7 +1393,7 @@ function listadosParking(){
 function listadosClientes(){
     let pestana=window.open()
     let arrayClientes=oUPOCampo.getArrayClientes();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Clientes</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1451,7 +1451,7 @@ function listadosClientes(){
 function listadosProveedores(){
     let pestana=window.open()
     let arrayProveedor=oUPOCampo.getArrayProveedor();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Proveedores</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1492,7 +1492,7 @@ function listadosProveedores(){
 function listadosActividades(){
     let pestana=window.open()
     let arrayActividades=oUPOCampo.getArrayActividades();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Actividades</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1533,7 +1533,7 @@ function listadosActividades(){
 function listadosReservas(){
     let pestana=window.open()
     let arrayReservas=oUPOCampo.getArrayReservas();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Reservas</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1634,7 +1634,7 @@ function aceptarListadoCliRes() {
 	let dSalida = frmListadoCliResFecha.txtSalidaCliRes.value.trim();
 	let pestana=window.open();
 	let aClientes = oUPOCampo.listadoClientePorFecha(dEntrada, dSalida);
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Clientes por Fecha</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
 	//Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1706,7 +1706,7 @@ function aceptarListadoResFecha() {
 	let dSalida = frmListadoResFecha.txtSalidaResFecha.value.trim();
 	let pestana=window.open();
 	let aReservas = oUPOCampo.listadoReservaPorFecha(dEntrada, dSalida);
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Reservas por Fecha</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
 	//Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1773,7 +1773,7 @@ function aceptarListadoHabDispFecha() {
 	let dSalida = frmListadoHabDispFecha.txtSalidaHabDispFecha.value.trim();
 	let pestana=window.open();
 	let aHabitaciones = oUPOCampo.listadoHabDispPorFecha(dEntrada, dSalida);
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Habitaciones Disponibles por Fecha</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
 	//Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1822,7 +1822,7 @@ function aceptarListadoParkDispFecha() {
     let dSalida = frmListadoParkDispFecha.txtSalidaParkDispFecha.value.trim();
     let pestana=window.open();
     let aParking = oUPOCampo.listadoParkDispPorFecha(dEntrada, dSalida);
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Parking disponible por Fecha</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1871,7 +1871,7 @@ function aceptarListadoParkDispFecha() {
 function mostrarListadoParkRes(){
     let pestana=window.open()
     let aPark=oUPOCampo.listadoReservaParking();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>"); 
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Reservas con Parking</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>"); 
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1917,7 +1917,7 @@ function mostrarListadoParkRes(){
 function mostrarListadoRegRes() {
     let pestana=window.open();
     let aRegimen = oUPOCampo.listadoReservaRegimenA();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Régimen por Reservas</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1951,7 +1951,7 @@ function mostrarListadoRegRes() {
 function mostrarListadoActRes() {
     let pestana=window.open()
     let aActividades=oUPOCampo.listadoReservaActividades();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Reservas con Activiades</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
