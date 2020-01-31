@@ -1968,6 +1968,12 @@ function esconderTodosLosFormularios(){
 //Datos prueba de habitaciones
 
 function datosHabitaciones() {
+    /*let oXML = loadXMLDoc("basedatos.xml");
+    let arrayHabitacionesXML = oXML.querySelectorAll("habitacion");
+     for(let i=0; i<arrayHabitacionesXML.length; i++){
+       oUPOCampo.altaHabitacion(new Habitacion(oHabitaciones[i].querySelector("id").textContent, oHabitaciones[i].querySelector("tipo").textContent, oHabitaciones[i].querySelector("precio").textContent,oHabitaciones[i].querySelector("capacidad").textContent));
+    }*/
+    
     oUPOCampo.altaHabitacion(new Habitacion(1, "doble", 40.50, 4));
     oUPOCampo.altaHabitacion(new Habitacion(2, "simple", 28.90, 2));
     oUPOCampo.altaHabitacion(new Habitacion(3, "doble", 40.50, 4));
@@ -2097,4 +2103,20 @@ function datosReservas()
     oUPOCampo.altaReserva(new Reservas(9832, 4, "2020-02-15", "2020-02-26", 63.25, 13, "28569535T", 15, "Tiro con arco, Baloncesto", "Pensión Completa"));
     oUPOCampo.altaReserva(new Reservas(5234, 1, "2020-02-01", "2020-02-03", 77.30, 8, "85216328G", "NO", "Alpinismo", "Solo Desayuno"));
     oUPOCampo.altaReserva(new Reservas(5555, 2, "2020-03-03", "2020-03-06", 65.20, 15, "44855685D", 8, "Buceo con bombona, Baloncesto", "Media Pensión"));
+}
+function loadXMLDoc(filename) {
+    let xhttp = null;
+
+    if (window.XMLHttpRequest) {
+        xhttp = new XMLHttpRequest();
+    }
+    else // code for IE5 and IE6
+    {
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET", filename, false);
+
+    xhttp.send();
+
+    return xhttp.responseXML;
 }
