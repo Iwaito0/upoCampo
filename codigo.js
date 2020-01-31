@@ -3,6 +3,13 @@
 var oUPOCampo = new UpoCampo();
 var divListado = document.getElementById("listado");
 
+var selectParkLista = document.getElementById("selectListaHab");
+var selectParkMod = document.getElementById("selectListaHabModificar");
+selectParkMod.disabled = true;
+var selectRegAlta = document.getElementById("selectListaReg");
+var selectRegMod = document.getElementById("selectListaRegModificar");
+selectRegMod.disabled = true;
+
 var dFechaIni = new Date();
 var dFechaFin = new Date();
 var iNumMaxPersonas = 0;
@@ -300,25 +307,25 @@ function aceptarAltaCliente(){
 
 function recogerFechaIni(){
 	dFechaIni = frmAltaReserva.txtEntradaAlta.value.trim();
-	mostrarHabitaciones();
+	mostrarHabitaciones(selectParkLista);
     habDesParking();
     habDesActividad();
 }
 
 function recogerFechaFin(){
 	dFechaFin = frmAltaReserva.txtSalidaAlta.value.trim();
-	mostrarHabitaciones();
+	mostrarHabitaciones(selectParkLista);
     habDesParking();
     habDesActividad();
 }
 
 function recogerNumPer(){
 	iNumMaxPersonas = parseInt(frmAltaReserva.txtNumAlta.value.trim());
-	mostrarHabitaciones();
+	mostrarHabitaciones(selectParkLista);
 }
 
-function mostrarHabitaciones()  {
-    document.getElementById("selectListaHab").length = 0;
+function mostrarHabitaciones(aLista)  {
+    aLista.length = 0;
     let aReserva = oUPOCampo.getArrayReservas();
     let aHabitaciones = oUPOCampo.getArrayHabitaciones();
 
@@ -345,7 +352,7 @@ function mostrarHabitaciones()  {
         opc.setAttribute("value", aHabitaciones[i].id);
         let texto = document.createTextNode(aHabitaciones[i].id);
         opc.appendChild(texto);
-        document.getElementById("selectListaHab").appendChild(opc);
+        aLista.appendChild(opc);
     }
     
 }
@@ -404,8 +411,8 @@ function mostrarActividades() {
     }
 }
 
-function mostrarRegimenes() {
-    document.getElementById("selectListaReg").length = 0;
+function mostrarRegimenes(aLista) {
+    aLista.length = 0;
     let aRegimen = oUPOCampo.buscarRegimen();
 
     for (let i = 0; i < aRegimen.length; i++) {
@@ -413,7 +420,7 @@ function mostrarRegimenes() {
         opc.setAttribute("value", aRegimen[i].id);
         let texto = document.createTextNode(aRegimen[i].id);
         opc.appendChild(texto);
-        document.getElementById("selectListaReg").appendChild(opc);
+        aLista.appendChild(opc);
     }
 }
 
@@ -468,7 +475,7 @@ function aceptarAltaReserva(){
         frmAltaReserva.reset();
         habDesParking();
         habDesActividad();
-        mostrarRegimenes();    
+        mostrarRegimenes(); 
 }
 
 
@@ -772,6 +779,8 @@ function seleccionarReserva() {
     let inputNumPersonas = document.getElementById("txtNumModificar");
     let inputEntrada = document.getElementById("txtEntradaModificar");
     let inputSalida = document.getElementById("txtSalidaModificar");
+    mostrarHabitaciones(selectParkMod);
+    mostrarRegimenes(selectRegMod);
 
     let reservaSeleccionada = oUPOCampo.buscarReserva(iID);
 
@@ -782,6 +791,9 @@ function seleccionarReserva() {
         inputNumPersonas.disabled = false;
         inputEntrada.disabled = false;
         inputSalida.disabled = false;
+
+        selectParkMod.disabled = false;
+        selectRegMod.disabled = false;
 
         btnModificarReserva.disabled = false;
         btnCacelarModReserva.disabled = false;
@@ -908,6 +920,9 @@ function cancelarModificarReserva(){
     inputEntrada.disabled = true;
     inputSalida.disabled = true;
 
+    selectParkMod.disabled = true;
+    selectRegMod.disabled = true;
+
     btnModificarReserva.disabled = true;
     btnCacelarModReserva.disabled = true;
 
@@ -1029,11 +1044,12 @@ function aceptarModificarCliente(){
 
 function aceptarModificarReserva(){
     // Recoger valores del formulario
+    let sMensaje = "";
     let iID = parseInt(frmModificarReserva.txtIdModificar.value.trim());
     let iNumPersonas = parseInt(frmModificarReserva.txtNumModificar.value.trim());
     let dCheckin = frmModificarReserva.txtEntradaModificar.value.trim();
     let dCheckout = frmModificarReserva.txtSalidaModificar.value.trim();
-    let fPrecio = parseFloat(frmModificarReserva.txtPrecioModificar.value.trim());
+    let fPrecio = 0;
     let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
 
 
@@ -1051,13 +1067,7 @@ function aceptarModificarReserva(){
     else{
         frmModificarReserva.txtNumModificar.classList.remove("error");  
     }
-    if(!/^[0-9]+([.][0-9]+)?$/.test(fPrecio)){
-        sMensaje+="El campo precio esta mal (ten cuidado que el separador de decimales es el punto)\n";
-        frmModificarReserva.txtPrecioModificar.classList.add("error");
-    }
-    else{
-        frmModificarReserva.txtPrecioModificar.classList.remove("error");  
-    }
+    
 
     if(sMensaje==""){
     // Creamos el objeto reserva
@@ -1861,10 +1871,10 @@ function mostrarAltaCliente() {
 function mostrarAltaReserva() {
     esconderTodosLosFormularios();
 	frmAltaReserva.style.display = "block";
-    mostrarHabitaciones();
+    mostrarHabitaciones(selectParkLista);
     habDesParking();
     habDesActividad();
-    mostrarRegimenes();
+    mostrarRegimenes(selectRegAlta);
 }
 
 function mostrarAltaProveedor() {
@@ -1898,6 +1908,8 @@ function mostrarModificarCliente() {
 function mostrarModificarReserva() {
     esconderTodosLosFormularios();
 	frmModificarReserva.style.display = "block";
+    mostrarHabitaciones(selectParkMod);
+    mostrarRegimenes(selectRegMod);
 }
 function mostrarModificarActividad(){
     esconderTodosLosFormularios();
@@ -2079,11 +2091,11 @@ function datosProveedor() {
 
 function datosReservas()
 {
-    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
-    oUPOCampo.altaReserva(new Reservas(4321, 1, "2020-2-10", "2020-2-14", 90.45, 6, "30452198R", 4, "Tenis", "Todo Incluido"));
-    oUPOCampo.altaReserva(new Reservas(1111, 2, "2020-2-12", "2020-2-16", 45.45, 12, "51483972H", 7, "Exploracion de cuevas, Bingo", "Media Pensión"));
-    oUPOCampo.altaReserva(new Reservas(5656, 1, "2020-1-30", "2020-2-01", 12.80, 4, "25584568J", "NO", "Bingo", "Nada"));
-    oUPOCampo.altaReserva(new Reservas(9832, 4, "2020-2-15", "2020-2-26", 63.25, 13, "28569535T", 15, "Tiro con arco, Baloncesto", "Pensión Completa"));
-    oUPOCampo.altaReserva(new Reservas(5234, 1, "2020-2-01", "2020-2-03", 77.30, 8, "85216328G", "NO", "Alpinismo", "Solo Desayuno"));
-    oUPOCampo.altaReserva(new Reservas(5555, 2, "2020-3-03", "2020-3-06", 65.20, 15, "44855685D", 8, "Buceo con bombona, Baloncesto", "Media Pensión"));
+    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-01-20", "2020-02-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(4321, 1, "2020-02-10", "2020-02-14", 90.45, 6, "30452198R", 4, "Tenis", "Todo Incluido"));
+    oUPOCampo.altaReserva(new Reservas(1111, 2, "2020-02-12", "2020-02-16", 45.45, 12, "51483972H", 7, "Exploracion de cuevas, Bingo", "Media Pensión"));
+    oUPOCampo.altaReserva(new Reservas(5656, 1, "2020-01-30", "2020-02-01", 12.80, 4, "25584568J", "NO", "Bingo", "Nada"));
+    oUPOCampo.altaReserva(new Reservas(9832, 4, "2020-02-15", "2020-02-26", 63.25, 13, "28569535T", 15, "Tiro con arco, Baloncesto", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(5234, 1, "2020-02-01", "2020-02-03", 77.30, 8, "85216328G", "NO", "Alpinismo", "Solo Desayuno"));
+    oUPOCampo.altaReserva(new Reservas(5555, 2, "2020-03-03", "2020-03-06", 65.20, 15, "44855685D", 8, "Buceo con bombona, Baloncesto", "Media Pensión"));
 }
