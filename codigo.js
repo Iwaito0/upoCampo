@@ -1977,7 +1977,6 @@ function esconderTodosLosFormularios(){
 //Datos prueba de habitaciones
 
 function datosHabitaciones() {
-    oUPOCampo.altaHabitacion(new Habitacion(0, "simple", 28.90, 2));
     oUPOCampo.altaHabitacion(new Habitacion(1, "doble", 40.50, 4));
     oUPOCampo.altaHabitacion(new Habitacion(2, "simple", 28.90, 2));
     oUPOCampo.altaHabitacion(new Habitacion(3, "doble", 40.50, 4));
