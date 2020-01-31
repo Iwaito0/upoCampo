@@ -410,6 +410,30 @@ class UpoCampo{
         }
     }
 
+    buscarPrecioActividadesSeleccionadas(sNombre)
+    {
+        if (this.actividades.filter(actividad=>actividad.nombre == sNombre).length == 1)
+        {
+            return this.actividades.filter(actividad=>actividad.nombre == sNombre)[0].precio;
+        }
+    }
+
+    buscarPrecioHabitacionSeleccionada(iID)
+    {
+        if (this.habitaciones.filter(habitacion=>habitacion.id == iID).length == 1)
+        {
+            return this.habitaciones.filter(habitacion=>habitacion.id == iID)[0].precio;
+        }
+    }
+
+    buscarPrecioParkingSeleccionado(iParkingID)
+    {
+        if (this.parking.filter(plaza=>plaza.id == iParkingID).length == 1)
+        {
+            return this.parking.filter(plaza=>plaza.id == iParkingID)[0].precio;
+        }
+    }
+
     buscarProveedor(iCIF){
         let aProveedor = [];
 
@@ -430,6 +454,14 @@ class UpoCampo{
         }
 
         return aRegimen;
+    }
+
+    buscarPrecioRegimenSeleccionado(iID)
+    {
+        if (this.regimenAlimentario.filter(regimen=>regimen.id == iID).length == 1)
+        {
+            return this.regimenAlimentario.filter(regimen=>regimen.id == iID)[0].precioPersona;
+        }
     }
 
     listadoClientePorFecha(dFechaEntrada, dFechaSalida) {

@@ -462,13 +462,11 @@ function aceptarAltaReserva(){
         let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
         let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
         let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
-
         document.querySelectorAll("#selectListaActividad option:checked").forEach(eleccion=> aActividadesElegidas.push(oUPOCampo.buscarActividadSeleccionada(eleccion.value)));
-        let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
         let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
         
         // Creamos el objeto reserva
-        let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, aActividadesElegidas.join(', '), sRegimenID);
+        let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, precioTotal(), iNumHabitacion, sNifCliente, iParkingID, aActividadesElegidas.join(', '), sRegimenID);
         // Alta de reserva en UPOCAMPO
         let sMensaje = oUPOCampo.altaReserva(oReserva);
         alert(sMensaje);
@@ -477,6 +475,35 @@ function aceptarAltaReserva(){
         habDesActividad();
         mostrarRegimenes(); 
 }
+
+function precioTotal()
+{
+    document.querySelectorAll("#selectListaActividad option:checked").forEach(eleccion=> aActividadesElegidas.push(oUPOCampo.buscarActividadSeleccionada(eleccion.value)));
+    let acumulador2 = 0;
+    let precioHabitacion = oUPOCampo.buscarPrecioHabitacionSeleccionada(document.querySelector("#selectListaHab option:checked").value);
+    let precioParking = 0;
+    let precioRegimen = oUPOCampo.buscarPrecioRegimenSeleccionado(document.querySelector("#selectListaReg option:checked").value);
+    let precioTotalActividades = acumulador2;
+
+    for(var i = 0; i < aActividadesElegidas.length; i++)
+    {
+        acumulador2 = acumulador2 + oUPOCampo.buscarPrecioActividadesSeleccionadas(aActividadesElegidas[i]);
+        precioTotalActividades+=acumulador2;
+    }
+
+    if (document.getElementById("noActividad").checked)
+    {
+        precioTotalActividades = 0;
+    }
+    
+    if (document.getElementById("siParking").checked)
+    {
+        precioParking = oUPOCampo.buscarPrecioParkingSeleccionado(document.querySelector("#selectListaParking option:checked").value);
+    }
+    let precioTotal = precioHabitacion+precioParking+precioRegimen+precioTotalActividades;
+    return precioTotal;
+}
+
 
 
 function obtenerTotalDiasReserva(entrada, salida)
@@ -633,21 +660,19 @@ function comprobarDatosReserva()
 {
     if (datosReservaCorrectos())
     {
-        console.log("hace datosReservaCorrectos");
         activarBotonAltaReserva();
-        let divReserva = document.getElementById("divReservaComprobada");
         let dCheckin = frmAltaReserva.txtEntradaAlta.value.trim();
         let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
         let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
+        let totalPrecio = precioTotal();
+        let precioPorNoche = Math.round(totalPrecio/totalDias);
         let dias = document.createTextNode("Duración de la reserva: "+totalDias+" días");
-        if (divReserva.hasChildNodes())
-        {
-            divReserva.firstChild.remove();
-            console.log("He borrado el child dias");
-        }
-        
-        divReserva.appendChild(dias);
-        console.log("He añadido el child dias");
+        let precioT = document.createTextNode("Precio total: "+totalPrecio+"€");
+        let ppn = document.createTextNode("Precio por noche: "+precioPorNoche+"€");
+        document.querySelector("#divReservaComprobada #p1").appendChild(dias);
+        document.querySelector("#divReservaComprobada #p2").appendChild(precioT);
+        document.querySelector("#divReservaComprobada #p3").appendChild(ppn);
+        botonComprobarDatosReserva.disabled = true;
     }
     
     else
@@ -669,7 +694,6 @@ function activarBotonAltaReserva()
 
 function datosReservaCorrectos()
 {
-    console.log("Entra en datosReserva");
     let sMensaje="";
 
     // Recoger valores del formulario
