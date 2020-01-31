@@ -464,24 +464,6 @@ function habDesActividad() {
     }
 }
 
-function obtenerActividadesSeleccionadas(select)
-{
-    var result = [];
-    var options = select && select.options;
-    var opt;
-
-    for (var i=0, iLen=options.length; i<iLen; i++) 
-    {
-        opt = options[i];
-
-        if (opt.selected) 
-        {
-            result.push(opt.value || opt.text);
-        }
-    }
-    return result;
-}
-
 function aceptarAltaReserva(){
 
         let iID = parseInt(frmAltaReserva.txtIdAlta.value.trim());
@@ -493,23 +475,19 @@ function aceptarAltaReserva(){
         let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
         let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
 
-        let valores = document.querySelectorAll("#selectListaActividad option:checked").forEach(eleccion=> aActividadesElegidas.push(oUPOCampo.buscarActividadSeleccionada(eleccion.value)));
-        // meter en reserva el array de valores pero hecho string mediante un join()
+        document.querySelectorAll("#selectListaActividad option:checked").forEach(eleccion=> aActividadesElegidas.push(oUPOCampo.buscarActividadSeleccionada(eleccion.value)));
         let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
         let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
-        let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
+        
         // Creamos el objeto reserva
-        let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID, sRegimenID);
+        let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, aActividadesElegidas.join(', '), sRegimenID);
         // Alta de reserva en UPOCAMPO
         let sMensaje = oUPOCampo.altaReserva(oReserva);
         alert(sMensaje);
         frmAltaReserva.reset();
         habDesParking();
         habDesActividad();
-        mostrarRegimenes(selectRegAlta); 
-        let dias = document.createTextNode("Duración de la reserva: "+totalDias+" días");
-        document.getElementById("divReservaComprobada").appendChild(dias);     
-    
+        mostrarRegimenes(); 
 }
 
 
@@ -669,8 +647,21 @@ function comprobarDatosReserva()
     {
         console.log("hace datosReservaCorrectos");
         activarBotonAltaReserva();
-
+        let divReserva = document.getElementById("divReservaComprobada");
+        let dCheckin = frmAltaReserva.txtEntradaAlta.value.trim();
+        let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
+        let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
+        let dias = document.createTextNode("Duración de la reserva: "+totalDias+" días");
+        if (divReserva.hasChildNodes())
+        {
+            divReserva.firstChild.remove();
+            console.log("He borrado el child dias");
+        }
+        
+        divReserva.appendChild(dias);
+        console.log("He añadido el child dias");
     }
+    
     else
     {
         alert("Los datos no son correctos");
