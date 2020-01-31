@@ -475,10 +475,15 @@ function aceptarAltaReserva(){
     let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
     let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
     let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
+<<<<<<< HEAD
     let valores = document.querySelectorAll("#selectListaActividad");
     let iActividadID = obtenerActividadesSeleccionadas(frmAltaReserva.selectListaActividad);
     let iRegimenID = parseInt(frmAltaReserva.selectListaReg.value.trim());
     let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
+=======
+    let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
+    let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
+>>>>>>> 52adeb2fdcb1cdd517cd347653d5d5ba139e5ed8
 
     if (isNaN(iParkingID)) {
         iParkingID = 0;
@@ -487,6 +492,7 @@ function aceptarAltaReserva(){
     if(isNaN(iActividadID)){
         iActividadID = 0;
     }
+
 
     if(!/^\d+$/.test(iID)){
         sMensaje+="Introduce una ID válida\n";
@@ -505,7 +511,7 @@ function aceptarAltaReserva(){
 
     if(sMensaje==""){
     // Creamos el objeto reserva
-    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID, iRegimenID);
+    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID, sRegimenID);
     // Alta de reserva en UPOCAMPO
     let sMensaje = oUPOCampo.altaReserva(oReserva);
     alert(sMensaje);
@@ -1458,7 +1464,12 @@ function listadosReservas(){
         }
 
         oCelda = oFila.insertCell(-1);
-        oCelda.textContent = arrayReservas[i].regimenID;
+        if (arrayReservas[i].regimenID == "Nada") {
+            oCelda.textContent = "NO";
+        }
+        else {
+            oCelda.textContent = arrayReservas[i].regimenID;
+        }
     }
     
     pestana.document.body.append(oTabla);
