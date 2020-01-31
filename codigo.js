@@ -466,13 +466,12 @@ function aceptarAltaReserva(){
         if (isNaN(iParkingID)) {
             iParkingID = 0;
         }
-
+        
         document.querySelectorAll("#selectListaActividad option:checked").forEach(eleccion=> aActividadesElegidas.push(oUPOCampo.buscarActividadSeleccionada(eleccion.value)));
-        let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
         let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
         
         // Creamos el objeto reserva
-        let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, aActividadesElegidas.join(', '), sRegimenID);
+        let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, precioTotal(), iNumHabitacion, sNifCliente, iParkingID, aActividadesElegidas.join(', '), sRegimenID);
         // Alta de reserva en UPOCAMPO
         let sMensaje = oUPOCampo.altaReserva(oReserva);
         alert(sMensaje);
@@ -481,6 +480,35 @@ function aceptarAltaReserva(){
         habDesActividad();
         mostrarRegimenes(); 
 }
+
+function precioTotal()
+{
+    document.querySelectorAll("#selectListaActividad option:checked").forEach(eleccion=> aActividadesElegidas.push(oUPOCampo.buscarActividadSeleccionada(eleccion.value)));
+    let acumulador2 = 0;
+    let precioHabitacion = oUPOCampo.buscarPrecioHabitacionSeleccionada(document.querySelector("#selectListaHab option:checked").value);
+    let precioParking = 0;
+    let precioRegimen = oUPOCampo.buscarPrecioRegimenSeleccionado(document.querySelector("#selectListaReg option:checked").value);
+    let precioTotalActividades = acumulador2;
+
+    for(var i = 0; i < aActividadesElegidas.length; i++)
+    {
+        acumulador2 = acumulador2 + oUPOCampo.buscarPrecioActividadesSeleccionadas(aActividadesElegidas[i]);
+        precioTotalActividades+=acumulador2;
+    }
+
+    if (document.getElementById("noActividad").checked)
+    {
+        precioTotalActividades = 0;
+    }
+    
+    if (document.getElementById("siParking").checked)
+    {
+        precioParking = oUPOCampo.buscarPrecioParkingSeleccionado(document.querySelector("#selectListaParking option:checked").value);
+    }
+    let precioTotal = precioHabitacion+precioParking+precioRegimen+precioTotalActividades;
+    return precioTotal;
+}
+
 
 
 function obtenerTotalDiasReserva(entrada, salida)
@@ -637,21 +665,19 @@ function comprobarDatosReserva()
 {
     if (datosReservaCorrectos())
     {
-        console.log("hace datosReservaCorrectos");
         activarBotonAltaReserva();
-        let divReserva = document.getElementById("divReservaComprobada");
         let dCheckin = frmAltaReserva.txtEntradaAlta.value.trim();
         let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
         let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
+        let totalPrecio = precioTotal();
+        let precioPorNoche = Math.round(totalPrecio/totalDias);
         let dias = document.createTextNode("Duración de la reserva: "+totalDias+" días");
-        if (divReserva.hasChildNodes())
-        {
-            divReserva.firstChild.remove();
-            console.log("He borrado el child dias");
-        }
-        
-        divReserva.appendChild(dias);
-        console.log("He añadido el child dias");
+        let precioT = document.createTextNode("Precio total: "+totalPrecio+"€");
+        let ppn = document.createTextNode("Precio por noche: "+precioPorNoche+"€");
+        document.querySelector("#divReservaComprobada #p1").appendChild(dias);
+        document.querySelector("#divReservaComprobada #p2").appendChild(precioT);
+        document.querySelector("#divReservaComprobada #p3").appendChild(ppn);
+        botonComprobarDatosReserva.disabled = true;
     }
     
     else
@@ -673,7 +699,6 @@ function activarBotonAltaReserva()
 
 function datosReservaCorrectos()
 {
-    console.log("Entra en datosReserva");
     let sMensaje="";
 
     // Recoger valores del formulario
@@ -1238,7 +1263,7 @@ function aceptarModificarProveedor(){
 
 function listadosHabitaciones(){
     let pestana=window.open()
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Habitaciones</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     let arrayHabitaciones=oUPOCampo.getArrayHabitaciones();
 
     //Creacion de la tabla
@@ -1286,7 +1311,7 @@ function listadosHabitaciones(){
 function listadosParking(){
     let pestana=window.open()
     let arrayParking=oUPOCampo.getArrayParking();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Parking</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1331,7 +1356,7 @@ function listadosParking(){
 function listadosClientes(){
     let pestana=window.open()
     let arrayClientes=oUPOCampo.getArrayClientes();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Clientes</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1389,7 +1414,7 @@ function listadosClientes(){
 function listadosProveedores(){
     let pestana=window.open()
     let arrayProveedor=oUPOCampo.getArrayProveedor();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Proveedores</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1430,7 +1455,7 @@ function listadosProveedores(){
 function listadosActividades(){
     let pestana=window.open()
     let arrayActividades=oUPOCampo.getArrayActividades();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Actividades</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1471,7 +1496,7 @@ function listadosActividades(){
 function listadosReservas(){
     let pestana=window.open()
     let arrayReservas=oUPOCampo.getArrayReservas();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado General - Reservas</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1572,7 +1597,7 @@ function aceptarListadoCliRes() {
 	let dSalida = frmListadoCliResFecha.txtSalidaCliRes.value.trim();
 	let pestana=window.open();
 	let aClientes = oUPOCampo.listadoClientePorFecha(dEntrada, dSalida);
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Clientes por Fecha</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
 	//Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1644,7 +1669,7 @@ function aceptarListadoResFecha() {
 	let dSalida = frmListadoResFecha.txtSalidaResFecha.value.trim();
 	let pestana=window.open();
 	let aReservas = oUPOCampo.listadoReservaPorFecha(dEntrada, dSalida);
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Reservas por Fecha</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
 	//Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1711,7 +1736,7 @@ function aceptarListadoHabDispFecha() {
 	let dSalida = frmListadoHabDispFecha.txtSalidaHabDispFecha.value.trim();
 	let pestana=window.open();
 	let aHabitaciones = oUPOCampo.listadoHabDispPorFecha(dEntrada, dSalida);
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Habitaciones Disponibles por Fecha</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
 	//Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1760,7 +1785,7 @@ function aceptarListadoParkDispFecha() {
     let dSalida = frmListadoParkDispFecha.txtSalidaParkDispFecha.value.trim();
     let pestana=window.open();
     let aParking = oUPOCampo.listadoParkDispPorFecha(dEntrada, dSalida);
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Parking disponible por Fecha</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1809,7 +1834,7 @@ function aceptarListadoParkDispFecha() {
 function mostrarListadoParkRes(){
     let pestana=window.open()
     let aPark=oUPOCampo.listadoReservaParking();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>"); 
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Reservas con Parking</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>"); 
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1855,7 +1880,7 @@ function mostrarListadoParkRes(){
 function mostrarListadoRegRes() {
     let pestana=window.open();
     let aRegimen = oUPOCampo.listadoReservaRegimenA();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Régimen por Reservas</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -1889,7 +1914,7 @@ function mostrarListadoRegRes() {
 function mostrarListadoActRes() {
     let pestana=window.open()
     let aActividades=oUPOCampo.listadoReservaActividades();
-    pestana.document.write("<html><head><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
+    pestana.document.write("<html><head><link rel='icon' href='./img/favicon.png' type='image/png'><title>Listado Filtros - Reservas con Activiades</title><link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' integrity='sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T' crossorigin='anonymous'></head></html>");
     //Creacion de la tabla
     let oTabla=document.createElement("TABLE");
     oTabla.setAttribute("border","1");
@@ -2039,7 +2064,12 @@ function esconderTodosLosFormularios(){
 //Datos prueba de habitaciones
 
 function datosHabitaciones() {
-    oUPOCampo.altaHabitacion(new Habitacion(0, "simple", 28.90, 2));
+    /*let oXML = loadXMLDoc("basedatos.xml");
+    let arrayHabitacionesXML = oXML.querySelectorAll("habitacion");
+     for(let i=0; i<arrayHabitacionesXML.length; i++){
+       oUPOCampo.altaHabitacion(new Habitacion(oHabitaciones[i].querySelector("id").textContent, oHabitaciones[i].querySelector("tipo").textContent, oHabitaciones[i].querySelector("precio").textContent,oHabitaciones[i].querySelector("capacidad").textContent));
+    }*/
+    
     oUPOCampo.altaHabitacion(new Habitacion(1, "doble", 40.50, 4));
     oUPOCampo.altaHabitacion(new Habitacion(2, "simple", 28.90, 2));
     oUPOCampo.altaHabitacion(new Habitacion(3, "doble", 40.50, 4));
@@ -2169,4 +2199,20 @@ function datosReservas()
     oUPOCampo.altaReserva(new Reservas(9832, 4, "2020-02-15", "2020-02-26", 63.25, 13, "28569535T", 15, "Tiro con arco, Baloncesto", "Pensión Completa"));
     oUPOCampo.altaReserva(new Reservas(5234, 1, "2020-02-01", "2020-02-03", 77.30, 8, "85216328G", "NO", "Alpinismo", "Solo Desayuno"));
     oUPOCampo.altaReserva(new Reservas(5555, 2, "2020-03-03", "2020-03-06", 65.20, 15, "44855685D", 8, "Buceo con bombona, Baloncesto", "Media Pensión"));
+}
+function loadXMLDoc(filename) {
+    let xhttp = null;
+
+    if (window.XMLHttpRequest) {
+        xhttp = new XMLHttpRequest();
+    }
+    else // code for IE5 and IE6
+    {
+        xhttp = new ActiveXObject("Microsoft.XMLHTTP");
+    }
+    xhttp.open("GET", filename, false);
+
+    xhttp.send();
+
+    return xhttp.responseXML;
 }
