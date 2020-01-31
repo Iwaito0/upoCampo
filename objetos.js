@@ -538,7 +538,7 @@ class UpoCampo{
         let aReserva = oUPOCampo.getArrayReservas();
         let aRegimen = oUPOCampo.buscarRegimen();
         let aRegRes = [];
-
+        
         for (let i = 0; i < aRegimen.length; i++) {
             for (let j = 0; j < aReserva.length; j++) {
                 if (aRegimen[i].id == aReserva[j].regimenID) {
