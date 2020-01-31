@@ -13,6 +13,7 @@ datosRegimen();
 datosCliente();
 datosActividad();
 datosProveedor();
+datosReservas();
 
 /*--------------EVENTOS DE MENU----------------*/
 
@@ -29,6 +30,8 @@ menuAltaProveedor.addEventListener("click", mostrarAltaProveedor, false);
 
 var menuAltaActividad = document.getElementById("altaActividad");
 menuAltaActividad.addEventListener("click", mostrarAltaActividad, false);
+
+var divReservaComprobada = document.getElementById("divReservaComprobada");
 
 /*---------------MENU BAJA-------------*/
 
@@ -211,6 +214,12 @@ botonListarHabDisp.addEventListener("click", aceptarListadoHabDispFecha, false);
 
 var botonListarParkDisp = document.getElementById("btnListarParkDispFecha");
 botonListarParkDisp.addEventListener("click", aceptarListadoParkDispFecha, false);
+
+/*--------BOTON COMPROBAR DATOS DE LA RESERVA--------*/
+
+// var botonComprobarDatosReserva = document.getElementById("btnComprobarDatos");
+// botonComprobarDatosReserva.addEventListener("click", comprobarDatosReserva, false);
+
 
 /*-------------FUNCIONES-----------------*/
 /*-------------ALTA-------------*/
@@ -434,6 +443,26 @@ function habDesActividad() {
     }
 }
 
+function obtenerActividadesSeleccionadas(select)
+{
+    var result = [];
+    var options = select && select.options;
+    var opt;
+
+    for (var i=0, iLen=options.length; i<iLen; i++) 
+    {
+        opt = options[i];
+
+        if (opt.selected) 
+        {
+            result.push(opt.value || opt.text);
+        }
+    }
+    return result;
+}
+
+console.log(document.querySelectorAll("#selectListaActividad"));
+
 function aceptarAltaReserva(){
     let sMensaje="";
 
@@ -446,8 +475,10 @@ function aceptarAltaReserva(){
     let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
     let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
     let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
-    let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
+    let valores = document.querySelectorAll("#selectListaActividad");
+    let iActividadID = obtenerActividadesSeleccionadas(frmAltaReserva.selectListaActividad);
     let iRegimenID = parseInt(frmAltaReserva.selectListaReg.value.trim());
+    let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
 
     if (isNaN(iParkingID)) {
         iParkingID = 0;
@@ -481,11 +512,27 @@ function aceptarAltaReserva(){
     frmAltaReserva.reset();
     habDesParking();
     habDesActividad();
-    mostrarRegimenes();    
+    mostrarRegimenes(); 
+    let dias = document.createTextNode(totalDias);
+    document.getElementById("divReservaComprobada").appendChild(dias);   
     }
     else{
         alert(sMensaje);
     }
+}
+
+function obtenerTotalDiasReserva(entrada, salida)
+{
+    let ent = new Date(entrada);
+    let sal = new Date(salida);
+
+    ent.getTime();
+    sal.getTime();
+
+    let diff = sal-ent;
+
+    return diff/(1000*60*60*24);
+
 }
 
 function aceptarAltaProveedor(){
@@ -620,6 +667,38 @@ function aceptarBajaProveedor(){
     alert(sMensaje);
     frmBajaProveedores.reset();
 }
+
+
+/*----COMPROBAR DATOS ALTA RESERVA-----*/
+// botonAltaReserva.disabled = true;
+// function comprobarDatosReserva()
+// {
+//     if (datosReservaCorrectos())
+//     {
+//         activarBotonAltaReserva();
+
+//     }
+//     else
+//     {
+//         alert("Los datos no son correctos");
+//         botonAltaReserva.disabled = true;
+//     }
+// }
+
+// function activarBotonAltaReserva()
+// {
+//     if (botonAltaReserva.disabled == true)
+//     {
+//         botonAltaReserva.disabled = false;
+//     }
+// }
+
+// function datosReservaCorrectos()
+// {
+    
+// }
+
+
 /*-------------SELECCIONAR-------------*/
 
 function seleccionarCliente(){
@@ -1971,4 +2050,17 @@ function datosProveedor() {
 	oUPOCampo.altaProveedor(new Proveedores("52928526D", "Rodrigo", 34685127963));
 	oUPOCampo.altaProveedor(new Proveedores("45826584T", "Pepe", 34652895123));
 	oUPOCampo.altaProveedor(new Proveedores("58102605U", "Paula", 34658215985));
+}
+
+//Datos reservas
+
+function datosReservas()
+{
+    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(4321, 1, "2020-2-10", "2020-2-14", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
 }
