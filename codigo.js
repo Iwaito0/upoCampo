@@ -2012,7 +2012,7 @@ function datosParking() {
 
 function datosRegimen() {
     oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Nada', 0));
-    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Solo desayuno', 8.99));
+    oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Solo Desayuno', 8.99));
     oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Media Pensión', 22.50));
     oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Pensión Completa', 35.75));
     oUPOCampo.altaRegimenAlimenticio(new RegimenAlimenticio('Todo Incluido', 60));
@@ -2066,11 +2066,12 @@ function datosProveedor() {
 
 function datosReservas()
 {
+    Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones, sNifCliente, iParkingID, iActividadID, iRegimenID)
     oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
-    oUPOCampo.altaReserva(new Reservas(4321, 1, "2020-2-10", "2020-2-14", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
-    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
-    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
-    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
-    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
-    oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(4321, 1, "2020-2-10", "2020-2-14", 90.45, 6, "30452198R", 4, "Tenis", "Todo Incluido"));
+    oUPOCampo.altaReserva(new Reservas(1111, 2, "2020-2-12", "2020-2-16", 45.45, 12, "51483972H", 7, "Exploracion de cuevas, Bingo", "Media Pensión"));
+    oUPOCampo.altaReserva(new Reservas(5656, 1, "2020-1-30", "2020-2-01", 12.80, 4, "25584568J", "NO", "Bingo", "Nada"));
+    oUPOCampo.altaReserva(new Reservas(9832, 4, "2020-2-15", "2020-2-26", 63.25, 13, "28569535T", 15, "Tiro con arco, Baloncesto", "Pensión Completa"));
+    oUPOCampo.altaReserva(new Reservas(5234, 1, "2020-2-01", "2020-2-03", 77.30, 8, "85216328G", "NO", "Alpinismo", "Solo Desayuno"));
+    oUPOCampo.altaReserva(new Reservas(5555, 2, "2020-3-03", "2020-3-06", 65.20, 15, "44855685D", 8, "Buceo con bombona, Baloncesto", "Media Pensión"));
 }
