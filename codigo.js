@@ -2066,7 +2066,6 @@ function datosProveedor() {
 
 function datosReservas()
 {
-    Reservas(iID, iNumPersonas, dCheckIn, dCheckOut, fPrecio, iNumHabitaciones, sNifCliente, iParkingID, iActividadID, iRegimenID)
     oUPOCampo.altaReserva(new Reservas(1234, 3, "2020-1-20", "2020-2-10", 25.80, 1, "25518526A", 3, "Alpinismo, Bingo", "Pensión Completa"));
     oUPOCampo.altaReserva(new Reservas(4321, 1, "2020-2-10", "2020-2-14", 90.45, 6, "30452198R", 4, "Tenis", "Todo Incluido"));
     oUPOCampo.altaReserva(new Reservas(1111, 2, "2020-2-12", "2020-2-16", 45.45, 12, "51483972H", 7, "Exploracion de cuevas, Bingo", "Media Pensión"));
