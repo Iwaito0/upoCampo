@@ -475,15 +475,14 @@ function aceptarAltaReserva(){
     let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
     let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
     let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
-<<<<<<< HEAD
+
     let valores = document.querySelectorAll("#selectListaActividad");
-    let iActividadID = obtenerActividadesSeleccionadas(frmAltaReserva.selectListaActividad);
-    let iRegimenID = parseInt(frmAltaReserva.selectListaReg.value.trim());
-    let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
-=======
     let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
     let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
->>>>>>> 52adeb2fdcb1cdd517cd347653d5d5ba139e5ed8
+    let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
+
+
+
 
     if (isNaN(iParkingID)) {
         iParkingID = 0;
