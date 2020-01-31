@@ -474,6 +474,7 @@ function aceptarAltaReserva(){
         let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, precioTotal(), iNumHabitacion, sNifCliente, iParkingID, aActividadesElegidas.join(', '), sRegimenID);
         // Alta de reserva en UPOCAMPO
         let sMensaje = oUPOCampo.altaReserva(oReserva);
+
         divReservaComprobada.style.display = "none";
         botonComprobarDatosReserva.disabled = false;
         alert(sMensaje);
@@ -666,6 +667,7 @@ function aceptarBajaProveedor(){
 botonAltaReserva.disabled = true;
 function comprobarDatosReserva()
 {
+
     if (datosReservaCorrectos())
     {
         activarBotonAltaReserva();
