@@ -146,23 +146,11 @@ estadoHabParking.addEventListener("click", habDesParking, false);
 var estadoDesParking = document.getElementById("noParking");
 estadoDesParking.addEventListener("click", habDesParking, false);
 
-var estadoHabParkingMod = document.getElementById("siParkingMod");
-estadoHabParkingMod.addEventListener("click", habDesParkingMod, false);
-
-var estadoDesParkingMod = document.getElementById("noParkingMod");
-estadoDesParkingMod.addEventListener("click", habDesParkingMod, false);
-
 var estadoHabActividad = document.getElementById("siActividad");
 estadoHabActividad.addEventListener("click", habDesActividad, false);
 
 var estadoDesActividad = document.getElementById("noActividad");
 estadoDesActividad.addEventListener("click", habDesActividad, false);
-
-var estadoHabActividadMod = document.getElementById("siActividadMod");
-estadoHabActividadMod.addEventListener("click", habDesActividadMod, false);
-
-var estadoDesActividadMod = document.getElementById("noActividadMod");
-estadoDesActividadMod.addEventListener("click", habDesActividadMod, false);
 
 /*--------------------------CANCELAR--------------------------*/
 
@@ -475,6 +463,10 @@ function aceptarAltaReserva(){
         let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
         let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
 
+        if (isNaN(iParkingID)) {
+            iParkingID = 0;
+        }
+
         document.querySelectorAll("#selectListaActividad option:checked").forEach(eleccion=> aActividadesElegidas.push(oUPOCampo.buscarActividadSeleccionada(eleccion.value)));
         let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
         let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
@@ -780,32 +772,6 @@ function seleccionarCliente(){
 
 }
 
-function habDesParkingMod() {
-    
-    let selectParking = document.getElementById("selectListaParkingModificar");
-
-    if (estadoHabParkingMod.checked) {
-        mostrarParkingDisponiblesMod();
-        selectParking.style.display = "block";
-    }
-    else {
-        selectParking.length = 0;
-        selectParking.style.display = "none";
-    }
-}
-
-function habDesActividadMod() {
-    let selectActividad = document.getElementById("selectListaActividadModificar");
-
-    if (estadoHabActividadMod.checked) {
-        mostrarActividadesMod();
-        selectActividad.style.display = "block";
-    }
-    else {
-        selectActividad.length = 0;
-        selectActividad.style.display = "none";
-    }
-}
 
 function mostrarParkingDisponiblesMod() {
     document.getElementById("selectListaParkingModificar").length = 0;
@@ -887,10 +853,6 @@ function seleccionarReserva() {
 
         selectParkMod.disabled = false;
         selectRegMod.disabled = false;
-        estadoHabParkingMod.disabled = false;
-        estadoDesParkingMod.disabled = false;
-        estadoHabActividadMod.disabled = false;
-        estadoDesActividadMod.disabled = false;
 
         btnModificarReserva.disabled = false;
         btnCacelarModReserva.disabled = false;
@@ -1184,8 +1146,8 @@ function aceptarModificarReserva(){
     else{
         alert(sMensaje);
     }
-    habDesParkingMod();
-    habDesActividadMod();
+    mostrarParkingDisponiblesMod();
+    mostrarActividadesMod();
 }
 function aceptarModificarActividad(){
     let sMensaje="";
@@ -2016,8 +1978,8 @@ function mostrarModificarReserva() {
 	frmModificarReserva.style.display = "block";
     mostrarHabitaciones(selectParkMod);
     mostrarRegimenes(selectRegMod);
-    habDesParkingMod();
-    habDesActividadMod();
+    mostrarParkingDisponiblesMod();
+    mostrarActividadesMod();
     cancelarModificarReserva();
 }
 function mostrarModificarActividad(){
