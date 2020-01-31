@@ -461,8 +461,6 @@ function obtenerActividadesSeleccionadas(select)
     return result;
 }
 
-console.log(document.querySelectorAll("#selectListaActividad"));
-
 function aceptarAltaReserva(){
     let sMensaje="";
 
