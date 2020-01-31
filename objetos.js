@@ -401,6 +401,15 @@ class UpoCampo{
 
         return aActividad;
     }
+
+    buscarActividadSeleccionada(iID){
+
+        if (this.actividades.filter(actividad=>actividad.id == iID).length == 1)
+        {
+            return this.actividades.filter(actividad=>actividad.id == iID)[0].nombre;
+        }
+    }
+
     buscarProveedor(iCIF){
         let aProveedor = [];
 

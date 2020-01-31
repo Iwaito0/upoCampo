@@ -6,6 +6,8 @@ var divListado = document.getElementById("listado");
 var dFechaIni = new Date();
 var dFechaFin = new Date();
 var iNumMaxPersonas = 0;
+var aDatosReserva = [];
+var aActividadesElegidas = [];
 
 datosHabitaciones();
 datosParking();
@@ -217,8 +219,8 @@ botonListarParkDisp.addEventListener("click", aceptarListadoParkDispFecha, false
 
 /*--------BOTON COMPROBAR DATOS DE LA RESERVA--------*/
 
-// var botonComprobarDatosReserva = document.getElementById("btnComprobarDatos");
-// botonComprobarDatosReserva.addEventListener("click", comprobarDatosReserva, false);
+var botonComprobarDatosReserva = document.getElementById("btnComprobarDatos");
+botonComprobarDatosReserva.addEventListener("click", comprobarDatosReserva, false);
 
 
 /*-------------FUNCIONES-----------------*/
@@ -462,67 +464,35 @@ function obtenerActividadesSeleccionadas(select)
 }
 
 function aceptarAltaReserva(){
-    let sMensaje="";
 
-    // Recoger valores del formulario
-    let iID = parseInt(frmAltaReserva.txtIdAlta.value.trim());
-    let iNumPersonas = parseInt(frmAltaReserva.txtNumAlta.value.trim());
-    let dCheckin = frmAltaReserva.txtEntradaAlta.value.trim();
-    let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
-    let fPrecio = 0; //funcion totalPrecio
-    let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
-    let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
-    let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
+        let iID = parseInt(frmAltaReserva.txtIdAlta.value.trim());
+        let iNumPersonas = parseInt(frmAltaReserva.txtNumAlta.value.trim());
+        let dCheckin = frmAltaReserva.txtEntradaAlta.value.trim();
+        let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
+        let fPrecio = 0; //funcion totalPrecio
+        let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
+        let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
+        let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
 
-    let valores = document.querySelectorAll("#selectListaActividad");
-    let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
-    let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
-    let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
-
-
-
-
-    if (isNaN(iParkingID)) {
-        iParkingID = 0;
-    }
-
-    if(isNaN(iActividadID)){
-        iActividadID = 0;
-    }
-
-
-    if(!/^\d+$/.test(iID)){
-        sMensaje+="Introduce una ID válida\n";
-        frmAltaReserva.txtIdAlta.classList.add("error");
-    }
-    else{
-        frmAltaReserva.txtIdAlta.classList.remove("error");  
-    }
-    if(!/^\d+$/.test(iNumPersonas)){
-        sMensaje+="El campo numero de personas esta mal\n";
-        frmAltaReserva.txtNumAlta.classList.add("error");
-    }
-    else{
-        frmAltaReserva.txtNumAlta.classList.remove("error");  
-    }
-
-    if(sMensaje==""){
-    // Creamos el objeto reserva
-    let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID, sRegimenID);
-    // Alta de reserva en UPOCAMPO
-    let sMensaje = oUPOCampo.altaReserva(oReserva);
-    alert(sMensaje);
-    frmAltaReserva.reset();
-    habDesParking();
-    habDesActividad();
-    mostrarRegimenes(); 
-    let dias = document.createTextNode(totalDias);
-    document.getElementById("divReservaComprobada").appendChild(dias);   
-    }
-    else{
+        let valores = document.querySelectorAll("#selectListaActividad option:checked").forEach(eleccion=> aActividadesElegidas.push(oUPOCampo.buscarActividadSeleccionada(eleccion.value)));
+        // meter en reserva el array de valores pero hecho string mediante un join()
+        let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
+        let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
+        let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
+        // Creamos el objeto reserva
+        let oReserva = new Reservas(iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID, sRegimenID);
+        // Alta de reserva en UPOCAMPO
+        let sMensaje = oUPOCampo.altaReserva(oReserva);
         alert(sMensaje);
-    }
+        frmAltaReserva.reset();
+        habDesParking();
+        habDesActividad();
+        mostrarRegimenes(); 
+        let dias = document.createTextNode("Duración de la reserva: "+totalDias+" días");
+        document.getElementById("divReservaComprobada").appendChild(dias);     
+    
 }
+
 
 function obtenerTotalDiasReserva(entrada, salida)
 {
@@ -673,33 +643,87 @@ function aceptarBajaProveedor(){
 
 
 /*----COMPROBAR DATOS ALTA RESERVA-----*/
-// botonAltaReserva.disabled = true;
-// function comprobarDatosReserva()
-// {
-//     if (datosReservaCorrectos())
-//     {
-//         activarBotonAltaReserva();
+botonAltaReserva.disabled = true;
+function comprobarDatosReserva()
+{
+    if (datosReservaCorrectos())
+    {
+        console.log("hace datosReservaCorrectos");
+        activarBotonAltaReserva();
 
-//     }
-//     else
-//     {
-//         alert("Los datos no son correctos");
-//         botonAltaReserva.disabled = true;
-//     }
-// }
+    }
+    else
+    {
+        alert("Los datos no son correctos");
+        botonAltaReserva.disabled = true;
+    }
+}
 
-// function activarBotonAltaReserva()
-// {
-//     if (botonAltaReserva.disabled == true)
-//     {
-//         botonAltaReserva.disabled = false;
-//     }
-// }
+function activarBotonAltaReserva()
+{
+    if (botonAltaReserva.disabled == true)
+    {
+        botonAltaReserva.disabled = false;
+    }
+}
 
-// function datosReservaCorrectos()
-// {
-    
-// }
+
+
+function datosReservaCorrectos()
+{
+    console.log("Entra en datosReserva");
+    let sMensaje="";
+
+    // Recoger valores del formulario
+    let iID = parseInt(frmAltaReserva.txtIdAlta.value.trim());
+    let iNumPersonas = parseInt(frmAltaReserva.txtNumAlta.value.trim());
+    let dCheckin = frmAltaReserva.txtEntradaAlta.value.trim();
+    let dCheckout = frmAltaReserva.txtSalidaAlta.value.trim();
+    let fPrecio = 0; //funcion totalPrecio
+    let iNumHabitacion = parseInt(frmAltaReserva.selectListaHab.value.trim());
+    let sNifCliente = frmAltaReserva.txtReservaClienteAlta.value.trim();
+    let iParkingID = parseInt(frmAltaReserva.selectListaParking.value.trim());
+
+    let valores = document.querySelectorAll("#selectListaActividad");
+    let iActividadID = parseInt(frmAltaReserva.selectListaActividad.value.trim());
+    let sRegimenID = frmAltaReserva.selectListaReg.value.trim();
+    let totalDias = obtenerTotalDiasReserva(dCheckin, dCheckout);
+
+    if (isNaN(iParkingID)) {
+        iParkingID = 0;
+    }
+
+    if(isNaN(iActividadID)){
+        iActividadID = 0;
+    }
+
+    if(!/^\d+$/.test(iID)){
+        sMensaje+="Introduce una ID válida\n";
+        frmAltaReserva.txtIdAlta.classList.add("error");
+    }
+    else{
+        frmAltaReserva.txtIdAlta.classList.remove("error");  
+    }
+    if(!/^\d+$/.test(iNumPersonas)){
+        sMensaje+="El campo numero de personas esta mal\n";
+        frmAltaReserva.txtNumAlta.classList.add("error");
+    }
+    else{
+        frmAltaReserva.txtNumAlta.classList.remove("error");  
+    }
+
+    if (sMensaje != "")
+    {
+        alert(sMensaje);
+    }
+    else
+    {
+        aDatosReserva = [iID, iNumPersonas, dCheckin, dCheckout, fPrecio, iNumHabitacion, sNifCliente, iParkingID, iActividadID, sRegimenID];
+        return true;
+    }
+
+}
+
 
 
 /*-------------SELECCIONAR-------------*/
